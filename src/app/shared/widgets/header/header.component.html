@@ -1,0 +1,41 @@
+<header class="d-none d-lg-block">
+    <div id="heade" class="pt-3 pb-2 header-B">
+        <div class="container">
+            <div class="row ios">
+                <!-- <div class="col-1 col-md-1 d-lg-none">
+                    <a class="white-text text-left" (click)="toogle()">
+                        <mdb-icon fas icon="bars" [hidden]="X"></mdb-icon>
+                        <mdb-icon fas icon="times" [hidden]="!X"></mdb-icon>
+                    </a>
+                </div> -->
+                <div class="col-10 col-md-11 col-lg-3 col-xl-3">
+                    <a [routerLink]="['']">
+                        <img Lazy src="./assets/images/logo.svg" alt="Logo Condor" class="logo mx-auto d-block"/>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-4 d-none d-xl-block">
+                    <input class="form-control rounded-pill px-2 mt-2" type="text" placeholder="O que você está procurando?" (keyup)="getSearch($event)" />
+                </div>
+                <div class="col-7 col-md-3 col-lg-9 col-xl-5 d-none d-lg-block">
+                    <ul class="nav justify-content-end" style="margin-top: -5px!important">
+                        <li class="nav-item" *ngFor="let item of items.buttom">
+                            <a class="nav-link white-text px-1 b-06 f-08 text-center i-cartao" [href]="item.url" rel="noopener" *ngIf="item.external">
+                                <img Lazy [src]="item.icon" height="30px" alt="{{ item.name }}" /><br />
+                                <span class="d-none d-lg-block mt-2">{{ item.name }}</span>
+                            </a>
+                            <a class="nav-link white-text px-1 b-06 f-08 text-center i-cartao" [routerLink]="[item.url]" *ngIf="!item.external">
+                                <img Lazy [src]="item.icon" height="30px" alt="{{ item.name }}" /><br />
+                                <span class="d-none d-lg-block mt-2">{{ item.name }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row justify-content-center d-none d-lg-block d-xl-none">
+                <div class="col-md-12">
+                    <input class="form-control rounded-pill px-2 mt-1" type="text" placeholder="O que você está procurando?" (keyup)="getSearch($event)" />
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,19 @@
+<section *ngIf="(items | async) as data" >
+  <div class="container" *ngIf="data.length > 0">
+    <helper-titulo [titulo]="title" [icon]="icon" [link]="link"></helper-titulo>
+    <!-- <h2 class="titulo-black b-07 mb-4 pb-1 border-bottom" *ngIf="code === 'black'">
+      <i class="{{ icon }} mr-2" aria-hidden="true"></i>
+      <a href="https://www.condor.com.br/black-friday" target="_blank"><span>{{ title }}</span></a>
+    </h2> -->
+    <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide *ngFor="let item of data" [id]="item.id">
+            <helper-product [code]="item"></helper-product>
+        </ng-template>
+    </owl-carousel-o>
+    <!-- <swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange()" [config]="options">
+    <ng-template swiperSlide *ngFor="let item of data">
+      <helper-product [code]="item"></helper-product>
+    </ng-template>
+  </swiper> -->
+  </div>
+</section>

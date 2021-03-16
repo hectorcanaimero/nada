@@ -1,0 +1,18 @@
+<div class="news mb-5">
+    <h5 class="b-07 border-bottom pb-1 mb-3">Últimas Noticias</h5>
+    <a [routerLink]="['/institucional/imprensa/', n.slug]" routerLinkActive="router-link-active"
+        class="waves-light f-09 b-07 text-muted pl-2 border-bottom pb-2 mb-2 text-justify"
+        mdbWavesEffect *ngFor="let n of noticias | async">
+        {{ n.title }}
+    </a>
+</div>
+<div class="news mb-5">
+    <h5 class="b-07 border-bottom pb-1 mb-3">Joanir Zonta</h5>
+    <div class="media border-bottom pb-3 mb-4" *ngFor="let item of items">
+        <img class="d-flex mr-3" [src]="item.thumbnail" alt="{{ item.title }}" />
+        <div class="media-body">
+            <h6 class="mt-0 font-weight-bold">{{ item.title }}</h6>
+            <div [innerHTML]="item.content"></div>
+        </div>
+    </div>
+</div>

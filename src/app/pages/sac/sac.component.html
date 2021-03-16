@@ -1,0 +1,132 @@
+<section id="content" class="py-5">
+  <div class="container">
+    <h1 class="b-08 border-bottom pb-1 mb-3">Atendimento ao cliente - SAC</h1>
+    <div class="row ios justify-content-center">
+      <div class="col-md-12 col-lg-8 col-xl-9">
+        <form [formGroup]="fmSac">
+          <h5 class="mt-5 mb-4 border-bottom pb-1 b-07">
+            1. Selecione o assunto que você deseja falar:
+          </h5>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="duvidas" formControlName="assunto"
+              value="Tirar dúvidas" mdbInput />
+            <label class="custom-control-label" for="duvidas">Tirar dúvidas</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="sugestoes" formControlName="assunto"
+              value="Enviar sugestões" mdbInput />
+            <label class="custom-control-label" for="sugestoes">Enviar sugestões</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="elogios" formControlName="assunto"
+              value="Enviar elogios" mdbInput />
+            <label class="custom-control-label" for="elogios">Enviar elogios</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="reclamacoes" formControlName="assunto"
+              value="Enviar reclamações" mdbInput />
+            <label class="custom-control-label" for="reclamacoes">Enviar reclamações</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="outros" formControlName="assunto" value="Outros"
+              mdbInput />
+            <label class="custom-control-label" for="outros">Outros</label>
+          </div>
+          <h5 class="mt-5 mb-4 border-bottom pb-1 b-07">
+            2. Selecione a loja que quer contatar:
+          </h5>
+          <div class="form-group">
+            <label for="cidade">Cidade</label>
+            <select class="browser-default custom-select" (change)="getLojas($event)" formControlName="cidade"
+              id="cidade">
+              <option selected>Selecione a Cidade</option>
+              <option [value]="r.id" *ngFor="let r of region">{{ r.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="loja">Loja</label>
+            <select class="browser-default custom-select" formControlName="loja" id="loja">
+              <option selected>Selecione o Condor</option>
+              <option [value]="l.title?.rendered" *ngFor="let l of allLojas">{{ l.title?.rendered }}</option>
+            </select>
+          </div>
+          <h5 class="mt-5 mb-4 border-bottom pb-1 b-07">
+            3. Informe seus dados básicos:
+          </h5>
+          <div class="row ios">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" formControlName="nome" />
+              </div>
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" id="email" formControlName="email" />
+              </div>
+              <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type='text' inputmode="number" class="form-control" id="cpf" formControlName="cpf">
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type='number' class="form-control" id="telefone" formControlName="telefone">
+              </div>
+              <div class="form-group">
+                <label for="data_nascimento">Data de Nascimento</label>
+                <input type="date" class="form-control" id="data_nascimento" formControlName="data_nascimento" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="cep">CEP</label>
+                <input type="number" class="form-control" id="cep" formControlName="cep" (change)="onCEP($event)"
+                  placeholder="Insira o CEP e clique Enter" />
+              </div>
+              <div class="form-group">
+                <label for="rua">Rua</label>
+                <input type="text" class="form-control" id="rua" formControlName="rua" />
+              </div>
+              <div class="form-group">
+                <label for="complemento">Complemento</label>
+                <input type="text" class="form-control" id="complemento" formControlName="complemento" />
+              </div>
+              <div class="form-group">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" id="bairro" formControlName="bairro" />
+              </div>
+              <div class="form-group">
+                <label for="cid">Cidade</label>
+                <input type="text" class="form-control" id="cid" formControlName="cid" />
+              </div>
+              <div class="form-group">
+                <label for="uf">UF</label>
+                <input type="text" class="form-control" id="uf" formControlName="uf" />
+              </div>
+            </div>
+          </div>
+          <h5 class="mt-5 mb-4 border-bottom pb-1 b-07">
+            4. Deixe sua mensagem:
+          </h5>
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea class="form-control" id="mensdagem" rows="4" formControlName="mensagem"></textarea>
+          </div>
+          <div class="text-center">
+            <button type="reset" mdbBtn color="danger" mdbWavesEffect>
+              <h6 class="mb-0 font-weight-bold text-uppercase">cancelar</h6>
+            </button>
+            <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="onSubmit()" [disabled]="fmSac.invalid">
+              <h6 class="mb-0 font-weight-bold text-uppercase">Enviar</h6>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4 col-xl-3 d-none d-lg-block">
+        <div class="news mb-5">
+          <img src="./assets/images/0800.jpg" class="img-fluid" alt="SAC 0800416655" />
+        </div>
+        <!-- <app-sidebar></app-sidebar> -->
+      </div>
+    </div>
+  </div>
+</section>

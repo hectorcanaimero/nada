@@ -1,0 +1,26 @@
+<section id="carousel" class="py-0 py-md-3" *ngIf="(items | async) as banner">
+  <div id="banner" class="container">
+    <div class="row ios">
+      <div class="col-sm-8 col-md-8 col-lg-8 mb-1">
+        <app-ofertas *showItBootstrap="['xs']"  code="dia" title="Ofertas do dia" icon="fas fa-shopping-basket"
+          link="/ofertas-do-dia" type="slug"></app-ofertas>
+        <mdb-carousel [isControls]="true"
+          class="carousel slide carousel-fade z-depth-1" [interval]="7500" [animation]="'fade'">
+          <mdb-carousel-item *ngFor="let left of banner.left">
+            <helper-image [code]="left" size="730x350" idImage="banner-home-left" [ngClass]="{'d-none': left.length < 1}"></helper-image>
+          </mdb-carousel-item>
+        </mdb-carousel>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <app-ofertas *showItBootstrap="['xs']"  code="geral" title="Mais procurados" icon="fas fa-shopping-basket"
+        link="/ofertas-para-voce" type="slug"></app-ofertas>
+        <mdb-carousel class="carousel slide carousel-fade z-depth-1"
+          [interval]="7000" [animation]="'fade'" [isControls]="true" >
+          <mdb-carousel-item *ngFor="let right of banner.right">
+            <helper-image [code]="right" idImage="banner-home-right" ></helper-image>
+          </mdb-carousel-item>
+        </mdb-carousel>
+      </div>
+    </div>
+  </div>
+</section>

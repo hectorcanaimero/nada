@@ -1,0 +1,67 @@
+<section id="Post" class="py-5">
+    <div class="container">
+        <h1 class="title">{{ items.title }}</h1>
+        <p class="date">
+            <i class="far fa-calendar-alt mr-1"></i>
+            {{ items.date | date: "dd/MM/yyyy" }}</p>
+        <div class="row">
+            <div class="col-md-9">
+                <img [src]="items.full" alt="{{ items.title }}" class="img-fluid mb-3">
+                <div class="text-left">
+                    <div class="item-tags">
+                        <i class="fas fa-tags mr-1 bag badge-outline-red"></i>
+                        <mdb-badge pill="true" class="bag badge-outline-red"
+                            *ngFor="let tag of items.tags | slice: 0:2" [routerLink]="['/blog', 'tag', tag.slug]">
+                            {{ tag.name }}
+                        </mdb-badge>
+                    </div>
+                </div>
+                <div class="content mt-4 mt-md-5">
+                    <div [innerHTML]="items.content | safe: 'html'" id="conteudo"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <app-aside></app-aside>
+            </div>
+        </div>
+        <h2 class="mt-5 b-07 text-blog border-bottom mb-1">Post Relacionados</h2>
+        <div class="row no-gutters">
+            <div class="col-md-6 col-lg-3" *ngFor="let item of relations">
+                <div class="item m-2 rounded">
+                    <a [routerLink]="['/blog', item.slug]">
+                        <img [src]="item.full" class="w-100 rounded-top" alt="">
+                    </a>
+                    <div class="item-body">
+                        <p class="date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            {{ item.date | date: "dd/MM/yyyy" }}</p>
+                        <h1>
+                            <a class="text-muted" [routerLink]="['/blog', item.slug]" routerLinkActive="router-link-active" >{{ item.title }}</a>
+                        </h1>
+                        <div class="item-tags">
+                            <i class="fas fa-tags mr-1 bag badge-outline-red"></i>
+                            <mdb-badge pill="true" class="bag badge-outline-red"
+                                *ngFor="let tag of item.tags | slice: 0:2" [routerLink]="['/blog', 'tag', tag.slug]">
+                                {{ tag.name }}
+                            </mdb-badge>
+                        </div>
+                    </div>
+                    <div class="item-footer">
+                        <div class="row justify-content-end">
+                            <div class="col-6 text-center">
+                                <a [routerLink]="['/blog', item.slug]" class="button-condor text-muted">
+                                    Ler mais >>
+                                </a>
+                            </div>
+                            <div class="col-6  text-center" *ngIf="nav">
+                                <a (click)="share(item)"class="button-condor text-blog">
+                                    <i class="fas fa-share mr-1"></i>Compartilhar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

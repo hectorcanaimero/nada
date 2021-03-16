@@ -1,0 +1,4 @@
+<nav class="nav flex-column px-2">
+  <a *ngFor="let item of items" class="nav-link active white-text border-bottom"
+    [routerLink]="[item.url]">{{item.name}}</a>
+</nav>

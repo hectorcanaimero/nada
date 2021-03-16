@@ -1,0 +1,46 @@
+<footer class="pt-3 pt-md-5">
+  <div class="container pb-md-5">
+      <div class="row ios">
+        <div class="col-12 d-md-none mb-4">
+            <ul class="list-group list-group-flush" style="background: none !important; color: #fff !important">
+                <li class="list-group-item rgba-0" style="background: none !important; color: #fff !important">
+                    <a href="tel:0800416655"  class="white-text">
+                        <mdb-icon fas icon="phone" class="mr-1"></mdb-icon>
+                        Fale Conosco 0800 416655
+                    </a>
+                </li>
+                <li class="list-group-item rgba-0" style="background: none !important; color: #fff !important">
+                    <a [routerLink]="['/fale-conosco/trabalhe-conosco']" class="white-text">
+                        <mdb-icon fas icon="briefcase" class="mr-1"></mdb-icon>
+                        Trabalhe Conosco
+                    </a>
+                </li>
+                <li class="list-group-item rgba-0" style="background: none !important; color: #fff !important">
+                    <a [routerLink]="['/fale/conosco/sac']" class="white-text">
+                        <mdb-icon fas icon="headset" class="mr-1"></mdb-icon>
+                        Contato
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-none d-md-block">
+            <img Lazy [src]="items['logo']" alt="" class="img-fluid mb-4" />
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-lg-none">
+            <helper-social [items]="items['midia']"></helper-social>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-none d-md-block">
+            <helper-menu [items]="items['institucional']"></helper-menu>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-none d-md-block">
+            <helper-menu [items]="items['servicos']"></helper-menu>
+        </div>
+        <div class="col-6 col-md-6 col-lg-3 d-none d-lg-block text-center">
+            <helper-social [items]="items['midia']"></helper-social>
+        </div>
+      </div>
+  </div>
+  <div class="copyright">
+      <p class="footer-copyright text-center mb-0 py-2 b-04" [innerHTML]="items['copyright']"></p>
+  </div>
+</footer>

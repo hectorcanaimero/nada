@@ -1,0 +1,27 @@
+<section id="blogger" class="py-3">
+    <div class="container">
+        <helper-titulo icon="fas fa-rss" titulo="Nosso Blog"></helper-titulo>
+        <div class="row ios mb-4">
+            <div class="col-sm-4 col-md-4 mb-3" *ngFor="let post of items">
+                <mdb-card>
+                    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                        <img Lazy [src]="post.medium" [alt]="post.title" class="w-100">
+                        <a [routerLink]="['/blog', post.slug]">
+                            <div class="mask"></div>
+                        </a>
+                    </div>
+                    <mdb-card-body>
+                        <mdb-card-title>
+                            <h5 class="b-07">{{ post.title }}</h5>
+                        </mdb-card-title>
+                        <mdb-card-text class="d-md-none"> {{ post.title }}</mdb-card-text>
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+        </div>
+        <div class="text-center">
+            <a rel="noopener noreferrer" href="https://www.condor.com.br/blog" mdbBtn color="condor" class="rounded-pill" mdbWavesEffect target="_blank">
+                Ver todos os posts </a>
+        </div>
+    </div>
+</section>

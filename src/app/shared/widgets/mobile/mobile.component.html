@@ -1,0 +1,172 @@
+<header *showItBootstrap="['xs', 'sm']">
+    <h4 class="mb-0 py-2 px-3 bg-top fixed-top">
+        <span class="float-left mt-1">
+            <i class="fa fa-bars white-text" (click)="toogle()"></i>
+        </span>
+        <a [routerLink]="['/']">
+            <img src="./assets/images/logo.png" alt="Logo Condor" class="logo img-fluid mx-auto d-block">
+        </a>
+    </h4>
+    <div id="loja" class="bg-loja">
+        <helper-selector></helper-selector>
+        <!-- <a class="white-text">
+            <p class="mb-0 px-2 py-1">Mostrando as ofertas para Hiper Condor Nilo Peçanha
+                <span class="float-right">
+                    <i class="fa-map-marker ajuste fas"></i>
+                </span>
+            </p>
+        </a> -->
+    </div>
+    <div class="input-group mb-4" *ngIf="!activeBlog">
+        <input #search aria-label="O que você está procurando?" class="form-control input-search rounded-0"
+            placeholder="O que você está procurando?" type="text" (keyup)="getSearch($event)">
+            <div class="input-group-prepend w-30">
+                <select class="browser-default custom-select" (change)="goToDepartamento($event)">
+                    <option selected>Departamento</option>
+                    <option [value]="d.slug" *ngFor="let d of ofertas | async">{{ d.nome }}</option>
+                </select>
+            </div>
+    </div>
+    <div class="input-group mb-4" *ngIf="activeBlog">
+        <input #search aria-label="O que você está procurando?" class="form-control input-search rounded-0"
+            placeholder="O que você está procurando?" type="text" (keyup)="Click($event)">
+        <div class="input-group-prepend w-25">
+            <select class="browser-default custom-select" (change)="goToCategory($event)">
+                <option selected>Categoria</option>
+                <option [value]="c.slug" *ngFor="let c of category | async">{{ c.name }}</option>
+            </select>
+        </div>
+    </div>
+    <div id="mobile">
+        <div class="sidenav fixed-top" *ngIf="entrada">
+            <div class="d-flex flex-row">
+                <div class="menu">
+                    <div class="bg-top p-2">
+                        <a (click)="toogle()">
+                            <img src="./assets/images/logo.png" alt="Logo Condor" class="logo mx-auto d-block">
+                        </a>
+                    </div>
+                    <div class="list-group">
+                        <a rel="noopener noreferrer" class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                        href="https://www.condor.com.br/delivery" target="_blank" (click)="toogle()">
+                            <div style="width: 30px !important; display: inline-block; text-align: center;">
+                                <img src="./assets/images/market_mobile.svg" height="20px" alt="Compre on-line" />
+                            </div>
+                            Compre-online
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                            [routerLink]="['']" (click)="toogle()">
+                            Home
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a href="#" class="list-group-item py-2 rounded-0 waves-light f-09" mdbWavesEffect (click)="submenu()">
+                            Ofertas
+                            <i class="fas fa-angle-down float-right" [hidden]="!active"></i>
+                            <i class="fas fa-angle-up float-right" [hidden]="active"></i>
+                        </a>
+                    </div>
+                    <div class="list-group my-0 animated" [ngClass]="{ 'fadeOut d-none ': active, 'fadeInLeft': !active }">
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let m of ofertas | async"
+                            [routerLink]="['/departamento', m.slug ]" routerLinkActive="active" (click)="toogle()">
+                            <mdb-icon fas icon="shopping-basket"></mdb-icon>
+                            {{ m.nome }}
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let campanha of items.campanha"
+                          [routerLink]="['/departamento', campanha.slug ]" routerLinkActive="active" (click)="toogle()">
+                          <mdb-icon fas icon="shopping-basket"></mdb-icon>
+                          {{ campanha.nome }}
+                        <i class="fas fa-angle-right float-right"></i>
+                      </a>
+                    </div>
+                    <div *ngFor="let mob of items.campanha" >
+                      <a rel="noopener noreferrer" class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="!mob.campanha"
+                        [href]="[mob.slug]" target="_blank" (click)="toogle()">
+                          {{ mob.nome }}
+                          <i class="fas fa-angle-right float-right"></i>
+                      </a>
+                      <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="mob.campanha" [routerLink]="[mob.slug]" (click)="toogle()">
+                          {{ mob.nome }}
+                          <i class="fas fa-angle-right float-right"></i>
+                      </a>
+                    </div>
+                    <div *ngFor="let center of items.center" >
+                        <a rel="noopener noreferrer" class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="center.external" [href]="[center.url]" target="_blank" (click)="toogle()">
+                            {{ center.name }}
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="!center.external" [routerLink]="[center.url]" (click)="toogle()">
+                            {{ center.name }}
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                    </div>
+                    <div class="list-group my-1">
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let header of items.header"
+                            [routerLink]="[header.url]" routerLinkActive="active" (click)="toogle()">
+                            <div style="width: 30px !important; display: inline-block; text-align: center;">
+                                <img [src]="header.iconmobile" height="20px" alt="{{ header.name }}" />
+                            </div>
+                            {{ header.name }}
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="list-group">
+                        <a href="#" class="list-group-item py-2 rounded-0 waves-light f-09" mdbWavesEffect (click)="submenu1()">
+                            Fale Conosco
+                            <i class="fas fa-angle-down float-right" [hidden]="!active1"></i>
+                            <i class="fas fa-angle-up float-right" [hidden]="active1"></i>
+                        </a>
+                    </div>
+                    <div class="list-group my-0 animated" [ngClass]="{
+                        'fadeOut d-none ': active1,
+                        'fadeInLeft': !active1
+                        }">
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                            [routerLink]="['/fale-conosco/sac']" routerLinkActive="active" (click)="toogle()">
+                            <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                            SAC
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                            [routerLink]="['/fale-conosco/trabalhe-conosco']" routerLinkActive="active" (click)="toogle()">
+                            <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                            Trabalhe conosco
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                            [routerLink]="['/fale-conosco/disque-denuncia']" routerLinkActive="active" (click)="toogle()">
+                            <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                            Disque-denúncia
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                        <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                            [routerLink]="['/institucional/imprensa']" routerLinkActive="active" (click)="toogle()">
+                            <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                            Notícias
+                            <i class="fas fa-angle-right float-right"></i>
+                        </a>
+                    </div>
+                    <span>
+                      <helper-menu-mobile [menu]="condor.institucional"></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.acoes"></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.servicos"></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.empresa"></helper-menu-mobile>
+                    </span>
+                </div>
+                <div class="backdrop text-center" (click)="toogle()">
+                    <h3>
+                        <span class="float-right">
+                            <span class="fa-stack fa-1x">
+                                <i class="fas fa-circle fa-stack-2x white-text"></i>
+                                <i class="fas fa-times fa-stack-1x"></i>
+                            </span>
+                        </span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

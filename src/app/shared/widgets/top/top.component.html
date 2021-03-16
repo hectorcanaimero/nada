@@ -1,0 +1,289 @@
+<section id="topHeader" class="sticky-top d-none d-md-block">
+    <div id="top-header" class="header-A py-1 d-none d-lg-block">
+        <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark ie-nav" [containerInside]="true" >
+            <mdb-navbar-brand>
+                <i class="fas white-text cursor" [ngClass]="{'fa-times': entrada, 'fa-bars': !entrada}" (click)="active()"></i>
+            </mdb-navbar-brand>
+            <links>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item dropdown mega-dropdown" dropdown style="width: auto!important;" >
+                        <a dropdownToggle type="button" class="nav-link py-N header-menu dropdown-toggle waves-light"
+                            mdbWavesEffect >
+                            <i class="fas fa-briefcase"></i> Institucional
+                        </a>
+                        <div class="dropdown-menu mega-menu v-2 row justify-content-center z-depth-1 header-B  w-100" >
+                            <div class="container-fluid">
+                                <div class="w-100 d-flex flex-row justify-content-center mx-md-0 mx-1">
+                                    <div class="top-menu  sub-menu my-xl-5 mt-5 mb-3">
+                                        <h6 class="mb-3 text-underline" >
+                                            <a href="#" class="p-0 sub-title white-text text-uppercase b-08">
+                                                {{json.institucional.title}}</a>
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.institucional.menu">
+                                                <a *ngIf="a.external" class="p-0 menu-item white-text" [href]="a.url"
+                                                rel="noopener" target="_blank"> {{ a.nome }} </a>
+                                                <a *ngIf="!a.external" class="p-0 menu-item white-text" [routerLink]="[a.url]" >
+                                                    {{ a.nome }} </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="top-menu sub-menu my-xl-5 mt-5 mb-3">
+                                        <h6 class="mb-3 text-underline">
+                                            <a class="p-0 sub-title white-text text-uppercase b-08" href="#" >{{json.acoes.title}}</a>
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.acoes.menu">
+                                                <a *ngIf="a.external" class="p-0 menu-item white-text" [href]="a.url"
+                                                rel="noopener" target="_blank"> {{ a.nome }} </a>
+                                                <a *ngIf="!a.external" class="p-0 menu-item white-text" [routerLink]="[a.url]" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="top-menu sub-menu my-xl-5 mt-5 mb-3">
+                                        <h6 class="mb-3 text-underline">
+                                            <a class="p-0 sub-title white-text text-uppercase b-08" href="#">{{json.servicos.title}}</a>
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.servicos.menu">
+                                                <a *ngIf="a.external" class="p-0 menu-item white-text" [href]="a.url"
+                                                rel="noopener" target="_blank"> {{ a.nome }} </a>
+                                                <a *ngIf="!a.external" class="p-0 menu-item white-text" [routerLink]="[a.url]" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="top-menu sub-menu my-xl-5 mt-5 mb-1">
+                                        <h6 class="mb-3 text-underline">
+                                            <a class="p-0  sub-title white-text text-uppercase b-08" href="#">{{json.empresa.title}}</a>
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.empresa.menu">
+                                                <a *ngIf="a.external" class="p-0 menu-item white-text" [href]="a.url"
+                                                rel="noopener" target="_blank"> {{ a.nome }} </a>
+                                                <a *ngIf="!a.external" class="p-0 menu-item white-text" [routerLink]="[a.url]" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="top-menu sub-menu my-xl-5 mt-5 mb-1">
+                                        <h6 class="mb-3 text-underline">
+                                            <a class="p-0 sub-title white-text text-uppercase b-08" href="#">{{json.financeiro.title}}</a>
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.financeiro.menu">
+                                                <a *ngIf="a.external" class="p-0 menu-item white-text" [href]="a.url"
+                                                rel="noopener" target="_blank"> {{ a.nome }} </a>
+                                                <a *ngIf="!a.external" class="p-0 menu-item white-text" [routerLink]="[a.url]" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown mega-dropdown" dropdown style="width: auto!important;" >
+                        <a dropdownToggle type="button" class="nav-link py-N header-menu dropdown-toggle waves-light"
+                            mdbWavesEffect >
+                            <i class="fas fa-comments"></i>
+                            Fale Conosco<span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu mega-menu v-2 row justify-content-center z-depth-1 header-B  w-100" >
+                            <div class="container-fluid">
+                                <div class="w-100 d-flex flex-row justify-content-center mx-md-0 mx-1">
+                                    <div class="w-25 sub-menu mb-4">
+                                        <h6 class="p-0 sub-title text-uppercase mt-5 b-08 mb-3 white-text text-underline" >
+                                        SAC
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.sac">
+                                                <a class="p-0 menu-item white-text" [href]="a.url" target="_blank" *ngIf="a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                                <a class="p-0 menu-item white-text" [routerLink]="[a.url]" *ngIf="!a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="w-25 sub-menu  mb-4">
+                                        <h6 class="p-0 sub-title text-uppercase mt-5 b-08 mb-3 white-text text-underline">
+                                        trabalhe conosco
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.trabalhe">
+                                                <a class="p-0 menu-item white-text" [href]="a.url" target="_blank" *ngIf="a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                                <a class="p-0 menu-item white-text" [routerLink]="[a.url]" *ngIf="!a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="w-25 sub-menu mb-4">
+                                        <h6 class="p-0 sub-title text-uppercase mt-5 b-08 mb-3 white-text text-underline" >
+                                        disque denúncia
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.denuncia">
+                                                <a class="p-0 menu-item white-text" [href]="a.url" target="_blank" *ngIf="a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                                <a class="p-0 menu-item white-text" [routerLink]="[a.url]" *ngIf="!a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="w-25 sub-menu mb-4">
+                                        <h6 class="p-0 sub-title text-uppercase mt-5 b-08 mb-3 white-text text-underline" >
+                                        fornecedores
+                                        </h6>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let a of json.fornecedores">
+                                                <a class="p-0 menu-item white-text" [href]="a.url" target="_blank" *ngIf="a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                                <a class="p-0 menu-item white-text" [routerLink]="[a.url]" *ngIf="!a.external" >
+                                                {{ a.nome }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item waves-light" *ngFor="let menu of json.menu">
+                        <a class="nav-link py-N header-menu" [routerLink]="[menu.url]" *ngIf="menu.inter" >
+                            <i class="{{ menu.icon }}" *ngIf="menu.type === 'font'"></i>
+                            <img [src]="menu.icon" height="20px" alt="{{ menu.name }}" *ngIf="menu.type === 'svg'" />
+                            {{ menu.name }}
+                        </a>
+                        <a class="nav-link py-N header-menu" href="{{ menu.url }}" *ngIf="!menu.inter"
+                            rel="noopener">
+                            <i class="{{ menu.icon }}" *ngIf="menu.type === 'font'"></i>
+                            <img [src]="menu.icon" height="20px" alt="{{ menu.name }}" *ngIf="menu.type === 'svg'" />
+                            {{ menu.name }}
+                        </a>
+                    </li>
+                    <helper-selector></helper-selector>
+                </ul>
+            </links>
+        </mdb-navbar>
+    </div>
+</section>
+<div class="sidebar pt-2 overflow-auto d-none d-lg-block" [ngClass]="{'open': toogle1}" *ngIf="toogle1">
+    <div class="px-5 py-3 text-center">
+        <img src="./assets/images/logo.svg" alt="Logo Condor" width="180px" class="img-fluid"/>
+    </div>
+    <div class="menu">
+        <div class="list-group">
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+            href="https://www.condor.com.br/delivery" target="_blank" (click)="toogle()">
+                <div style="width: 30px !important; display: inline-block; text-align: center;">
+                    <img src="./assets/images/market_mobile.svg" height="20px" alt="Compre on-line" />
+                </div>
+                Compre-online
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                [routerLink]="['']" (click)="toogle()">
+                Home
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+            <a href="#" class="list-group-item py-2 rounded-0 waves-light f-09" mdbWavesEffect (click)="submenu2()">
+                Ofertas
+                <i class="fas fa-angle-down float-right" [hidden]="!active2"></i>
+                <i class="fas fa-angle-up float-right" [hidden]="active2"></i>
+            </a>
+        </div>
+        <div class="list-group my-0 animated" [ngClass]="{ 'fadeOut d-none ': active2, 'fadeInLeft': !active2 }">
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let m of ofertas | async"
+                [routerLink]="['/departamento', m.slug ]" routerLinkActive="active" (click)="toogle()">
+                <mdb-icon fas icon="shopping-basket"></mdb-icon>
+                {{ m.nome }}
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+        </div>
+        <div *ngFor="let mob of items.campanha" >
+          <a rel="noopener noreferrer" class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="!mob.campanha"
+          [href]="[mob.slug]" target="_blank" (click)="toogle()">
+            {{ mob.nome }}
+            <i class="fas fa-angle-right float-right"></i>
+          </a>
+          <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="mob.campanha" [routerLink]="[mob.slug]" (click)="toogle()">
+              {{ mob.nome }}
+              <i class="fas fa-angle-right float-right"></i>
+          </a>
+        </div>
+        <div *ngFor="let cen of items.center" >
+            <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="cen.external" [href]="[cen.url]" target="_blank" (click)="toogle()">
+                {{ cen.name }}
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+            <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="!cen.external" [routerLink]="[cen.url]" (click)="toogle()">
+                {{ cen.name }}
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+        </div>
+        <div class="list-group my-1">
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let item of items.header"
+                [routerLink]="[items.url]" routerLinkActive="active" (click)="toogle()">
+                <div style="width: 30px !important; display: inline-block; text-align: center;">
+                    <img [src]="items.iconmobile" height="20px" alt="{{ items.name }}" />
+                </div>
+                {{ items.name }}
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item py-2 rounded-0 waves-light f-09" mdbWavesEffect (click)="submenu1()">
+                Fale Conosco
+                <i class="fas fa-angle-down float-right" [hidden]="!active1"></i>
+                <i class="fas fa-angle-up float-right" [hidden]="active1"></i>
+            </a>
+        </div>
+        <div class="list-group my-0 animated" [ngClass]="{
+            'fadeOut d-none ': active1,
+            'fadeInLeft': !active1
+            }">
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                [routerLink]="['/fale-conosco/sac']" routerLinkActive="active" (click)="toogle()">
+                <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                SAC
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                [routerLink]="['/fale-conosco/trabalhe-conosco']" routerLinkActive="active" (click)="toogle()">
+                <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                Trabalhe conosco
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                [routerLink]="['/fale-conosco/disque-denuncia']" routerLinkActive="active" (click)="toogle()">
+                <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                Disque-denúncia
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
+                [routerLink]="['/imprensa']" routerLinkActive="active" (click)="toogle()">
+                <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                Notícias
+                <i class="fas fa-angle-right float-right"></i>
+            </a>
+        </div>
+        <span>
+          <helper-menu-mobile [menu]="json.acoes" [active]="false"></helper-menu-mobile>
+          <helper-menu-mobile [menu]="json.servicos" [active]="false"></helper-menu-mobile>
+          <helper-menu-mobile [menu]="json.empresa" [active]="false"></helper-menu-mobile>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+:root {
+  --color-default--text: #444444;
+  --color-default--background: #f2faff;
+
+  --color-blue-primary: #447ab3;
+  --color-blue-secondary: #2e65a5;
+  --color-blue-tertiary: #1e73be;
+
+  --color-red-primary: #f44336;
+  --color-red-secondary: #940505dc;
+  // --color-red-tertiary: #1e73be;
+
+  /////////////
+$cor-default-background: #f2faff;
+$cor-default-text: #444;
+$cor-footer-background: #447ab3;
+/////////////
+
+// Black Friday
+// $blue: #181818;
+// $red: #ff8300;
+// $blue-alpha: #212121;
+// $cor-footer-background: #181818;
+// $fundoProduto: #000000d9;
+
+
+
+$blue: #447ab3;
+$blue-alpha: #2e65a5;
+$red: #f44336 ;
+$fundoProduto: none;
+$blue-beta: #1e73be;
+$red-alpha: #940505dc;
+$colorProduto: #000;
+
+// methods
+@mixin font-Weight($num) { font-weight: $num !important; }
+@mixin font-Size($num) { font-size: $num !important; }
+@mixin backGround($color) { background: $color !important; }
+
+}
+
+
+
+  /////////////
+  $cor-default-background: #f2faff;
+  $cor-default-text: #444;
+  $cor-footer-background: #447ab3;
+  /////////////
+
+  // Black Friday
+  // $blue: #181818;
+  // $red: #ff8300;
+  // $blue-alpha: #212121;
+  // $cor-footer-background: #181818;
+  // $fundoProduto: #000000d9;
+
+
+
+  $blue: #447ab3;
+  $blue-alpha: #2e65a5;
+  $red: #f44336 ;
+  $fundoProduto: none;
+  $blue-beta: #1e73be;
+  $red-alpha: #940505dc;
+  $colorProduto: #000;
+
+  // methods
+  @mixin font-Weight($num) { font-weight: $num !important; }
+  @mixin font-Size($num) { font-size: $num !important; }
+  @mixin backGround($color) { background: $color !important; }

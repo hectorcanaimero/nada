@@ -1,0 +1,68 @@
+<section id="single-loja" class="py-5" *ngIf="(items | async) as item">
+    <div class="container">
+        <h2 class="b-07 border-bottom pb-1 mb-4">{{ item.title1 }}</h2>
+        <div class="row justify-content-center my-4">
+            <div class="col-md-4">
+                <select class="browser-default custom-select mb-2" (change)="onLoja($event)">
+                <option selected value="All">Todas as regiões</option>
+                <option [value]="r.id" *ngFor="let r of region">{{ r.name }}</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <select class="browser-default custom-select" (change)="goToLoja($event)">
+                <option selected value="All">Todas as lojas</option>
+                <option [value]="i.slug" *ngFor="let i of lojas">{{ i.title1 }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row ios mb-5">
+            <div class="col-md-5">
+                <img [src]="item.medium" alt="{{ item.title1 }}" class="w-100 mb-4" />
+            </div>
+            <div class="col-md-7">
+              <div [innerHTML]="item.content1"></div>
+              <div class="buttom">
+                <a [href]="item.maps" target="_blank" class="btn btn-primary rounded" (click)="onTracking(item.title1, 'Rota')">
+                  <i class="fas fa-map-marker mr-2"></i>
+                  Como chegar
+                </a>
+                <a href="tel:{{ item.telefone }}" target="_blank" class="btn btn-success rounded d-xl-none" (click)="onTracking(item.title1, 'Ligar')">
+                  <i class="fas fa-phone mr-2"></i>
+                  Ligue Agora
+                </a>
+                <a [href]="item.avaliacao" target="_blank" class="btn btn-light rounded" (click)="onTracking(item.title1, 'Avaliar')">
+                  <i class="fab fa-google mr-2"></i>
+                  Avalie no google
+                </a>
+              </div>
+            </div>
+        </div>
+        <div class="row ios mb-3">
+            <div class="col-md-6 mb-4 mb-md-0" *ngIf="setores.length > 1">
+                <div class="px-3">
+                    <h3 class="b-07 pb-1 mb-4 border-bottom">Setores</h3>
+                    <mdb-badge primary="true" *ngFor="let sec of setores" class="mr-2 mb-1">
+                        {{ sec }}
+                    </mdb-badge>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="servicos.length > 1">
+                <div class="px-3">
+                    <h3 class="b-07 pb-1 mb-4 border-bottom">Serviços</h3>
+                    <mdb-badge danger="true" *ngFor="let ser of servicos" class="mr-2 mb-1">
+                        {{ ser }}
+                    </mdb-badge>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row ios mt-4">
+            <div class="col-md-12">
+                <app-google-map
+                    [lat]="items.lat"
+                    [lng]="items.lng"
+                    [titulo]="items.title?.rendered">
+                </app-google-map>
+            </div>
+        </div> -->
+    </div>
+</section>

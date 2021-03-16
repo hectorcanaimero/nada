@@ -1,0 +1,16 @@
+<section *ngIf="(data$ | async) as ofertas">
+  <ngx-loadable module="carousel" [show]="show"></ngx-loadable>
+  <app-ofertas *showItBootstrap="['md', 'lg', 'xl']" [code]="ofertas[0].code" [title]="ofertas[0].titulo" [icon]="ofertas[0].icon" [link]="ofertas[0].link" type="slug"></app-ofertas>
+  <helper-faixa type="radar"></helper-faixa>
+  <div class="container my-2"> <helper-selector type="alert"></helper-selector> </div>
+  <app-ofertas [code]="ofertas[1].code" [title]="ofertas[1].titulo" [icon]="ofertas[1].icon" [link]="ofertas[1].link" type="slug"> </app-ofertas>
+  <ngx-loadable module="banners" [show]="show"></ngx-loadable>
+  <app-ofertas [code]="ofertas[2].code" [title]="ofertas[2].titulo" [icon]="ofertas[2].icon" [link]="ofertas[2].link" type="slug">
+  </app-ofertas>
+  <app-ofertas [code]="ofertas[3].code" [title]="ofertas[3].titulo" [icon]="ofertas[3].icon" [link]="ofertas[3].link" type="departamento">
+  </app-ofertas>
+  <helper-faixa type="clube"></helper-faixa>
+  <ngx-loadable module="posts" [show]="show"></ngx-loadable>
+  <ngx-loadable module="institucional" [show]="show"></ngx-loadable>
+</section>
+

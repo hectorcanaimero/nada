@@ -1,0 +1,18 @@
+<aside>
+    <div class="aside search">
+        <h5>Busca</h5>
+        <div class="form-group">
+            <input type="text" class="form-control" (keyup)="Click($event)">
+        </div>
+    </div>
+    <div class="aside category">
+        <h5>Categorias</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item border-bottom" *ngFor="let c of category">
+                <a class="nav-link b-6" [routerLink]="['/blog','categoria', c.slug]">
+                    > {{ c.name }} ({{ c.count }})
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
