@@ -74,7 +74,7 @@ export class AllInComponent implements OnInit {
         this.news.getBlogCollection(`posts?categories=${data.body[0]['id']}&page=${p}&per_page=${this.ip}`).subscribe(
           res => {
             this.items = res.body;
-            this.header = res.headers.keys().map(key => res.headers.get(key))[3];
+            this.header = res.headers.keys().map(key => res.headers.get(key))[4];
           }
         );
       },
@@ -89,7 +89,7 @@ export class AllInComponent implements OnInit {
         this.news.getBlogCollection(`posts?tags=${data.body[0]['id']}&page=${p}&per_page=${this.ip}`).subscribe(
           res => {
             this.items = res.body;
-            this.header = res.headers.keys().map(key => res.headers.get(key))[3];
+            this.header = res.headers.keys().map(key => res.headers.get(key))[4];
           }
         );
       },
@@ -102,7 +102,7 @@ export class AllInComponent implements OnInit {
     this.news.getBlogCollection(`posts?search=${text.toLocaleLowerCase()}&page=${p}&per_page=${this.ip}`).subscribe(
       res => {
         this.items = res.body;
-        this.header = res.headers.keys().map(key => res.headers.get(key))[3];
+        this.header = res.headers.keys().map(key => res.headers.get(key))[4];
         this.m = `Resultado da busca por <b>"${slug.split('-').join(' ')}"</b>`;
       },
       err => console.log(err)
@@ -113,7 +113,7 @@ export class AllInComponent implements OnInit {
     this.news.Blog(page, this.ip).subscribe(
       res => {
         this.items = res.body;
-        this.header = res.headers.keys().map(key => res.headers.get(key))[3];
+        this.header = res.headers.keys().map(key => res.headers.get(key))[4];
       },
       err => console.log(err)
     );

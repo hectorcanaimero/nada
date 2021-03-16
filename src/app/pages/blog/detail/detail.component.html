@@ -8,13 +8,13 @@
             <div class="col-md-9">
                 <img [src]="items.full" alt="{{ items.title }}" class="img-fluid mb-3">
                 <div class="text-left">
-                    <div class="item-tags">
+                    <!-- <div class="item-tags">
                         <i class="fas fa-tags mr-1 bag badge-outline-red"></i>
                         <mdb-badge pill="true" class="bag badge-outline-red"
                             *ngFor="let tag of items.tags | slice: 0:2" [routerLink]="['/blog', 'tag', tag.slug]">
                             {{ tag.name }}
                         </mdb-badge>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="content mt-4 mt-md-5">
                     <div [innerHTML]="items.content | safe: 'html'" id="conteudo"></div>

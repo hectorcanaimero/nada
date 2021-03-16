@@ -15,13 +15,13 @@
                                 <h1>
                                     <a class="text-muted" [routerLink]="['/blog', item.slug]" routerLinkActive="router-link-active" >{{ item.title }}</a>
                                 </h1>
-                                <div class="item-tags">
+                                <!-- <div class="item-tags">
                                     <i class="fas fa-tags mr-1 bag badge-outline-red"></i>
                                     <mdb-badge pill="true" class="bag badge-outline-red"
                                         *ngFor="let tag of item.tags | slice: 0:2" [routerLink]="['/blog', 'tag', tag.slug]">
                                         {{ tag.name }}
                                     </mdb-badge>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="item-footer">
                                 <div class="row justify-content-end">
