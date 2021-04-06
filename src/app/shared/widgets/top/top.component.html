@@ -235,12 +235,12 @@
             </a>
         </div>
         <div class="list-group my-1">
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let item of items.header"
-                [routerLink]="[items.url]" routerLinkActive="active" (click)="toogle()">
+            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let head of items.header"
+                [routerLink]="[head.url]" routerLinkActive="active" (click)="toogle()">
                 <div style="width: 30px !important; display: inline-block; text-align: center;">
-                    <img [src]="items.iconmobile" height="20px" alt="{{ items.name }}" />
+                    <img [src]="head.iconmobile" height="20px" alt="{{ head.name }}" />
                 </div>
-                {{ items.name }}
+                {{ head.name }}
                 <i class="fas fa-angle-right float-right"></i>
             </a>
         </div>
