@@ -83,7 +83,7 @@ export class MobileComponent implements OnInit {
   goToCategory = (e: any) => this.router.navigate(['/blog', 'categoria', e.target.value]);
   goToDepartamento = (e: any) => this.router.navigate(['/departamento', e.target.value]);
 
-
+  toog = (ev) => this.entrada = false;
   Click = (event) => {
     if (event.keyCode === 13) {
       if (! event.target.value) return;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'helper-menu-mobile',
@@ -9,6 +9,8 @@ export class MenuMobileComponent implements OnInit {
 
   @Input() menu: any = [];
   @Input() active?: boolean = true;
+
+  @Output() toogle = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -16,4 +18,6 @@ export class MenuMobileComponent implements OnInit {
   submenu() {
     this.active = !this.active;
   }
+
+  onToogle = () => this.toogle.emit(false);
 }

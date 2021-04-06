@@ -37,8 +37,12 @@ export class TopComponent implements OnInit {
     submenu1 = () => this.active1 = !this.active1;
     submenu2 = () => this.active2 = !this.active2;
 
-    toogle = () => {
-        this.entrada = !this.entrada;
-        this.salida.emit(this.entrada);
+    toog = (ev) => console.log(ev);
+
+    toogle = (event?) => {
+      if (event) this.entrada = event;
+      this.entrada = !this.entrada;
+      this.salida.emit(this.entrada);
     }
+
 }

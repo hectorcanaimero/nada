@@ -149,10 +149,10 @@
                         </a>
                     </div>
                     <span>
-                      <helper-menu-mobile [menu]="condor.institucional"></helper-menu-mobile>
-                      <helper-menu-mobile [menu]="condor.acoes"></helper-menu-mobile>
-                      <helper-menu-mobile [menu]="condor.servicos"></helper-menu-mobile>
-                      <helper-menu-mobile [menu]="condor.empresa"></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.institucional" (toogle)="toog($event) "></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.acoes"(toogle)="toog($event) "></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.servicos"(toogle)="toog($event) "></helper-menu-mobile>
+                      <helper-menu-mobile [menu]="condor.empresa"(toogle)="toog($event) "></helper-menu-mobile>
                     </span>
                 </div>
                 <div class="backdrop text-center" (click)="toogle()">
