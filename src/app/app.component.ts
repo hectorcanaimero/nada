@@ -71,7 +71,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.storageMap.has('Loja').subscribe(res => { if (res === false) this.init = true; });
+    const data = { loja: 21, slug: 'hiper-condor-nilo-pecanha', nome: 'Hiper Condor Nilo Peçanha' };
+    this.storageMap.has('Loja').subscribe(res => { if (res === false) {
+      this.storageMap.set('Loja', data).subscribe(() => {});
+    } });
   }
 
   ngOnDestroy() {
