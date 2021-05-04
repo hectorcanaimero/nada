@@ -8,6 +8,10 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
+(global as any).WebSocket = require('ws');
+(global as any).XMLHttpRequest = require('xhr2');
+
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
@@ -44,7 +48,7 @@ export function app() {
 }
 
 function run() {
-  const port = process.env.PORT || 4010;
+  const port = process.env.PORT || 4050;
 
   // Start up the Node server
   const server = app();
