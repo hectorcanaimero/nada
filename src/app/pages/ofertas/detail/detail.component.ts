@@ -64,9 +64,10 @@ export class DetailComponent implements OnInit {
   onTracking = (name: string, type: string) => this.seo.dataLayerTracking({ event: 'productpageAction', productName: name, productButton: type })
 
   getSeo = (code: any) => {
+    console.log(code);
     this.seo.updateTags({
       title: `Confira a Ofertas de ${code.produtos.dsc_produto} | Condor.com.br`,
-      description: 'Compre Online, Confira os Tabloides ou encontre o Supermercado Condor mais próximo! Toda loja em até 6x, Bazar em até 10x e Eletro em até 20x Sem Juros*',
+      description: code.produtos.dsc_descricao,
       image: `https://marketing.condor.com.br/api/Containers/produtos/download/${ code.host }.jpg`
     });
     this.seo.addCanonical();
