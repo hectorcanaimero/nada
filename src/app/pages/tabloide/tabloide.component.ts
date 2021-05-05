@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { SeoService } from '../../shared/services/seo.service';
 import { NewsService } from '../../shared/services/news.service';
@@ -10,7 +10,7 @@ import { NewsService } from '../../shared/services/news.service';
   templateUrl: './tabloide.component.html',
   styleUrls: ['./tabloide.component.scss']
 })
-export class TabloideComponent implements OnInit {
+export class TabloideComponent implements OnInit, AfterViewInit {
 
   show: string;
   active: any = [];
@@ -25,16 +25,37 @@ export class TabloideComponent implements OnInit {
     this.getSeo();
     this.items = this.news.Tabloides(100).pipe(
       tap((res) => {
-        this.seo.dataLayerTracking({ event: 'clickTabloid', tabloidName: res[0].title });
-        this.show = `<iframe class="embed-responsive-item" src="//e.issuu.com/embed.html#${res[0]['condor'].issuu[0]}" allowfullscreen ></iframe>`;
-      })
+        // const url = res[0]['condor'].issuu[0];
+        // this.seo.dataLayerTracking({ event: 'clickTabloid', tabloidName: res[0].title });
+        // this.show = `<iframe class="embed-responsive-item" src="${this.selectedType(url)}" allowfullscreen ></iframe>`;
+        })
     )
+  }
+
+  ngAfterViewInit(): void {
+    this.items.subscribe((res) => {
+      const url = res[0]['condor'].issuu[0];
+      this.seo.dataLayerTracking({ event: 'clickTabloid', tabloidName: res[0].title });
+      this.show = `<iframe class="embed-responsive-item" src="${this.selectedType(url)}" allowfullscreen ></iframe>`;
+    });
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    // 26072615/85053920
   }
 
   getIssuu = (issu: any, i: number) => {
     this.active = i;
+    const url = issu.condor.issuu[0];
     this.seo.dataLayerTracking({ event: 'clickTabloid', tabloidName: issu.title.rendered });
-    this.show = `<iframe class="embed-responsive-item" src="//e.issuu.com/embed.html#${issu.condor.issuu}" allowfullscreen></iframe>`;
+    this.show = `<iframe class="embed-responsive-item" src="${this.selectedType(url)}" allowfullscreen></iframe>`;
+  }
+
+  private selectedType = (text: string) => {
+    let url: string = '';
+    let value = text.indexOf('/');
+    if (value > 0) url = `//e.issuu.com/embed.html#${text}`;
+    else url = `//e.issuu.com/embed.html?d=${text}&hideIssuuLogo=true&u=redecondor`;
+    return url
   }
 
   getSeo = () => {
