@@ -1,0 +1,6 @@
+<a rel="noopener noreferrer" [href]="code?.url || code.link" *ngIf="code?.url.match('https')" target="_blank">
+  <img LazyLoad [src]="code?.large || code.image" [alt]="code?.title || code.titulo || code.name" class="img-fluid w-100"  [id]="idImage" />
+</a>
+<a [routerLink]="[code?.url || code.link]" *ngIf="!code?.url.match('https')" target="_blank">
+  <img LazyLoad [src]="code?.large || code.image" [alt]="code?.title || code.titulo || code.name" class="img-fluid w-100"  [id]="idImage" />
+</a>

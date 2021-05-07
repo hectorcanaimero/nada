@@ -1,0 +1,30 @@
+<section id="departamento" class="py-3 py-md-5" *ngIf="(campanha$ | async) as campanha; else semData">
+    <div class="container">
+        <div class="d-lg-none">
+            <img *ngIf="campanha['full']" [src]="campanha['full']" alt="{{ campanha['title'] }}" class="w-100 mb-2">
+            <h2 *ngIf="!campanha['full']" class="b-08 text-mute text-center pb-1 border-bottom mb-3">{{ campanha['title'] }}</h2>
+        </div>
+        <div class="row ios justify-content-center">
+          <div class="col-12">
+              <div class="d-none d-lg-block">
+                  <img *ngIf="campanha['full']" [src]="campanha['full']" alt="{{ campanha['title'] }}" class="w-100 mb-2">
+                  <h2 *ngIf="!campanha['full']" class="b-08 text-mute"> {{ campanha['title'] }}</h2>
+              </div>
+              <div class="row mt-3">
+                  <div class="col-6 col-xl-3 mb-4"
+                      *ngFor="let a of items | async | paginate: { itemsPerPage: 12, currentPage: p }">
+                      <app-product [code]="a"></app-product>
+                  </div>
+              </div>
+              <div class="mt-5">
+                  <pagination-controls class="animated fade text-center mt-5 border-top pt-1"
+                      (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true">
+                  </pagination-controls>
+              </div>
+          </div>
+        </div>
+    </div>
+</section>
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>

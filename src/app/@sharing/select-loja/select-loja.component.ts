@@ -1,0 +1,71 @@
+import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { StorageMap } from '@ngx-pwa/local-storage';
+import { Observable, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+import { SeoService } from '@core/services/seo.service';
+import { UtilService } from '@core/services/util.service';
+import { NewsService } from '@core/services/news.service';
+import { DataService } from '@core/services/data.service';
+
+
+@Component({
+  selector: 'app-select-loja',
+  templateUrl: './select-loja.component.html',
+  styleUrls: ['./select-loja.component.scss']
+})
+
+export class SelectLojaComponent implements OnInit {
+
+  @Output() loja: any;
+  @Input() new: any;
+  @Input() type?: string = 'simple';
+  @Input() load?: boolean = false;
+  @ViewChild('frame', { static: true }) public frame: any;
+  condor: number;
+  miObjeto: Observable<any>;
+  region: Observable<any>;
+  lojas: any =[ ];
+  lojaDefault = { loja: 21, slug: 'hiper-condor-nilo-pecanha', nome: 'Hiper Condor Nilo Peçanha' };
+
+  constructor(
+    private router: Router,
+    private seo: SeoService,
+    private db: DataService,
+    private util: UtilService,
+    private news: NewsService,
+    private storageMap: StorageMap
+    ) { }
+
+  ngOnInit() {
+    this.miObjeto = this.storageMap.watch('Loja');
+    timer(400).subscribe(() => { if (this.load === true) { this.frame.show(); } })
+    this.region = this.news.getRegion$();
+  }
+
+  getLojas = (e: any) => this.news.LojaPorRegion(e.target.value).pipe(take(1))
+    .subscribe((res) => this.lojas = res);
+
+  setLocalStorageLoja = () => this.storageMap.set('Loja', this.lojaDefault)
+    .subscribe(() => {});
+
+    getLocalStorageLoja = () => this.util.StorageParse('Loja');
+
+  selectCondor = () => {
+    this.news.LojaId(this.condor).subscribe(data => {
+      this.db.getOfertas(data.cod_loja).pipe(take(1)).subscribe();
+      this.storageMap.set('Loja', { loja: data.cod_loja, slug: data.slug, nome: data.title1 }).subscribe(() => {});
+    });
+    this.frame.hide();
+  }
+
+  open = () => {
+    this.frame.show();
+    this.seo.dataLayerTracking({ event: 'findStore', storeAction: 'Clique Header', storeName: 'Nome da Loja' });
+  }
+
+  close = () => this.frame.hide();
+
+}

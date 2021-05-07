@@ -5,9 +5,11 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 
 import { Observable, timer } from 'rxjs';
 
-import { SeoService } from '../../../shared/services/seo.service';
-import { UtilService } from '../../../shared/services/util.service';
-import { NewsService } from '../../../shared/services/news.service';
+import { SeoService } from '@core/services/seo.service';
+import { UtilService } from '@core/services/util.service';
+import { NewsService } from '@core/services/news.service';
+import { DataService } from '@core/services/data.service';
+import { take } from 'rxjs/operators';
 
 const objeto = { loja: 21, slug: 'hiper-condor-nilo-pecanha', nome: 'Hiper Condor Nilo Peçanha' };
 
@@ -34,6 +36,7 @@ export class SelectorComponent implements OnInit {
     private seo: SeoService,
     private util: UtilService,
     private news: NewsService,
+    private db: DataService,
     private storageMap: StorageMap
     ) { }
 
@@ -60,12 +63,13 @@ export class SelectorComponent implements OnInit {
 
   selectCondor = () => {
     this.news.LojaId(this.condor).subscribe(data => {
+      this.db.getOfertas(data.cod_loja).pipe(take(1)).subscribe();
       const type = { loja: data.cod_loja, slug: data.slug, nome: data.title1 };
       this.storageMap.delete('Loja').subscribe(() => {});
       this.storageMap.set('Loja', type).subscribe(() => {});
     });
     this.frame.hide();
-    timer(300).subscribe(() => this.init());
+    // timer(300).subscribe(() => this.init());
   }
 
   init = () => {

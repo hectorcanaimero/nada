@@ -1,0 +1,20 @@
+<section id="taloide-onmline" class="py-5" *ngIf="items | async as tabloide; else semData">
+    <div class="container">
+        <div class="row ios">
+            <div class="col-md-4 order-2 order-md-1">
+                <div class="list-group mt-3 mt-md-0">
+                    <a *ngFor="let item of tabloide; let i = index" (click)="getIssuu(item, i)"
+                      class="list-group-item  waves-light" mdbWavesEffect [ngClass]="{'active': i === active}">
+                        {{ item.title?.rendered }}
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-8 order-1 order-md-2">
+                <div class="embed-responsive embed-responsive-16by9" [innerHTML]="show | safe: 'html'"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<ng-template #semData>
+  <app-sem-data height="80vh"></app-sem-data>
+</ng-template>

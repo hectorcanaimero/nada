@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
@@ -6,14 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { NgcCookieConsentService, NgcInitializeEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent } from 'ngx-cookieconsent';
 
-import { SeoService } from './shared/services/seo.service';
-import { UtilService } from './shared/services/util.service';
-import { UpdateService } from './shared/services/updateService';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { NewsService } from 'src/app/shared/services/news.service';
+import { SeoService } from '@core/services/seo.service';
+import { UtilService } from '@core/services/util.service';
+import { NewsService } from '@core/services/news.service';
+import { DataService } from '@core/services/data.service';
 
 import { Subscription, Observable } from 'rxjs';
 import { Static } from './shared/services/interfaces/static';
+import { UpdateService } from './shared/services/updateService';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     router: Router,
     sw: UpdateService,
-    private api: ApiService,
+    private db: DataService,
     private util: UtilService,
     private news: NewsService,
     private seo: SeoService,
@@ -51,9 +52,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private gtmService: GoogleTagManagerService
   ) {
     sw.checkForUpdates();
-    // if (!util.StorageParse('Loja')) {
-    //   this.init = true;
-    // }
+    this.storageMap.has('Loja').subscribe((res) => {
+      if (!res) {
+        this.storageMap.set('Loja', {
+          loja: "6", slug: "hiper-condor-pinheirinho", nome: "Hiper Condor Pinheirinho"
+        }).subscribe();
+      }
+    })
+
     router.events.forEach((item) => {
       if (item instanceof NavigationEnd) {
         const gtmTag = { event: 'page', pageName: item.url };
@@ -66,13 +72,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getSeo();
     this.setCookies();
     this.data$ = this.util.getStatic();
-    this.news.getLoja().subscribe(res => res);
-    this.news.getRegion().subscribe(res => res);
+    this.news.getLoja().pipe(take(1)).subscribe();
+    this.news.getRegion().pipe(take(1)).subscribe();
   }
 
-  ngAfterViewInit() {
-    this.storageMap.has('Loja').subscribe(res => { if (res === false) this.init = true; });
-  }
+  ngAfterViewInit() { }
 
   ngOnDestroy() {
     // unsubscribe to cookieconsent observables to prevent memory leaks
@@ -93,8 +97,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.updateTags(
       {
         title: data.title,
+        image: data.image,
         description: data.description,
-        image: data.image
       }
     );
     this.seo.addCanonical();

@@ -1,0 +1,13 @@
+<section id="search" class="p-y-3 py-md-5">
+    <div class="container">
+        <h1 class="h2-responsive b-7 mb-4" [innerHTML]="message"></h1>
+        <div class="row mb-4">
+            <div class="col-md-4 mb-4" *ngFor="let item of items">
+                <helper-product [code]="item"></helper-product>
+            </div>
+        </div>
+        <app-widget-ofertas [code]="'geral'" [sector]="product.setor" title="Mais ofertas"
+            icon="fas fa-shopping-basket" type="slug">
+        </app-widget-ofertas>
+    </div>
+</section>

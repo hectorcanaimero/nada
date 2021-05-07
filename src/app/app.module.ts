@@ -1,8 +1,3 @@
-import { MobileModule } from './shared/widgets/mobile/mobile.module';
-import { FooterModule } from './shared/widgets/footer/footer.module';
-import { HeaderModule } from './shared/widgets/header/header.module';
-import { MenuModule } from './shared/widgets/menu/menu.module';
-import { TopModule } from './shared/widgets/top/top.module';
 import { NgModule } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -25,7 +20,21 @@ import { RedirectGuard } from './shared/services/redirect.guard';
 import { HelperModule } from './component/helper/helper.module';
 
 registerLocaleData(localePt);
+
+import { TopModule } from '@widgets/top/top.module';
+import { MenuModule } from '@widgets/menu/menu.module';
 import { environment } from '../environments/environment';
+import { FooterModule } from '@widgets/footer/footer.module';
+import { HeaderModule } from '@widgets/header/header.module';
+import { MobileModule } from '@widgets/mobile/mobile.module';
+
+
+
+
+
+
+
+
 
 // const cookieConfig: NgcCookieConsentConfig = {
 //   cookie: { domain: 'localhost' },

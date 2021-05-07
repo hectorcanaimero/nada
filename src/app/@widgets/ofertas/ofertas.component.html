@@ -1,0 +1,10 @@
+<section >
+  <div class="container">
+    <app-titulo [titulo]="title" [icon]="icon" [link]="link"></app-titulo>
+    <swiper [lazy]="true" [config]="options">
+    <ng-template swiperSlide *ngFor="let item of items$ | async">
+      <app-product [code]="item" [loja]="loja"></app-product>
+    </ng-template>
+  </swiper>
+  </div>
+</section>

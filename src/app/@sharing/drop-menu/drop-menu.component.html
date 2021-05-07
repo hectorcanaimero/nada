@@ -1,0 +1,11 @@
+<div class="drop-menu sub-menu my-3">
+  <div class="titulo">
+    <h6> <a href="#">{{ titulo }}</a> </h6>
+  </div>
+  <ul class="list-unstyled">
+    <li *ngFor="let item of data; trackBy:trackByFunction">
+      <a *ngIf="item.external" class="p-0 menu-item white-text" [href]="item.url" rel="noopener" target="_blank"> {{ item.nome }} </a>
+      <a *ngIf="!item.external" class="p-0 menu-item white-text" [routerLink]="[item.url]" >{{ item.nome }} </a>
+    </li>
+  </ul>
+</div>

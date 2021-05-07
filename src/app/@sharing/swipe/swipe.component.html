@@ -1,0 +1,7 @@
+<swiper effect="fade" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()" [lazy]="true"
+  [navigation]="true" [pagination]="{ clickable: true }">
+
+  <ng-template swiperSlide *ngFor="let item of data; trackBy: trackByFunction">
+    <app-image [code]="item" [idImage]="idImage" [size]="size"></app-image>
+  </ng-template>
+</swiper>

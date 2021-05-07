@@ -1,0 +1,25 @@
+<section id="banner-top" class="condor-banner whats-banner" *ngIf="type === 'radar' || type === 'whats'">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-11">
+                <a rel="noopener noreferrer" [routerLink]="['/institucional/radar-de-ofertas']" target="_blank">
+                    <img Lazy id="banner-top" src="/assets/images/faixa/radar.png"  alt="Radar do Ofertas" class="img-fluid d-none d-md-block">
+                    <img Lazy id="banner-top" src="./assets/images/faixa/radar_mobile.png" alt="Radar do Ofertas" class="img-fluid d-md-none">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="banner-footer" class="condor-banner clube-banner" *ngIf="type === 'clube'">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-11">
+                <a rel="noopener noreferrer" [routerLink]="['/clubecondor']" target="_blank">
+                    <img Lazy id="banner-footer" src="./assets/images/faixa/clube.png" alt="Clube Condor" class="img-fluid d-none d-md-block">
+                    <img Lazy id="banner-footer" src="./assets/images/faixa/clube_mobile.png" alt="Clube Condor" class="img-fluid d-md-none">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

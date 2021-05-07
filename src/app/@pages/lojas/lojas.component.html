@@ -1,0 +1,33 @@
+<section id="loja" class="py-5">
+  <div class="container">
+    <h2 class="b-08 border-bottom pb-1 mb-3">O Condor mais Próximo</h2>
+    <div class="row justify-content-center my-4">
+      <div class="col-md-4 mb-2">
+        <select class="browser-default custom-select" (change)="onLoja($event)">
+          <option selected value="All">Todas as regiões</option>
+          <option [value]="r.id" *ngFor="let r of region$ | async">{{ r.name }}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <select class="browser-default custom-select" (change)="goToLoja($event)">
+          <option selected value="All">Todas as lojas</option>
+          <option [value]="i.slug" *ngFor="let i of items$ | async">{{ i.title1 }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row ios mb-5" *ngIf="items$ | async; else semData">
+      <div class="col-md-6 col-lg-4 col-xl-4 mb-5" *ngFor="let loja of items$ | async | paginate: { itemsPerPage: 9, currentPage: p }">
+        <div class="boxs z-depth-3" [routerLink]="[loja.slug]">
+          <h4 class="titulo">{{ loja.title1 }}</h4>
+          <div class="images" [ngStyle]="{'background': 'url('+ loja.medium +') no-repeat center center'}"></div>
+      </div>
+      </div>
+    </div>
+    <pagination-controls class="animated fade text-center" (pageChange)="p = $event"
+      previousLabel="Anterior" nextLabel="Próximo" responsive="true">
+    </pagination-controls>
+  </div>
+</section>
+<ng-template #semData>
+  <app-sem-data height="50vh"></app-sem-data>
+</ng-template>

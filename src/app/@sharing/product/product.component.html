@@ -1,0 +1,51 @@
+<div class="product" (click)="goToProduct()">
+  <div class="message">
+    <div class="mas18" *ngIf="code.image === mas18"> <p>+18</p> </div>
+    <div class="kit" *ngIf="code.kit"> <p>KIT</p> </div>
+  </div>
+  <div class="images">
+    <img appOferta src="https://marketing.condor.com.br/api/Containers/produtos/download/{{ code.host }}.jpg"
+      [alt]="code.produtos.dsc_produto" />
+    <div class="promotion">
+      <img Lazy *ngIf="code.preco_clube" src="./assets/images/clube.png"
+        alt="Tag Clube Condor" class="selo_clube">
+      <img Lazy *ngIf="code.preco_cashback" src="./assets/images/selo_ddv.png"
+        alt="Dinheiro de Volta" class="selo_ddv">
+    </div>
+  </div>
+  <div class="content">
+    <p class="title">{{ code.produtos.dsc_produto | truncate: 70 }}</p>
+    <div class="regular">
+      <div *ngIf="!code.preco_clube"></div>
+      <div style="height: 54px;" *ngIf="!code.preco_clube"></div>
+      <p [ngClass]="code.preco_clube ? 'price-clube' : 'price-normal'">
+        {{ code.preco_regular || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}
+        <span>{{ code.produtos.embalagem }}</span>
+      </p>
+      <div style="height: 18px;"></div>
+    </div>
+    <div class="clube" *ngIf="code.preco_clube">
+      <p class="price">
+        {{ code.preco_clube || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}
+        <span>{{ code.produtos.embalagem }}</span>
+      </p>
+      <div class="parcela" *ngIf="code.parcela_clube; else semParcela">
+        <p>
+          {{ code.qtd_clube || 0 }}x de
+          {{ code.parcela_clube || 0 | currency: 'R$':'symbol':'1.2-2':'pt' }}
+          no cartão Condor.
+        </p>
+      </div>
+    </div>
+    <div class="validade">
+      <p>
+        Oferta Válida de {{ code.produtos.start | date: "dd/MM/yyyy" }} a {{ code.produtos.end | date: "dd/MM/yyyy" }}
+        <br>{{ loja.nome }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<ng-template #semParcela>
+  <div style="height: 18px;"></div>
+</ng-template>

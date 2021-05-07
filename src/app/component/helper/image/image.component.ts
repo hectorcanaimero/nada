@@ -11,7 +11,7 @@ export class ImageComponent implements OnInit {
   @Input() idImage?: string = '';
   @Input() size?: string;
   imagem: any = [];
-  default = `https://via.placeholder.com/${this.size}?text=Rede+Condor`;
+  default = ``;
 
   ngOnInit() {
   }

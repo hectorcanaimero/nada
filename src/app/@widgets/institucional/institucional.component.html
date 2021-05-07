@@ -1,0 +1,17 @@
+<section id="PostInstitucional" class="py-3" *ngIf = "items$ | async as items">
+  <div class="container">
+    <app-titulo icon="fas fa-newspaper" titulo="Condor. Há 47 anos faz parte da família"></app-titulo>
+    <div class="row ios">
+      <div class="col-12 col-sm-3 col-md-6 col-lg-3 mb-3" *ngFor="let item of items | sort: 'id'; trackBy: trackByFunction">
+        <a [routerLink]="['institucional', item.slug]" class="text-muted b-06">
+          <div class="view z-depth-3">
+            <img Lazy [src]="item.medium" class="w-100" [alt]="item.title">
+            <div class="mask flex-center rgba-black-light cursor">
+              <h3 class="b-07 white-text text-center text-shadow">{{ item.title }}</h3>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

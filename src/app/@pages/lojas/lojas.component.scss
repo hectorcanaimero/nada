@@ -1,0 +1,21 @@
+.boxs{
+  height: 320px;
+  cursor: pointer;
+  border-radius: 10px;
+  .titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    font-size: 1.3rem;
+    min-height: 70px;
+    color: var(--color-default--text);
+  }
+  .images{
+      height: 250px;
+      background-size: cover !important;
+      border-radius: 0 0 10px 10px;
+  }
+}

@@ -1,0 +1,20 @@
+<section id="carousel" class="py-0 py-md-3" *ngIf="data$ | async as item">
+  <div id="banner" class="container">
+    <div class="row ios">
+      <div class="col-sm-8 col-md-8 col-lg-8 mb-1">
+        <app-widget-ofertas *showItBootstrap="['xs']"  code="dia" title="Ofertas do dia" icon="fas fa-shopping-basket"
+          link="/ofertas-do-dia" type="slug"></app-widget-ofertas>
+          <div class="z-depth-1">
+            <app-swipe [data]="item.left" idImage="banner-home-left" size="730x350"></app-swipe>
+          </div>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <app-widget-ofertas *showItBootstrap="['xs']"  code="geral" title="Mais procurados" icon="fas fa-shopping-basket"
+        link="/ofertas-para-voce" type="slug"></app-widget-ofertas>
+        <div class="z-depth-1">
+          <app-swipe [data]="item.right" idImage="banner-home-right" size="350x350"></app-swipe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

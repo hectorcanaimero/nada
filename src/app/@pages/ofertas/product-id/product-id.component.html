@@ -1,0 +1,191 @@
+<section id="DetalheProduto" class="py-2 py-md-5" *ngIf="items$ | async as code; else semData">
+  <div class="container">
+    <mdb-breadcrumb class="mb-5">
+      <mdb-breadcrumb-item class="bread blue-text text-uppercase"> {{code.produtos.dsc_departamento}}</mdb-breadcrumb-item>
+      <mdb-breadcrumb-item class="blue-text text-uppercase"> {{code.produtos.dsc_setor}} </mdb-breadcrumb-item>
+      <mdb-breadcrumb-item class="active text-uppercase">{{code.produtos.dsc_produto}}</mdb-breadcrumb-item>
+    </mdb-breadcrumb>
+    <div class="d-none d-lg-block">
+      <div class="row justify-content-center">
+        <div class="col-3">
+          <div class="image">
+            <img appProduct [src]="code.host" alt="{{code.produtos.dsc_produto}}" class="img-fluid mx-auto d-block">
+          </div>
+        </div>
+        <div class="col-6">
+          <h2 class="b-06 border-bottom pb-1 mb-4 titulo">{{ code.produtos.dsc_produto }}</h2>
+          <p>{{ code.produtos.dsc_descricao }}</p>
+          <p class="legal" *ngIf="code.produtos.image">* {{code.produtos.image}}</p>
+          <p class="mt-5 f-09">
+            Oferta válida de {{ code.produtos.start | date: 'dd/MM/yyyy' }}
+            até {{ code.produtos.end | date: 'dd/MM/yyyy' }} no <span class="b-08">{{ loja }}</span>
+          </p>
+          <div class="row justify-content-center my-4">
+            <div class="col-md-6 col-lg-5 col-xl-6 text-center" *ngIf="code.departamento !== 11">
+              <a class="btn btn-primary btn-rounded" href="https://www.sitemercado.com.br/condor" target="_blank"
+                (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                Comprar online
+              </a>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-6 text-center" *ngIf="code.departamento === 11">
+              <a class="btn btn-primary btn-rounded" href="https://loja.condor.com.br" target="_blank"
+                (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                Comprar online
+              </a>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-6 text-center">
+              <a class="btn btn-danger btn-rounded" href="https://www.google.com.br/maps/search/condor" target="_blank" (click)="onTracking(code['produtos'].dsc_produto  ,'comprar_online')">
+                Comprar na loja
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <app-select-loja type="alert"></app-select-loja>
+          <div class="precos">
+            <img src="./assets/images/clube.png" class="image-clube" alt="Clube Condor">
+            <div [ngClass]="code.preco_clube ? 'regular' : 'clube'">
+              <p>
+                {{ code.preco_regular || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}
+                <span>{{code.produtos.embalagem }}</span>
+              </p>
+            </div>
+            <div class="clube mt-2" *ngIf="code.preco_clube">
+              <p> {{ code.preco_clube || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}
+                <span>{{code.produtos.embalagem }}</span></p>
+            </div>
+          </div>
+          <div class="parcelas" *ngIf="code.qtd_clube">
+            <p>
+              <span>{{ code.qtd_clube || 0 }}x</span> de
+              <span class="parcela">{{ code.parcela_clube || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}</span>
+              <br>no cartão Condor
+          </p>
+          </div>
+          <div class="cashback" *ngIf="code.preco_cashback">
+            <div class="align-self-center">
+              <img src="./assets/images/selo_ddv.png" alt="Dinheiro de Volta" class="img-fluid">
+            </div>
+            <div>
+              <p> recebe de volta
+                <span> {{ code.preco_cashback || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-lg-none">
+      <h2 class="b-06 border-bottom pb-1 mb-4 titulo">{{ code.produtos.dsc_produto }}</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4 col-lg-4">
+          <div class="image mb-3">
+            <img appProduct [src]="code.host" alt="{{code.produtos.dsc_produto}}" class="img-fluid mx-auto d-block">
+          </div>
+          <div class="mt-2 d-none d-md-block"><app-select-loja type="alert"></app-select-loja></div>
+        </div>
+        <div class="col-md-8 col-lg-8">
+          <div class="row">
+            <div class="col-12">
+              <p>{{ code.produtos.dsc_descricao }}</p>
+              <p class="legal" *ngIf="code.produtos.image">* {{code.produtos.image}}</p>
+              <p class="mt-5 f-09">
+                Oferta válida de {{ code.produtos.start | date: 'dd/MM/yyyy' }}
+                até {{ code.produtos.end | date: 'dd/MM/yyyy' }} no <span class="b-08">{{ loja }}</span>
+              </p>
+              <div class=" mb-4 d-none d-md-block">
+                <div class="row">
+                  <div class="col-6 text-center" *ngIf="code.departamento !== 11">
+                    <a class="btn btn-primary btn-rounded" href="https://www.sitemercado.com.br/condor" target="_blank"
+                      (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                      Comprar online
+                    </a>
+                  </div>
+                  <div class="col-6 text-center" *ngIf="code.departamento === 11">
+                    <a class="btn btn-primary btn-rounded" href="https://loja.condor.com.br" target="_blank"
+                      (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                      Comprar online
+                    </a>
+                  </div>
+                  <div class="col-6 text-center">
+                    <a class="btn btn-danger btn-rounded" href="https://www.google.com.br/maps/search/condor" target="_blank" (click)="onTracking(code['produtos'].dsc_produto  ,'comprar_online')">
+                      Comprar na loja
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="precos mb-2">
+                <img src="./assets/images/clube.png" class="image-clube" alt="Clube Condor">
+                <div [ngClass]="code.preco_clube ? 'regular' : 'clube'">
+                  <p>
+                    {{ code.preco_regular || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}
+                    <span>{{code.produtos.embalagem }}</span>
+                  </p>
+                </div>
+                <div class="clube mt-2" *ngIf="code.preco_clube">
+                  <p> {{ code.preco_clube || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}
+                    <span>{{code.produtos.embalagem }}</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="code.qtd_clube">
+              <div class="parcelas mt-0" >
+                <p>
+                  <span>{{ code.qtd_clube || 0 }}x</span> de
+                  <span class="parcela">{{ code.parcela_clube || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}</span>
+                  <br>no cartão Condor
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="code.preco_cashback">
+              <div class="cashback mt-0">
+                <div class="align-self-center">
+                  <img src="./assets/images/selo_ddv.png" alt="Dinheiro de Volta" class="img-fluid">
+                </div>
+                <div>
+                  <p> recebe de volta
+                    <span> {{ code.preco_cashback || 0 | currency: "R$":"symbol":"1.2-2":"pt" }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row no-gutters d-md-none">
+              <div class="col-6 col-md-6 text-center" *ngIf="code.departamento !== 11">
+                <a class="btn btn-primary" href="https://www.sitemercado.com.br/condor" target="_blank"
+                  (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                  Comprar online
+                </a>
+              </div>
+              <div class="col-6 text-center" *ngIf="code.departamento === 11">
+                <a class="btn btn-primary" href="https://loja.condor.com.br" target="_blank"
+                  (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                  Comprar online
+                </a>
+              </div>
+              <div class="col-6 text-center">
+                <a class="btn btn-danger" href="https://www.google.com.br/maps/search/condor" target="_blank" (click)="onTracking(code['produtos'].dsc_produto  ,'comprar_online')">
+                  Comprar na loja
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 d-md-none"><app-select-loja type="alert"></app-select-loja></div>
+        </div>
+      </div>
+    </div>
+    <div class="my-2 p-3 bg-light rounded">
+      <p class="text-justify mb-0 f-08">
+          <span class="b-06">*Consultar a disponibilidade do produto nas lojas Condor.</span><br>
+          Para melhor atender nossos clientes, não vendemos por atacado e reservamo-nos o direito de limitar a 12 unidades/kg por cliente
+          (consumidor) a quantidade dos produtos anunciados. Para o estado do Paraná, essa condição é válida conforme acordo
+          (TAC Termo de Ajuste de Conduta) entre PROCON-PR e APRAS.
+      </p>
+    </div>
+  </div>
+</section>
+
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>
