@@ -1,7 +1,7 @@
 import { SeoService } from 'src/app/shared/services/seo.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
-import { map, tap, debounceTime } from 'rxjs/operators';
+import { map, tap, debounceTime, delay } from 'rxjs/operators';
 
 import { NewsService } from '../../shared/services/news.service';
 
@@ -17,7 +17,7 @@ export class ImprensaComponent implements OnInit {
   p: number = 1;
   ip: number = 6;
   subscription: Subscription;
-  items: Observable<any>;
+  items$: Observable<any>;
 
   constructor(
     private seo: SeoService,
@@ -31,15 +31,15 @@ export class ImprensaComponent implements OnInit {
   }
 
   getPost = (page: number) => {
-    this.items = this.news.Posts(page, this.ip).pipe(
-      debounceTime(400),
+    this.items$ = this.news.Posts(page, this.ip).pipe(
       tap((res) => this.header = res.headers.keys().map(key => res.headers.get(key))[4]),
       map((res) => res.body),
+      delay(1000),
     );
   }
 
-  pageChanged = (e: any) => {
-    this.p = e;
-    this.items = this.news.Posts(this.p, this.ip).pipe(map((res) => res.body));
+  pageChanged = (ev: any) => {
+    this.p = ev;
+    this.items$ = this.news.Posts(this.p, this.ip).pipe(map((res) => res.body));
   }
 }

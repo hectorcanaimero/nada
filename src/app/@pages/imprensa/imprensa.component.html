@@ -1,0 +1,34 @@
+<section id="imprensa" class="py-4" *ngIf="(items$ | async) as items; else semData">
+  <div class="container">
+    <h2 class="h1-responsive font-weight-bold text-left border-bottom my-5">Notícias</h2>
+    <div class="row ios">
+      <div class="col-xl-9">
+        <div class="row">
+          <div class="col-md-6 mb-4" *ngFor=" let item of items | paginate: { itemsPerPage: ip, currentPage: p, totalItems: header } ">
+            <div class="cards">
+              <a [routerLink]="['/institucional/imprensa', item.slug]">
+                <div class="image" [ngStyle]="{'background': 'url('+ item.medium +') no-repeat center center'}">
+                  <div class="content">
+                    <h3 class="titulo">{{ item.title }}</h3>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="mt-4 mx-auto">
+            <pagination-controls class="animated fade text-center" (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)" previousLabel="Anterior" nextLabel="Próximo" responsive="true">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3">
+          <img src="./assets/images/banner_imprensa.jpg" class="img-fluid mb-4" alt="Imprensa">
+          <app-sidebar></app-sidebar>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>

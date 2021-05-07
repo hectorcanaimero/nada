@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { NewsService } from '@core/services/news.service';
+import { Page } from '@core/interfaces/news';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,32 +10,17 @@ import { ApiService } from 'src/app/shared/services/api.service';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() json: any = [];
-  @Input() items: any = [];
-  @Input() entrada: boolean = false;
-  @Output() salida = new EventEmitter<boolean>();
+  items$: Observable<any>;
+  noticias$: Observable<Page[]>;
 
-  active1: boolean = true;
-  active2: boolean = true;
-  toogle1: boolean = false;
-
-  ofertas: Observable<any>;
-
-
-  constructor( private api: ApiService) { }
+  constructor(
+    private news: NewsService
+  ) { }
 
   ngOnInit(): void {
-    this.ofertas = this.api.getMenuOfertas('menuDepartamento');
+    this.items$ = this.news.PageCollection(`?include[]=97&include[]=104`);
+    this.noticias$ = this.news.LastNews(5);
   }
 
-  active = () => this.toogle1 = !this.toogle1;
-  submenu1 = () => this.active1 = !this.active1;
-  submenu2 = () => this.active2 = !this.active2;
-
-  toogle = (ev?: any) => {
-    if (ev) this.entrada = ev;
-    this.entrada = !this.entrada;
-    this.salida.emit(this.entrada);
-  }
-
+  trackById = (index: number, items: any) => items[index];
 }

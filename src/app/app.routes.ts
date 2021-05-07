@@ -4,6 +4,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const app: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./@pages/home/home.module').then(mod => mod.HomeModule) },
+  { path: 'institucional/imprensa', loadChildren: () => import('./@pages/imprensa/imprensa.module').then(mod => mod.ImprensaModule) },
   { path: 'institucional', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
   { path: 'tabloide-online', loadChildren: () => import('./@pages/tabloide/tabloide.module').then(mod => mod.TabloideModule) },
   { path: 'lojas', loadChildren: () => import('./@pages/lojas/lojas.module').then(mod => mod.LojasModule) },
@@ -24,7 +25,6 @@ const app: Routes = [
   { path: 'fale-conosco/sac', loadChildren: () => import('./pages/sac/sac.module').then(mod => mod.SacModule) },
   { path: 'fale-conosco', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
   { path: 'acoes-condor', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
-  { path: 'institucional/imprensa', loadChildren: () => import('./pages/imprensa/imprensa.module').then(mod => mod.ImprensaModule) },
   { path: 'para-sua-empresa', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
   { path: 'servicos-financeiro', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
   { path: 'pesquisa-usuario', loadChildren: () => import('./@pages/ofertas/search/search.module').then(mod => mod.SearchModule) },

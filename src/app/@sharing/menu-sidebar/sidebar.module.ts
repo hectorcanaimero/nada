@@ -1,9 +1,10 @@
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { RouterModule } from '@angular/router';
+import { MDBRootModule } from 'angular-bootstrap-md';
 
 import { SidebarComponent } from './sidebar.component';
+import { HelperModule } from 'src/app/component/helper/helper.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SidebarComponent } from './sidebar.component';
   imports: [
     CommonModule,
     RouterModule,
-    MDBBootstrapModule,
+    HelperModule,
+    MDBRootModule,
   ]
 })
 export class SidebarModule { }

@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImprensaComponent } from './imprensa.component';
-import { DetailComponent } from './detail/detail.component';
 import { FormsModule } from '@angular/forms';
-import { HelperModule } from '../../component/helper/helper.module';
+import { Routes, RouterModule } from '@angular/router';
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Routes, RouterModule } from '@angular/router';
+
+import { SidebarModule } from '@sharing/sidebar/sidebar.module';
+import { SemDataModule } from '@sharing/sem-data/sem-data.module';
+import { HelperModule } from '../../component/helper/helper.module';
+
+import { ImprensaComponent } from './imprensa.component';
+import { DetailComponent } from './detail/detail.component';
 
 const app: Routes = [
   { path: '', component: ImprensaComponent },
@@ -19,6 +24,8 @@ const app: Routes = [
     CommonModule,
     FormsModule,
     HelperModule,
+    SemDataModule,
+    SidebarModule,
     MDBBootstrapModule,
     NgxPaginationModule,
     RouterModule.forChild(app)

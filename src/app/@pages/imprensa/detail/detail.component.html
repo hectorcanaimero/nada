@@ -1,0 +1,24 @@
+<section id="conteudo" class="py-5" *ngIf="(items$ | async) as item; else semData">
+  <div class="container">
+    <h1 class="b-08 border-bottom pb-1 mb-3 text-left">{{ item.title }}</h1>
+    <div class="row ios justify-content-center">
+      <div class="view overlay mb-5">
+        <div class="mask flex-center rgba-green-slight">
+          <p class="white-text">{{ item.title }}</p>
+        </div>
+      </div>
+      <div class="col-lg-8 col-xl-9">
+        <img *ngIf="item.full" class="w-100" [src]="item['full']" [alt]="item.title" />
+        <img *ngIf="!item.full" class="w-100" src="./assets/images/sem-imagem.jpg" [alt]="item.title" />
+        <div class="mt-4" [innerHTML]="item.content" id="conteudo"></div>
+      </div>
+      <div class="col-lg-4 col-xl-3 bg-red">
+        <img src="./assets/images/banner_imprensa.jpg" class="img-fluid mb-4" alt="Imprensa">
+        <app-sidebar></app-sidebar>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>

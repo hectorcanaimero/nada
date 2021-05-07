@@ -5,7 +5,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router';
 import { HelperModule } from 'src/app/component/helper/helper.module';
 
-import { SidebarModule } from '@sharing/sidebar/sidebar.module';
+// import { SidebarModule } from '@sharing/menu-sidebar/sidebar.module';
 import { DropMenuModule } from '@sharing/drop-menu/drop-menu.module';
 import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
 
@@ -16,7 +16,7 @@ import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
     CommonModule,
     RouterModule,
     HelperModule,
-    SidebarModule,
+    // SidebarModule,
     DropMenuModule,
     SelectLojaModule,
     MDBBootstrapModule

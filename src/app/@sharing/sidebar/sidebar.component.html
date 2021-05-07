@@ -1,107 +1,18 @@
-<div class="sidebar pt-2 overflow-auto d-none d-lg-block" [ngClass]="{'open': toogle1}" *ngIf="toogle1">
-    <div class="px-5 py-3 text-center">
-        <img src="./assets/images/logo.svg" alt="Logo Condor" width="180px" class="img-fluid"/>
-    </div>
-    <div class="menu">
-        <div class="list-group">
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
-            href="https://www.condor.com.br/delivery" target="_blank" (click)="toogle()">
-                <div style="width: 30px !important; display: inline-block; text-align: center;">
-                    <img src="./assets/images/market_mobile.svg" height="20px" alt="Compre on-line" />
-                </div>
-                Compre-online
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
-                [routerLink]="['']" (click)="toogle()">
-                Home
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-            <a href="#" class="list-group-item py-2 rounded-0 waves-light f-09" mdbWavesEffect (click)="submenu2()">
-                Ofertas
-                <i class="fas fa-angle-down float-right" [hidden]="!active2"></i>
-                <i class="fas fa-angle-up float-right" [hidden]="active2"></i>
-            </a>
+<div class="news mb-3">
+    <h5 class="b-07 border-bottom pb-1 mb-3">Últimas Noticias</h5>
+    <a [routerLink]="['/institucional/imprensa/', n.slug]" routerLinkActive="router-link-active"
+        class="waves-light f-09 b-07 text-muted pl-2 border-bottom pb-2 mb-2 text-justify"
+        mdbWavesEffect *ngFor="let n of noticias$ | async; trackBy: trackById">
+        {{ n.title }}
+    </a>
+</div>
+<div class="news mb-3">
+    <h5 class="b-07 border-bottom pb-1 mb-3">Joanir Zonta</h5>
+    <div class="media border-bottom pb-3 mb-4" *ngFor="let item of items$ | async; trackBy: trackById">
+        <img class="d-flex mr-3" [src]="item.thumbnail" alt="{{ item.title }}" />
+        <div class="media-body">
+            <h6 class="mt-0 font-weight-bold">{{ item.title }}</h6>
+            <div [innerHTML]="item.content"></div>
         </div>
-        <div class="list-group my-0 animated" [ngClass]="{ 'fadeOut d-none ': active2, 'fadeInLeft': !active2 }">
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let m of ofertas | async"
-                [routerLink]="['/departamento', m.slug ]" routerLinkActive="active" (click)="toogle()">
-                <mdb-icon fas icon="shopping-basket"></mdb-icon>
-                {{ m.nome }}
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-        </div>
-        <div *ngFor="let mob of items.campanha" >
-          <a rel="noopener noreferrer" class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="!mob.campanha"
-          [href]="[mob.slug]" target="_blank" (click)="toogle()">
-            {{ mob.nome }}
-            <i class="fas fa-angle-right float-right"></i>
-          </a>
-          <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="mob.campanha" [routerLink]="[mob.slug]" (click)="toogle()">
-              {{ mob.nome }}
-              <i class="fas fa-angle-right float-right"></i>
-          </a>
-        </div>
-        <div *ngFor="let cen of items.center" >
-            <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="cen.external" [href]="[cen.url]" target="_blank" (click)="toogle()">
-                {{ cen.name }}
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-            <a class="list-group-item rounded-0 waves-light f-09 w-100" mdbWavesEffect *ngIf="!cen.external" [routerLink]="[cen.url]" (click)="toogle()">
-                {{ cen.name }}
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-        </div>
-        <div class="list-group my-1">
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect *ngFor="let head of items.header"
-                [routerLink]="[head.url]" routerLinkActive="active" (click)="toogle()">
-                <div style="width: 30px !important; display: inline-block; text-align: center;">
-                    <img [src]="head.iconmobile" height="20px" alt="{{ head.name }}" />
-                </div>
-                {{ head.name }}
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-        </div>
-        <div class="list-group">
-            <a href="#" class="list-group-item py-2 rounded-0 waves-light f-09" mdbWavesEffect (click)="submenu1()">
-                Fale Conosco
-                <i class="fas fa-angle-down float-right" [hidden]="!active1"></i>
-                <i class="fas fa-angle-up float-right" [hidden]="active1"></i>
-            </a>
-        </div>
-        <div class="list-group my-0 animated" [ngClass]="{
-            'fadeOut d-none ': active1,
-            'fadeInLeft': !active1
-            }">
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
-                [routerLink]="['/fale-conosco/sac']" routerLinkActive="active" (click)="toogle()">
-                <mdb-icon fas icon="angle-double-right"></mdb-icon>
-                SAC
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
-                [routerLink]="['/fale-conosco/trabalhe-conosco']" routerLinkActive="active" (click)="toogle()">
-                <mdb-icon fas icon="angle-double-right"></mdb-icon>
-                Trabalhe conosco
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
-                [routerLink]="['/fale-conosco/disque-denuncia']" routerLinkActive="active" (click)="toogle()">
-                <mdb-icon fas icon="angle-double-right"></mdb-icon>
-                Disque-denúncia
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-            <a class="list-group-item rounded-0 waves-light f-09" mdbWavesEffect
-                [routerLink]="['/imprensa']" routerLinkActive="active" (click)="toogle()">
-                <mdb-icon fas icon="angle-double-right"></mdb-icon>
-                Notícias
-                <i class="fas fa-angle-right float-right"></i>
-            </a>
-        </div>
-        <span>
-          <helper-menu-mobile [menu]="json.acoes" [active]="false"></helper-menu-mobile>
-          <helper-menu-mobile [menu]="json.servicos" [active]="false"></helper-menu-mobile>
-          <helper-menu-mobile [menu]="json.empresa" [active]="false"></helper-menu-mobile>
-        </span>
     </div>
 </div>
