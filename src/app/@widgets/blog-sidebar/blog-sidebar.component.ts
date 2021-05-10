@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../../../shared/services/news.service';
-import { UtilService } from '../../../shared/services/util.service';
 import { Router } from '@angular/router';
+import { NewsService } from '@core/services/news.service';
+import { UtilService } from '@core/services/util.service';
 
 @Component({
-  selector: 'app-aside',
-  templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.scss']
+  selector: 'app-blog-sidebar',
+  templateUrl: './blog-sidebar.component.html',
+  styleUrls: ['./blog-sidebar.component.scss']
 })
-export class AsideComponent implements OnInit {
+export class BlogSidebarComponent implements OnInit {
 
   category: any = [];
 
@@ -29,9 +29,9 @@ export class AsideComponent implements OnInit {
       res => this.category = res.body );
   }
 
-  Click(event) {
-    if (event.keyCode === 13) {
-      return this.router.navigate(['blog', 'search', this.util.toSlug(event.target.value)]);
+  onSearch(ev: any) {
+    if (ev.keyCode === 13) {
+      return this.router.navigate(['blog', 'search', this.util.toSlug(ev.target.value)]);
     }
   }
 }

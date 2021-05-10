@@ -1,4 +1,4 @@
-<section *ngIf="(data$ | async) as ofertas">
+<section *ngIf="(data$ | async) as ofertas; else semData">
   <app-carousel></app-carousel>
   <app-widget-ofertas [code]="ofertas[0].code" [title]="ofertas[0].titulo"
     [icon]="ofertas[0].icon" [link]="ofertas[0].link" type="slug"></app-widget-ofertas>
@@ -14,4 +14,7 @@
   <app-widget-post></app-widget-post>
   <app-widget-institucional></app-widget-institucional>
 </section>
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>
 

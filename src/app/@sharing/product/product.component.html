@@ -4,8 +4,7 @@
     <div class="kit" *ngIf="code.kit"> <p>KIT</p> </div>
   </div>
   <div class="images">
-    <img appOferta src="https://marketing.condor.com.br/api/Containers/produtos/download/{{ code.host }}.jpg"
-      [alt]="code.produtos.dsc_produto" />
+    <img appProduct [src]="code.host" [alt]="code.produtos.dsc_produto" />
     <div class="promotion">
       <img Lazy *ngIf="code.preco_clube" src="./assets/images/clube.png"
         alt="Tag Clube Condor" class="selo_clube">

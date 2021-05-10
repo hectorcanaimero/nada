@@ -13,6 +13,7 @@ const app: Routes = [
   { path: 'campanha', loadChildren: () => import('./@pages/ofertas/campanha/campanha.module').then(mod => mod.CampanhaModule) },
   { path: 'departamento', loadChildren: () => import('./@pages/ofertas/departamento/departamento.module').then(mod => mod.DepartamentoModule) },
 
+  { path: 'blog', loadChildren: () => import('./@pages/blog/blog.module').then(mod => mod.BlogModule)},
 
 
   { path: 'clubecondor', redirectTo: 'fale-conosco/baixe-o-app'},
@@ -20,8 +21,7 @@ const app: Routes = [
   { path: 'trabalhe-conosco', redirectTo: 'fale-conosco/trabalhe-conosco'},
   { path: 'radar-de-ofertas', redirectTo: 'institucional/radar-de-ofertas', },
   { path: 'cartao-presente', redirectTo: 'para-sua-empresa/cartao-presente-condor' },
-  { path: 'blog', loadChildren: () => import('./pages/blog/blog.module').then(mod => mod.BlogModule)},
-  { path: 'receitas', loadChildren: () => import('./pages/blog/blog.module').then(mod => mod.BlogModule) },
+  { path: 'receitas', loadChildren: () => import('./@pages/blog/blog.module').then(mod => mod.BlogModule) },
   { path: 'fale-conosco/sac', loadChildren: () => import('./pages/sac/sac.module').then(mod => mod.SacModule) },
   { path: 'fale-conosco', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
   { path: 'acoes-condor', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },

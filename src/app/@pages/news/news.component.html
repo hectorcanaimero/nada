@@ -1,25 +1,25 @@
-<section id="conteudo" class="py-5" *ngIf="(items | async) as items; else semData">
-    <div class="container">
-        <div class="animate fadeIn">
-            <h1 class="b-08 border-bottom pb-1 mb-3">{{ items['title'] }}</h1>
-            <div class="row ios justify-content-center">
-                <div class="view overlay mb-5">
-                    <div class="mask flex-center rgba-green-slight">
-                        <p class="white-text">{{ items['title'] }}</p>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-xl-9">
-                    <img *ngIf="!items['full']" src="./assets/images/sem-imagem.jpg" alt="{{ items['title'] }}" class="w-100 mb-4" />
-                    <img *ngIf="items['full']"  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                    data-src="{{ items['full'] }}" alt="{{ items['title'] }}" class="w-100 mb-4" />
-                    <div [innerHTML]="items['content'] | safe: 'html'" id="conteudo"></div>
-                </div>
-                <div class="col-lg-4 col-xl-3 bg-red">
-                    <helper-sidebar></helper-sidebar>
-                </div>
-            </div>
+<section id="conteudo" class="py-5" *ngIf="(items$ | async) as items; else semData">
+  <div class="container">
+    <div class="animate fadeIn">
+      <h1 class="b-08 border-bottom pb-1 mb-3">{{items.title  }}</h1>
+      <div class="row ios justify-content-center">
+        <div class="view overlay mb-5">
+          <div class="mask flex-center rgba-green-slight">
+            <p class="white-text">{{ items.title  }}</p>
+          </div>
         </div>
+        <div class="col-lg-8 col-xl-9">
+          <img *ngIf="!items.full" src="./assets/images/sem-imagem.jpg" [alt]="items.title" class="w-100 mb-4" />
+          <img *ngIf="items.full"  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          data-src="{{ items.full }}" [alt]="items.title" class="w-100 mb-4" />
+          <div [innerHTML]="items.content | safe: 'html'" id="conteudo"></div>
+        </div>
+        <div class="col-lg-4 col-xl-3 bg-red">
+          <app-sidebar></app-sidebar>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <ng-template #semData>
   <app-sem-data></app-sem-data>

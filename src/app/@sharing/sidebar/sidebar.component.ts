@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
 import { NewsService } from '@core/services/news.service';
 import { Page } from '@core/interfaces/news';
 
@@ -13,9 +15,7 @@ export class SidebarComponent implements OnInit {
   items$: Observable<any>;
   noticias$: Observable<Page[]>;
 
-  constructor(
-    private news: NewsService
-  ) { }
+  constructor( private news: NewsService ) { }
 
   ngOnInit(): void {
     this.items$ = this.news.PageCollection(`?include[]=97&include[]=104`);

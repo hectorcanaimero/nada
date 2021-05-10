@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map, take, tap, delay } from 'rxjs/operators';
+import { map, tap, delay } from 'rxjs/operators';
 
-import { SeoService } from 'src/app/shared/services/seo.service';
-import { NewsService } from 'src/app/shared/services/news.service';
+import { Page } from '@core/interfaces/news';
+import { SeoService } from '@core/services/seo.service';
+import { NewsService } from '@core/services/news.service';
 
 
 @Component({
@@ -16,8 +17,8 @@ import { NewsService } from 'src/app/shared/services/news.service';
 
 export class NewsComponent implements OnInit {
 
-  items: any = [];
-  slug: Observable<string>;
+  items$: Observable<Page>;
+  slug$: Observable<string>;
 
   constructor(
     private seo: SeoService,
@@ -26,12 +27,11 @@ export class NewsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.seo.addCanonical();
-    this.slug = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('id')));
-    this.slug.subscribe(data => this.getPost(`${data}`));
+    this.slug$ = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('id')));
+    this.slug$.subscribe(data => this.getPost(`${data}`));
   }
 
-  private getPost = (id: string) => this.items = this.news.PageSlug(id).pipe(
+  private getPost = (id: string) => this.items$ = this.news.PageSlug(id).pipe(
     tap((res) => {
       this.seo.addCanonical();
       this.seo.updateTags( { title: res.title, image: res.medium, description: res.content } );

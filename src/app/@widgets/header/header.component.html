@@ -1,14 +1,14 @@
 <header class="d-none d-lg-block">
   <div id="heade" class="pt-3 pb-2 header-B">
     <div class="container">
-      <div class="row ios">
-        <div class="col-10 col-md-11 col-lg-3 col-xl-3">
+      <div class="row">
+        <div class="col-10 col-md-11 col-lg-3 col-xl-3 align-self-center">
           <a [routerLink]="['']">
             <img Lazy src="./assets/images/logo.svg" alt="Logo Condor" class="logo mx-auto d-block"/>
           </a>
         </div>
-        <div class="col-md-6 col-lg-4 col-xl-4 d-none d-xl-block">
-          <input class="form-control rounded-pill px-2 mt-2" type="text" placeholder="O que você está procurando?" (keyup)="getSearch($event)" />
+        <div class="col-md-6 col-lg-4  d-none d-xl-block align-self-center">
+          <input class="form-control rounded-pill px-2" type="text" placeholder="O que você está procurando?" (keyup)="getSearch($event)" />
         </div>
         <div class="col-7 col-md-3 col-lg-9 col-xl-5 d-none d-lg-block">
           <ul class="nav justify-content-end" style="margin-top: -5px!important">
@@ -20,7 +20,7 @@
       </div>
       <div class="row justify-content-center d-none d-lg-block d-xl-none">
         <div class="col-md-12">
-          <input class="form-control rounded-pill px-2 mt-1" type="text" placeholder="O que você está procurando?" (keyup)="getSearch($event)" />
+          <input class="form-control rounded-pill px-2" type="text" placeholder="O que você está procurando?" (keyup)="getSearch($event)" />
         </div>
       </div>
     </div>

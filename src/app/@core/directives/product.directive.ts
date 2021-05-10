@@ -1,4 +1,5 @@
 import { Directive, AfterViewInit, HostBinding, Input, ElementRef } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 
 @Directive({
   selector: 'img[appProduct]'
@@ -31,8 +32,8 @@ export class ProductDirective implements AfterViewInit {
   }
 
   private loadImage() {
-    console.log(this.src);
-    this.srcAttr = `https://marketing.condor.com.br/api/Containers/produtos/download/${this.src}.jpg`;
+    const image = `${ environment.v1.url }/Containers/produtos/download/${this.src}.jpg`;
+    this.srcAttr = image;
   }
 
 }

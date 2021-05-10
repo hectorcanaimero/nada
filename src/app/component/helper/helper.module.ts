@@ -13,7 +13,6 @@ import { SelectorComponent } from './selector/selector.component';
 import { FormsModule } from '@angular/forms';
 import { LojaComponent } from './loja/loja.component';
 import { MapsComponent } from './maps/maps.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { FaixaComponent } from './faixa/faixa.component';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { DirectiveModule } from 'src/app/shared/directive/directive.module';
@@ -31,7 +30,6 @@ import { DirectiveModule } from 'src/app/shared/directive/directive.module';
     SelectorComponent,
     LojaComponent,
     MapsComponent,
-    SidebarComponent,
     FaixaComponent,
     MenuMobileComponent
   ],
@@ -44,7 +42,6 @@ import { DirectiveModule } from 'src/app/shared/directive/directive.module';
     TituloComponent,
     SelectorComponent,
     LojaComponent,
-    SidebarComponent,
     FaixaComponent,
     MenuMobileComponent
   ],

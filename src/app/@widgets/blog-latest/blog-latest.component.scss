@@ -1,0 +1,28 @@
+.titulo {
+  padding-bottom: 0rem;
+  margin-bottom: .75rem;
+  border-bottom: 1px solid #e2e2e2;
+  h2{
+    margin-bottom: 0px;
+    font-weight: 700;
+  }
+}
+
+.cards {
+  .image {
+    margin-bottom: 1rem;
+    img{
+      border-radius: 10px;
+    }
+  }
+  .content {
+    height: 130px;
+    .date {
+      margin-bottom: .15rem;
+      color: #686868;
+    }
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+}

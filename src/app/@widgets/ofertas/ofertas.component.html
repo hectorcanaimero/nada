@@ -1,8 +1,8 @@
-<section >
-  <div class="container">
+<section *ngIf="(items$ | async) as items">
+  <div class="container" *ngIf="total > 0">
     <app-titulo [titulo]="title" [icon]="icon" [link]="link"></app-titulo>
     <swiper [lazy]="true" [config]="options">
-    <ng-template swiperSlide *ngFor="let item of items$ | async">
+    <ng-template swiperSlide *ngFor="let item of items">
       <app-product [code]="item" [loja]="loja"></app-product>
     </ng-template>
   </swiper>

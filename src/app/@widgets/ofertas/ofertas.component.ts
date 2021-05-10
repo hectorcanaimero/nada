@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Observable, timer } from 'rxjs';
-import { map  } from 'rxjs/operators';
+import { map, tap  } from 'rxjs/operators';
 
 import { DataService } from '@core/services/data.service';
 import { Ofertas } from '@core/interfaces/ofertas';
@@ -29,6 +29,7 @@ export class OfertasComponent implements OnInit, OnChanges {
 
   items$: Observable<Ofertas[]>;
   loja: any = [];
+  total: number = 0;
 
   options = {
     freeMode: true,
@@ -73,7 +74,12 @@ export class OfertasComponent implements OnInit, OnChanges {
         else if (this.type === 'campanha') result = res?.filter((row => row.campanha === code));
         else if (this.type === 'departamento') result = res?.filter((row => row.departamento === code));
           return result?.slice(0,15);
-      })
+      }),
+      tap((res) => {
+        console.log(res);
+        this.total = res.length;
+        console.log(`Ofertas => ${this.type}: ${this.total}`);
+      } )
     );
   }
 }

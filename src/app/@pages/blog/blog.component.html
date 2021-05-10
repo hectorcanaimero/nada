@@ -1,0 +1,20 @@
+<section id="blog" class="my-4" *ngIf="items$ | async; else semData">
+  <div class="container">
+    <div class="mb-5">
+      <app-blog-slider></app-blog-slider>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-8">
+        <app-blog-list type="media" titulo="Receitas" [categoria]="23"></app-blog-list>
+        <app-blog-latest [data]="items$" titulo="Últimos Posts"></app-blog-latest>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <app-blog-sidebar></app-blog-sidebar>
+        <app-blog-list [tag]="206" titulo="Dicas da Familia"></app-blog-list>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>

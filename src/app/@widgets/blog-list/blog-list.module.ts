@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BlogListComponent } from './blog-list.component';
 
-import { SidebarComponent } from './sidebar.component';
+
 
 @NgModule({
-  declarations: [SidebarComponent],
-  exports: [SidebarComponent],
+  declarations: [BlogListComponent],
+  exports: [BlogListComponent],
   imports: [
-    CommonModule,
     RouterModule,
+    CommonModule,
     MDBBootstrapModule,
   ]
 })
-export class SidebarModule { }
+export class BlogListModule { }

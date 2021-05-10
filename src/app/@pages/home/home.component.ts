@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ChangeDetectorRef } from '@angular/co
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, delay } from 'rxjs/operators';
 
 import { Imagens } from '@core/interfaces/news';
 import { SeoService } from '@core/services/seo.service';
@@ -35,10 +35,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.seo.dataLayerPage('Home');
-    this.data$ = this.util.getStatic$().pipe(map((res) => res[3].data));
-    this.news.getBanners().pipe(take(1)).subscribe();
     this.getLoadOfertas();
+    this.seo.dataLayerPage('Home');
+    this.news.getBanners().pipe(take(1)).subscribe();
+    this.data$ = this.util.getStatic$().pipe(map((res) => res[3].data), delay(1500));
   }
 
   ngAfterViewInit () {
