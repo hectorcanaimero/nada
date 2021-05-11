@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -22,14 +23,17 @@ export class BlogListComponent implements OnInit {
   items$: Observable<Post[]>;
 
   constructor(
-    private db: BlogService
+    private db: BlogService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
     if (this.categoria)  {
-      this.items$ = this.db.getPostsCategories(this.categoria, 5);
+      this.items$ = this.db.getPostsCategories(this.categoria, 5).pipe(map((res) => res.body));
     } else {
-      this.items$ = this.db.getPostsTags(this.tag, 5);
+      this.items$ = this.db.getPostsTags(this.tag, 5).pipe(map((res) => res.body));
     }
   }
+
+  onBlogId = (slug: string) => this.router.navigateByUrl(`/blog/${slug}`);
 }

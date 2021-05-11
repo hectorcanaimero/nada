@@ -10,6 +10,7 @@
 
 .list {
   .line {
+    cursor: pointer;
     flex: row;
     display: flex;
     align-items: center;
@@ -29,6 +30,7 @@
       width: 80%;
       padding-left: .5rem;
       .date {
+        font-size: .8rem;
         margin-bottom: .15rem;
         color: #686868;
       }
@@ -43,6 +45,7 @@
 
 .media {
   .cards {
+    cursor: pointer;
     .image {
       margin-bottom: 1rem;
       img{

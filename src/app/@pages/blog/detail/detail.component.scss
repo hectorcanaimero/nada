@@ -1,6 +1,8 @@
-@import '../../../../variable.scss';
+img {
+  border-radius: 10px;
+}
 
-.text-blog { color: $red-alpha !important; }
+.text-blog { color: var(--color-red-secondary) !important; }
 
 .title{
     text-align: left;
@@ -10,7 +12,7 @@
 }
 
 .item-tags{
-    .bag { 
+    .bag {
         font-size: .95rem;
         margin: 0 .2rem;
         cursor: pointer;
@@ -19,7 +21,7 @@
 
 .date{
     letter-spacing: .2px;
-    color: $red-alpha;
+    color: var(--color-red-secondary);
     font-weight: 600;
     font-size: .9rem;
     margin-bottom: 1rem !important;
@@ -30,12 +32,12 @@
     transition: transform .2s;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
     min-height: 310px;
-    .text-blog { color: $red-alpha }
+    .text-blog { color: var(--color-red-secondary) }
     .item-body {
         padding: 1rem .5rem;
         .date{
             letter-spacing: .2px;
-            color: $red-alpha;
+            color: var(--color-red-secondary);
             font-weight: 600;
             font-size: .7rem;
             margin-bottom: 0 !important;
@@ -47,12 +49,12 @@
             a{
                 text-decoration: none !important;
                 &:hover {
-                    color: $red-alpha;
+                    color: var(--color-red-secondary);
                 }
             }
         }
         .item-tags{
-            .bag { 
+            .bag {
                 font-size: .70rem;
                 margin: 0 .2rem;
                 cursor: pointer;

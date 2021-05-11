@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -29,7 +30,7 @@ export class BlogSliderComponent implements OnInit {
     fadeEffect: {crossFade: true},
   }
 
-  constructor(private db: BlogService) { }
+  constructor(private db: BlogService, private router: Router) { }
 
   ngOnInit(): void {
     this.items$ = this.db.getPosts(1, 4).pipe(map((res) => res.body));
@@ -38,4 +39,5 @@ export class BlogSliderComponent implements OnInit {
 
   trackByFunction = (index: number, item: any): number => item[index];
 
+  onBlogId = (slug: string) => this.router.navigateByUrl(`/blog/${slug}`);
 }

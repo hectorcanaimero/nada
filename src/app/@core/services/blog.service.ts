@@ -26,19 +26,28 @@ export class BlogService {
   getPostSlug = (slug: string): Observable<Post> => {
     return this.http.get<Post>(`${ url }/posts`, { params: { slug: `${slug}` } }).pipe(map((data) => data[0]));
   }
-  getPostSearch = (search: string): Observable<Post[]> => {
-    return this.http.get<Post[]>(`${ url }/posts`, { params: { search: `${search}`}, headers }).pipe(map(data => data));
+  getPostSearch = (search: string, limit = 6): Observable<any> => {
+    return this.http.get<any>(`${ url }/posts?search=${search}&per_page=${limit}`, {headers, observe: 'response' });
   }
 
-  getPostsCategories = (categories: number, limit: number): Observable<Post[]> => {
-    return this.http.get<Post[]>(`${ url }/posts?categories=${categories}&per_page=${limit}`);
+  getPostsCategories = (categories: number, limit = 6): Observable<any> => {
+    return this.http.get<any>(`${ url }/posts?categories=${categories}&per_page=${limit}`, {observe: 'response'});
   }
 
-  getPostsTags = (tags: number, limit: number): Observable<Post[]> => {
-    return this.http.get<Post[]>(`${ url }/posts?tags=${tags}&per_page=${limit}`);
+  getPostsTags = (tags: number, limit: number): Observable<any> => {
+    return this.http.get<any>(`${ url }/posts?tags=${tags}&per_page=${limit}`, {observe: 'response'});
+  }
+
+  getCategoriesSlug = (slug: string): Observable<Categories> => {
+    return this.http.get<Categories>(`${ url }/categories?slug=${slug}`).pipe(map((res) => res[0]));
   }
 
   getCategories = (limit: number): Observable<Categories[]>=> {
     return this.http.get<Categories[]>(`${ url }/categories?orderby=count&order=desc&per_page=${limit}`);
   }
+
+  getTagSlug = (slug: string): Observable<any> => {
+    return this.http.get<any>(`${ url }/tags?slug=${slug}`).pipe(map((res) => res[0]));
+  }
+
 }

@@ -1,9 +1,12 @@
+import { BlogService } from '@core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { NewsService } from 'src/app/shared/services/news.service';
-import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
+import { Observable, Subscription } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
+
+import { NewsService } from '@core/services/news.service';
+import { Post } from '@core/interfaces/blog';
 
 @Component({
   selector: 'app-all-in',
@@ -12,122 +15,80 @@ import { map } from 'rxjs/operators';
 })
 export class AllInComponent implements OnInit {
 
-  p: number = 1;
-  ip: number = 6;
-  header: any = [];
-  slug: Observable<string>;
-  first: Observable<string>;
-  items: any = [];
-  subscription: Subscription;
-  nav: boolean = true;
-  m: string;
+  id: string = '';
+  slug: string = '';
+  titulo: string = '';
+  totalItems: any = 0;
+  currentPage: number = 1;
+  itemsPerPage: number = 6;
+
+  type: any = [];
+  slug$: Observable<string>;
+  first$: Observable<string>;
+  items$: Observable<Post[]>;
+
 
   constructor(
     private news: NewsService,
-    private act: ActivatedRoute,
     private router: Router,
-    private navigator: NgNavigatorShareService
+    private db: BlogService,
+    private act: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.first = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('first')));
-    this.slug = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('slug')));
-    this.first.subscribe(
-      first => {
-        this.slug.subscribe(
-          slug => {
-            if (first === 'categoria') {
-              return this.Category(slug, this.p);
-            } else if (first === 'tag') {
-              return this.Tag(slug, this.p);
-            } else {
-              return this.Search(slug, this.p);
-            }
-          }
-        );
-      }
-    );
-    this.Post(this.p);
-    if (!this.navigator.canShare()) {
-      this.nav = false;
-      return;
-    }
+    this.first$ = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('first')));
+    this.slug$ = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('slug')));
+    this.first$.subscribe(type => this.slug$.subscribe( slug => this.process(type, slug)));
   }
 
-  share(i: any) {
-    this.navigator.share({
-      title: i.title,
-      text: '',
-      url: `https://www.condor.com.br/blog/${i.slug}`
-    }).then( (response) => {
-      console.log(response);
-    })
-    .catch( (error) => {
-      console.log(error);
+
+  private process = (type: string, slug: string, page?: number) => {
+    this.id = type;
+    this.slug = slug;
+    if (type === 'categoria') {
+      return this.getCategories(slug, page);
+    }
+    else if (type === 'tag') {
+      return this.getTags(slug, page);
+    } else {
+      return this.getSearch(slug, page);
+    }
+  }
+  getCategories = (slug: string, page?: number) => {
+    this.db.getCategoriesSlug(slug).subscribe((type) => {
+      this.type = type;
+      this.titulo = `Categoria: ${type.name}`;
+      this.items$ = this.db.getPostsCategories(type.id, this.itemsPerPage).pipe(
+        tap((res) => this.totalItems = res.headers.keys().map(key => res.headers.get(key))[4]),
+        map((res) => res.body)
+      );
+    });
+  }
+  getTags = (slug: string, page?: number) => {
+    this.db.getTagSlug(slug).subscribe((type) => {
+      this.type = type;
+      this.titulo = `Etiqueta: ${type.name}`;
+      this.items$ = this.db.getPostsTags(type.id, this.itemsPerPage).pipe(
+        tap((res) => this.totalItems = res.headers.keys().map(key => res.headers.get(key))[4]),
+        map((res) => res.body)
+      );
     });
   }
 
-  Category(slug: string, p: number) {
-    this.m = `Resultado da busca por <b>"${slug.split('-').join(' ')}"</b>`;
-    this.news.getBlogCollection(`categories?slug=${slug}`).subscribe(
-      data => {
-        this.news.getBlogCollection(`posts?categories=${data.body[0]['id']}&page=${p}&per_page=${this.ip}`).subscribe(
-          res => {
-            this.items = res.body;
-            this.header = res.headers.keys().map(key => res.headers.get(key))[4];
-          }
-        );
-      },
-      err => console.log(err)
-    );
-  }
-
-  Tag(slug: string, p: number) {
-    this.news.getBlogCollection(`tags?slug=${slug}`).subscribe(
-      data => {
-        this.m = `Resultado da busca por <b>"${slug.split('-').join(' ')}"</b>`;
-        this.news.getBlogCollection(`posts?tags=${data.body[0]['id']}&page=${p}&per_page=${this.ip}`).subscribe(
-          res => {
-            this.items = res.body;
-            this.header = res.headers.keys().map(key => res.headers.get(key))[4];
-          }
-        );
-      },
-      err => console.log(err)
-    );
-  }
-
-  Search(slug: string, p: number) {
+  getSearch(slug: string, page?: number) {
     const text = slug.split('-').join('%20');
-    this.news.getBlogCollection(`posts?search=${text.toLocaleLowerCase()}&page=${p}&per_page=${this.ip}`).subscribe(
-      res => {
-        this.items = res.body;
-        this.header = res.headers.keys().map(key => res.headers.get(key))[4];
-        this.m = `Resultado da busca por <b>"${slug.split('-').join(' ')}"</b>`;
-      },
-      err => console.log(err)
+    this.items$ = this.db.getPostSearch(text, page).pipe(
+      tap((res) => {
+        this.totalItems = res.headers.keys().map(key => res.headers.get(key))[4];
+        this.titulo = `Resultado da busca por <b>"${ slug }"</b> (${this.totalItems})`;
+      }
+      ),
+      map((res) => res.body)
     );
   }
 
-  Post(page: number) {
-    this.news.Blog(page, this.ip).subscribe(
-      res => {
-        this.items = res.body;
-        this.header = res.headers.keys().map(key => res.headers.get(key))[4];
-      },
-      err => console.log(err)
-    );
-  }
-
-  pageChanged(e: any) {
-    this.p = e;
-    const url = this.router.url.split('/');
-    if (url[2] === 'categoria'){
-      this.Category(url[3], this.p);
-    } else if (url[2] === 'tag') {
-      this.Tag(url[3], this.p);
-    } else {
-      this.Search(url[3], this.p);
-    }
+  pageChanged = (ev: any) => {
+    this.currentPage = ev++;
+    this.process(this.id, this.slug, this.currentPage);
   }
 }

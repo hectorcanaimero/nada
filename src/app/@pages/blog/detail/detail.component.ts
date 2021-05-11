@@ -1,10 +1,10 @@
+import { BlogService } from '@core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../../../shared/services/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { NgNavigatorShareService } from 'ng-navigator-share';
-import { SeoService } from '../../../shared/services/seo.service';
+import { delay, map } from 'rxjs/operators';
+import { SeoService } from '@core/services/seo.service';
+import { Post } from '@core/interfaces/blog';
 
 
 @Component({
@@ -14,54 +14,23 @@ import { SeoService } from '../../../shared/services/seo.service';
 })
 export class DetailComponent implements OnInit {
 
-  nav: boolean = true;
-  slug: Observable<string>;
-  items: any = [];
-  relations: any = [];
+  slug$: Observable<string>;
+  items$: Observable<Post>;
+
   constructor(
-    private news: NewsService,
+    private db: BlogService,
     private seo: SeoService,
     private act: ActivatedRoute,
-    private navigator: NgNavigatorShareService
   ) { }
 
   ngOnInit(): void {
-    this.slug = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('slug')));
-    this.slug.subscribe(data => this.Post(data));
-    if (!this.navigator.canShare()) {
-      this.nav = false;
-      return;
-    }
+    this.slug$ = this.act.paramMap.pipe(map(paramsMap => paramsMap.get('slug')));
+    this.slug$.subscribe(data => this.getPost(data));
   }
 
-  Post(slug: string) {
-    this.news.getBlogCollection(`posts?slug=${slug}`).subscribe(
-      res => {
-        this.items = res.body[0];
-        this.getSeo(res.body[0]);
-        this.Relacionado(res.body[0]['tags'][0]['term_id'], 4);
-      }
-    );
-  }
-
-  Relacionado(tag: any, limit: number) {
-    this.news.getBlogCollection(`posts?tags=${tag}&per_page=${limit}`).subscribe(
-      res => {
-        this.relations = res.body;
-      }
-    );
-  }
-  share(i: any) {
-    this.navigator.share({
-      title: i.title,
-      text: '',
-      url: `https://www.condor.com.br/blog/${i.slug}`
-    }).then( (response) => {
-      console.log(response);
-    })
-    .catch( (error) => {
-      console.log(error);
-    });
+  getPost = (slug: string) => {
+    this.items$ = this.db.getPostSlug(slug).pipe(delay(1000));
+    this.items$.subscribe((res) => console.log(res));
   }
 
   getSeo = (item: any) => {

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { Observable, timer } from 'rxjs';
 import { Post } from '@core/interfaces/blog';
@@ -13,6 +14,7 @@ export class BlogLatestComponent implements OnInit {
 
   @Input() data: Observable<any>;
   @Input() titulo: string = '';
+  @Input() column: string = 'col-md-6';
 
   itemsPerPage: number = 6;
   currentPage: number = 1;
@@ -20,7 +22,8 @@ export class BlogLatestComponent implements OnInit {
   items$: Observable<Post[]>;
 
   constructor(
-    private db: BlogService
+    private db: BlogService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -37,4 +40,6 @@ export class BlogLatestComponent implements OnInit {
     this.items$ = this.db.getPosts(this.currentPage, this.itemsPerPage).pipe(map((res) => res.body));
     console.log(this.currentPage);
   }
+
+  onBlogId = (slug: string) => this.router.navigateByUrl(`/blog/${slug}`);
 }

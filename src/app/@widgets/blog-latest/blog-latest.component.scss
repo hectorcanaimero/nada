@@ -9,6 +9,7 @@
 }
 
 .cards {
+  cursor: pointer;
   .image {
     margin-bottom: 1rem;
     img{
@@ -22,7 +23,7 @@
       color: #686868;
     }
     .title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   }
 }

@@ -1,36 +1,25 @@
-<section id="Blog">
+<section id="Blog" *ngIf="items$ | async as items; else semData">
     <div id="Conteudo" class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <h1 *ngIf="items" [innerHTML]="m" class="message"></h1>
+                <h1 *ngIf="titulo" class="message" [innerHtml]="titulo"></h1>
                 <div class="row no-gutters">
-                    <div class="col-md-6 col-lg-4" *ngFor="let item of items | paginate: { itemsPerPage: ip, currentPage: p, totalItems: header }">
+                    <div class="col-md-6 col-lg-4" *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
                         <div class="item m-2 rounded">
                             <a [routerLink]="['/blog', item.slug]">
-                                <img [src]="item.full" class="w-100 rounded-top" alt="">
+                                <img LazyLoad [src]="item.medium" class="w-100 rounded-top" alt="">
                             </a>
                             <div class="item-body">
                                 <p class="date">{{ item.date | date: "dd/MM/yyyy" }}</p>
                                 <h1>
                                     <a class="text-muted" [routerLink]="['/blog', item.slug]" routerLinkActive="router-link-active" >{{ item.title }}</a>
                                 </h1>
-                                <!-- <div class="item-tags">
-                                    <mdb-badge pill="true" class="bag badge-outline-red"
-                                        *ngFor="let tag of item.tags | slice: 0:2" [routerLink]="['/blog', 'tag', tag.slug]">
-                                        {{ tag.name }}
-                                    </mdb-badge>
-                                </div> -->
                             </div>
                             <div class="item-footer">
                                 <div class="row justify-content-end">
                                     <div class="col-6 text-center">
                                         <a [routerLink]="['/blog', item.slug]" class="button-condor text-muted">
                                             Ler mais >>
-                                        </a>
-                                    </div>
-                                    <div class="col-6  text-center" *ngIf="nav">
-                                        <a (click)="share(item)"class="button-condor text-blog">
-                                            <i class="fas fa-share mr-1"></i>Compartilhar
                                         </a>
                                     </div>
                                 </div>
@@ -50,3 +39,6 @@
         </div>
     </div>
 </section>
+<ng-template #semData>
+  <app-sem-data></app-sem-data>
+</ng-template>
