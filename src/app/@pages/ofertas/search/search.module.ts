@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchComponent } from './search.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { OfertasModule } from '../../../@widgets/ofertas/ofertas.module';
 import { Routes, RouterModule } from '@angular/router';
-import { PipesModule } from '../../../shared/pipes/pipes.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HelperModule } from '../../../component/helper/helper.module';
 
+import { PipesModule } from '@core/pipes/pipes.module';
+import { OfertasModule } from '@widgets/ofertas/ofertas.module';
+import { ProductModule } from '@sharing/product/product.module';
 
-const app: Routes = [
-  { path: ':slug', component: SearchComponent }
-];
+import { SearchComponent } from './search.component';
 
+const app: Routes = [ { path: ':slug', component: SearchComponent } ];
 
 @NgModule({
   declarations: [SearchComponent],
@@ -19,6 +18,7 @@ const app: Routes = [
     PipesModule,
     HelperModule,
     CommonModule,
+    ProductModule,
     MDBBootstrapModule,
     OfertasModule,
     RouterModule.forChild(app)

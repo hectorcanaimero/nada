@@ -1,68 +1,76 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
-import {filter, map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { NewsService } from '@core/services/news.service';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { SeoService } from 'src/app/shared/services/seo.service';
-import { UtilService } from 'src/app/shared/services/util.service';
 
+import {filter, map} from 'rxjs/operators';
+import { Observable, timer } from 'rxjs';
+import { NewsService } from '@core/services/news.service';
+import { DataService } from '@core/services/data.service';
+import { SeoService } from '@core/services/seo.service';
+import { UtilService } from '@core/services/util.service';
+import { slideDownInOut, slideLeftInOut } from '@core/animations/slide';
+
+import { MenuDepartamento } from '@core/interfaces/menu';
 
 
 @Component({
   selector: 'app-mobile',
   templateUrl: './mobile.component.html',
-  styleUrls: ['./mobile.component.scss']
+  styleUrls: ['./mobile.component.scss'],
+  animations: [ slideDownInOut, slideLeftInOut ]
 })
 
 export class MobileComponent implements OnInit {
 
   @ViewChild('search') search: ElementRef;
 
-  @Input() entrada: boolean = false;
   @Output() salida = new EventEmitter<boolean>();
 
-  active: boolean = true;
-  active1: boolean = true;
-  activeBlog: boolean = false;
+  @Input() activeSidebar :string = 'out';
+  activeMenuOfertas: string = 'out';
 
   @Input() items: any = [];
   @Input() condor: any = [];
-  ofertas: Observable<any>;
+  menuOfertas$: Observable<any>;
   category: Observable<any>;
 
+  faleConosco = [];
+
+
   constructor(
+    private router: Router,
     private seo: SeoService,
-    private api: ApiService,
+    private db: DataService,
     private news: NewsService,
     private util: UtilService,
-    private router: Router
   ) {
-    router.events.pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe(event => {
-      const url = event['url'].split('/').find(element => element === 'blog');
-      if (url) this.activeBlog = true;
-      else this.activeBlog = false;
-    });
   }
 
   ngOnInit(): void {
-    this.getOfertas();
     this.getCategory();
+    this.convertFaleConosco();
+    this.menuOfertas$ = this.db.getMenuOfertas('menuDepartamento');
   }
 
-  toogle = () => {
-    this.entrada = !this.entrada;
-    this.salida.emit(this.entrada);
+  toogleSidebar = () => this.activeSidebar = this.activeSidebar === 'out' ? 'in' : 'out';
+  toogleMenuOfertas = () => this.activeMenuOfertas = this.activeMenuOfertas === 'out' ? 'in' : 'out';
+
+
+  convertFaleConosco = () => {
+    this.condor.sac.forEach(el => this.faleConosco.push(el));
+    this.condor.trabalhe.forEach(el => this.faleConosco.push(el));
+    this.condor.denuncia.forEach(el => this.faleConosco.push(el));
+    this.faleConosco.push({ nome: 'Notícias', url: '/institucional/imprensa' })
+
   }
 
-  submenu = () => this.active = !this.active;
-  submenu1 = () => this.active1 = !this.active1;
+  onLink = (slug: string) => {
+    this.router.navigateByUrl(slug);
+    this.activeSidebar = 'out';
+  }
 
-
-  getOfertas = () => {
-    this.ofertas = this.api.getMenuOfertas('menuDepartamento');
+  onToogle = (ev: any) => {
+    console.log(ev);
   }
 
   getSearch = (event: any) => {
@@ -83,7 +91,7 @@ export class MobileComponent implements OnInit {
   goToCategory = (e: any) => this.router.navigate(['/blog', 'categoria', e.target.value]);
   goToDepartamento = (e: any) => this.router.navigate(['/departamento', e.target.value]);
 
-  toog = (ev) => this.entrada = false;
+  // toog = (ev) => this.entrada = false;
   Click = (event) => {
     if (event.keyCode === 13) {
       if (! event.target.value) return;

@@ -11,11 +11,13 @@ import { SeoService } from '@core/services/seo.service';
 import { UtilService } from '@core/services/util.service';
 import { MenuDepartamento, MenuSetor } from '@core/interfaces/menu';
 import { Ofertas } from '@core/interfaces/ofertas';
+import { slideDownInOut } from '@core/animations/slide';
 
 @Component({
   selector: 'app-departamento',
   templateUrl: './departamento.component.html',
-  styleUrls: ['./departamento.component.scss']
+  styleUrls: ['./departamento.component.scss'],
+  animations: [ slideDownInOut ]
 })
 export class DepartamentoComponent implements OnInit, OnDestroy {
 
@@ -25,7 +27,7 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
   search: string = '';
 
   viewDepart: boolean = true;
-  viewSector: boolean = true;
+  viewSector: string = 'out';
   init: boolean = false;
 
   loja: any = [];
@@ -73,16 +75,14 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
   getData = (codigo: number) => {
     this.storageMap.watch('Loja').subscribe(({ loja }) => {
       this.menuSector$ = this.db.getCollection(`/Menus/MenuSectorOfertasLojaDepartamento?loja=${loja}&departamento=${codigo}`);
-
       this.items$ = this.db.OfertasLojaDepartamento(loja, codigo);
-      this.items$.subscribe((res) => console.log(res));
     })
   }
 
   getMenuDepartamento = (loja: number) => this.menu = this.db.getCollection(`/Menus/MenuDepartamentoOfertasLojaDepartamento?loja=${loja}`);
 
   onSearch = (e: any) => console.log(e.target.value);
-  toogleSector = () =>  this.viewSector = !this.viewSector;
+  toogleSector = () =>  this.viewSector = this.viewSector === 'out' ? 'in' : 'out';;
   toogleDepart = () =>  this.viewDepart = !this.viewDepart;
 
   getSeo = (departamento: string) => {

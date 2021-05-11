@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 
 import { Subscription, timer } from 'rxjs';
 
-import { ApiService } from 'src/app/shared/services/api.service';
-import { NewsService } from 'src/app/shared/services/news.service';
-import { SeoService } from 'src/app/shared/services/seo.service';
-import { UtilService } from '../../shared/services/util.service';
+import { NewsService } from '@core/services/news.service';
+import { SeoService } from '@core/services/seo.service';
+import { UtilService } from '@core/services/util.service';
+import { DataService } from '@core/services/data.service';
 
 @Component({
   selector: 'app-sac',
@@ -26,7 +26,7 @@ export class SacComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private api: ApiService,
+    private db: DataService,
     private seo: SeoService,
     private util: UtilService,
     private news: NewsService,
@@ -66,7 +66,7 @@ export class SacComponent implements OnInit, OnDestroy {
 
   onSubmit = () => {
     const a = this.region.filter((item) => item.id === this.fmSac.value.cidade);
-    this.api.add('Sacs', this.fmSac.value).subscribe(() => this.fmSac.reset());
+    this.db.add('Sacs', this.fmSac.value).subscribe(() => this.fmSac.reset());
     this.util.sweetalert( 'Sua mensagem foi enviada.', 'Aguarde que em breve entraremos em contato.', 'success', 'center' );
     this.seo.dataLayerTracking({ event: 'formSubmitted', formName: 'SAC', sacStore: this.fmSac.value.loja, });
     timer(1000).subscribe(() => this.router.navigate(['']));

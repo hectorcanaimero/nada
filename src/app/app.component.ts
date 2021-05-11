@@ -13,7 +13,7 @@ import { NewsService } from '@core/services/news.service';
 import { DataService } from '@core/services/data.service';
 
 import { Subscription, Observable } from 'rxjs';
-import { Static } from './shared/services/interfaces/static';
+import { Static } from '@core/interfaces/static';
 import { UpdateService } from './shared/services/updateService';
 
 @Component({

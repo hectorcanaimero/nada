@@ -1,6 +1,0 @@
-<a rel="noopener noreferrer" [href]="code?.url" *ngIf="code?.url.match('https')" target="_blank">
-    <img Lazy src="{{code?.large}}" alt="{{ code?.title }}" class="img-fluid w-100"  id="{{idImage}}" />
-</a>
-<a [routerLink]="[code?.url]" *ngIf="!code?.url.match('https')">
-    <img Lazy src="{{code?.large}}" alt="{{ code?.title }}" class="img-fluid w-100" id="{{idImage}}" />
-</a>

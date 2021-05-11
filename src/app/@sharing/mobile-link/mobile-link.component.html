@@ -1,0 +1,12 @@
+<div class="items" (click)="toogleSubMenu()">
+  <p class="item">{{ titulo }}</p>
+  <div class="icon">
+    <i class="fas" [ngClass]=" active === 'out' ? 'fa-plus': 'fa-minus'"></i>
+  </div>
+</div>
+<div class="submenu" [@slideDownInOut]="active">
+  <div class="sub-menu-items" *ngFor="let data of items" (click)="onLink(data.url || data.slug)">
+    <p class="item" mdbWavesEffect> {{ data.nome || data.name }} </p>
+    <div class="icon"> <i class="fas fa-angle-right float-right"></i> </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { SacComponent } from './sac.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { SidebarModule } from '@sharing/menu-sidebar/sidebar.module';
+import { SidebarModule } from '@sharing/sidebar/sidebar.module';
 
 const app: Routes = [{ path: '', component: SacComponent }];
 

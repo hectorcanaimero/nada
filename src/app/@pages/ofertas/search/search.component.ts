@@ -1,11 +1,13 @@
-import { StorageMap } from '@ngx-pwa/local-storage';
 import { Component, OnInit } from '@angular/core';
-import { UtilService } from '../../../shared/services/util.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../../../shared/services/api.service';
+import { ActivatedRoute } from '@angular/router';
+
+import { StorageMap } from '@ngx-pwa/local-storage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SeoService } from '../../../shared/services/seo.service';
+
+import { SeoService } from '@core/services/seo.service';
+import { UtilService } from '@core/services/util.service';
+import { DataService } from '@core/services/data.service';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private seo: SeoService,
     private util: UtilService,
-    private api: ApiService,
+    private db: DataService,
     private act: ActivatedRoute,
     private storageMap: StorageMap
   ) { }
@@ -44,7 +46,7 @@ export class SearchComponent implements OnInit {
     const text = slug.split('-').join('%20');
     const search = slug.split('-').join(' ');
     this.storageMap.watch('Loja').subscribe(({ loja }) => {
-      this.api.Search(text).subscribe(
+      this.db.Search(text).subscribe(
         res => {
           // tslint:disable-next-line: forin
           for (const k in res) {

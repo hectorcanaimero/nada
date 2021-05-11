@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { MenuDepartamento } from 'src/app/shared/services/interfaces/menu';
+import { MenuDepartamento } from '@core/interfaces/menu';
+import { DataService } from '@core/services/data.service';
 
 
 
@@ -19,10 +18,10 @@ export class MenuComponent implements OnInit {
   campanha: Observable<any>;
   items: Observable<MenuDepartamento>;
 
-  constructor( private api: ApiService ) { }
+  constructor( private db: DataService ) { }
 
   ngOnInit(): void {
-    this.items = this.api.getMenuOfertas('menuDepartamento');
+    this.items = this.db.getMenuOfertas('menuDepartamento');
   }
 
   trackByFunction = (index: number, item: any) => item[index];

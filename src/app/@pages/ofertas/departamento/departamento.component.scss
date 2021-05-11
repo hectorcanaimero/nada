@@ -1,10 +1,42 @@
+.sector {
+  .row {
+    div {
+      p{
+        padding: .5rem 0;
+        border-bottom: .5px solid #a7a7a7;
+        margin: 0 .15rem .20rem;
+        a{
+          color: var(--color-default--text);
+          font-size: .8rem;
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  .sector {
+    .row {
+      div {
+        p{
+          padding: .35rem 0;
+          a{ font-size: 1rem; }
+        }
+      }
+    }
+  }
+}
+
+
 @media(max-width: 450px) {
-    .col-lg-8, .col-xl-9 { 
-        padding-left: 0px !important;
-        padding-right: 0px !important;
+  .mobile {
+    .col-lg-8, .col-xl-9 {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
     }
-    .col-6 { 
-        padding-left: 5px !important;
-        padding-right: 5px !important;
+    .col-6 {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
     }
+  }
 }

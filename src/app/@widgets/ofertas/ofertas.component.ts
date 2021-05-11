@@ -33,16 +33,17 @@ export class OfertasComponent implements OnInit {
 
   options = {
     freeMode: true,
-    spaceBetween: 7,
+    spaceBetween: 15,
     grabCursor: true,
-    slidesPerView: 2,
+    slidesPerView: 1.5,
     type: 'progressbar',
     loop: true,
     autoplay: { delay: 1800 },
     breakpoints: {
-      640:  { slidesPerView: 2, spaceBetween: 20, },
-      768:  { slidesPerView: 3.5, spaceBetween: 20, },
-      1024: { slidesPerView: 4.5, spaceBetween: 20, },
+      360:  { slidesPerView: 2 },
+      768:  { slidesPerView: 3.5 },
+      1024: { slidesPerView: 4.5 },
+      1200: { slidesPerView: 5 },
     },
     navigation: true,
   }

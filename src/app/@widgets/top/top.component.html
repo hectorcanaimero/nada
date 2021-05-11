@@ -2,7 +2,7 @@
   <div id="top-header" class="header-A py-1 d-none d-lg-block">
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark ie-nav" [containerInside]="true" >
       <mdb-navbar-brand>
-        <i class="fas white-text cursor" [ngClass]="{'fa-times': entrada, 'fa-bars': !entrada}"></i>
+        <i class="fas white-text cursor" [ngClass]="activeSidebar === 'out' ? 'fa-bars' : 'fa-times'" (click)="toogleSidebar()"></i>
       </mdb-navbar-brand>
       <links>
         <ul id="top-menu" class="navbar-nav mx-auto">
@@ -55,4 +55,8 @@
     </mdb-navbar>
   </div>
 </section>
-<!-- <app-sidebar [items]="items"></app-sidebar> -->
+<app-menu-sidebar [items]="items" [condor]="json" [activeSidebar]="activeSidebar"></app-menu-sidebar>
+
+
+
+

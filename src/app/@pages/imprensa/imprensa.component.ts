@@ -1,9 +1,9 @@
-import { SeoService } from 'src/app/shared/services/seo.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
-import { map, tap, debounceTime, delay } from 'rxjs/operators';
+import { map, tap, delay } from 'rxjs/operators';
 
-import { NewsService } from '../../shared/services/news.service';
+import { SeoService } from '@core/services/seo.service';
+import { NewsService } from '@core/services/news.service';
 
 @Component({
   selector: 'app-imprensa',
@@ -13,7 +13,7 @@ import { NewsService } from '../../shared/services/news.service';
 
 export class ImprensaComponent implements OnInit {
 
-  public header: number = 0;
+  public header: any;
   p: number = 1;
   ip: number = 6;
   subscription: Subscription;
@@ -32,7 +32,7 @@ export class ImprensaComponent implements OnInit {
 
   getPost = (page: number) => {
     this.items$ = this.news.Posts(page, this.ip).pipe(
-      tap((res) => this.header = res.headers.keys().map(key => res.headers.get(key))[4]),
+      tap((res) => this.header = res?.headers.keys().map(key => res.headers.get(key))[4]),
       map((res) => res.body),
       delay(1000),
     );

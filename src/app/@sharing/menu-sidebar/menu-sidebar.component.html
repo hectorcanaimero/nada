@@ -1,0 +1,61 @@
+<div class="sidebar" [@slideLeftInOut]="activeSidebar">
+  <div class="image">
+    <img src="./assets/images/logo.png" class="logo" alt="Logo Condor">
+  </div>
+  <div class="menu overflow-auto">
+    <div class="items" (click)="onLink('')">
+      <p class="item"> Home </p>
+      <div class="icon">
+        <i class="fas fa-angle-right float-right"></i>
+      </div>
+    </div>
+    <div class="items" (click)="toogleMenuOfertas()">
+      <p class="item"> Ofertas </p>
+      <div class="icon">
+        <i class="fas" [ngClass]=" activeMenuOfertas === 'out' ? 'fa-plus': 'fa-minus'"></i>
+      </div>
+    </div>
+    <div class="submenu" [@slideDownInOut]="activeMenuOfertas">
+      <div class="sub-menu-items" *ngFor="let menu of menuOfertas$ | async" (click)="onLink(menu.slug)">
+        <p class="item" mdbWavesEffect  routerLinkActive="active">
+          <i class="fas fa-shopping-basket mr-1"></i>  {{ menu.nome }}
+        </p>
+        <div class="icon">
+          <i class="fas fa-angle-right float-right"></i>
+        </div>
+      </div>
+    </div>
+    <div class="items" *ngFor="let campanha of items.campanha" (click)="onLink(campanha.slug)">
+      <p class="item"> {{ campanha.nome }} </p>
+      <div class="icon">
+        <i class="fas fa-angle-right float-right"></i>
+      </div>
+    </div>
+    <div class="items" *ngFor="let center of items.center" (click)="onLink(center.slug)">
+      <p class="item"> {{ center.name }} </p>
+      <div class="icon">
+        <i class="fas fa-angle-right float-right"></i>
+      </div>
+    </div>
+    <div class="items" (click)="onLink('/blog')">
+      <p class="item"> Blog </p>
+      <div class="icon">
+        <i class="fas fa-angle-right float-right"></i>
+      </div>
+    </div>
+    <div class="space">
+      <div class="items" *ngFor="let header of items.header">
+        <img [src]="header.iconmobile" [alt]="header.name">
+        <p class="item"> {{ header.name }} </p>
+        <div class="icon">
+          <i class="fas fa-angle-right float-right"></i>
+        </div>
+      </div>
+    </div>
+    <app-mobile-link titulo="Fale Conosco" [items]="faleConosco" (toogle)=(onToogle($event))></app-mobile-link>
+    <app-mobile-link [titulo]="condor.institucional.title" [items]="condor.institucional.menu" (toogle)=(onToogle($event))></app-mobile-link>
+    <app-mobile-link [titulo]="condor.acoes.title" [items]="condor.acoes.menu" (toogle)=(onToogle($event))></app-mobile-link>
+    <app-mobile-link [titulo]="condor.financeiro.title" [items]="condor.financeiro.menu" (toogle)=(onToogle($event))></app-mobile-link>
+    <app-mobile-link [titulo]="condor.empresa.title" [items]="condor.empresa.menu" (toogle)=(onToogle($event))></app-mobile-link>
+  </div>
+</div>

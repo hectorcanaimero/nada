@@ -1,14 +1,13 @@
 <main *ngIf="(data$ | async) as data">
+  <app-mobile [items]="data[0].data" [condor]="data[4].data"></app-mobile>
   <app-top [items]="data[0].data" [json]="data[4].data"></app-top>
   <app-header [items]="data[2].data"></app-header>
   <app-menu [json]="data[0].data"></app-menu>
-  <router-outlet (activate)="onActivate($event)"></router-outlet>
+  <div class="type">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
   <app-footer [items]="data[1].data"></app-footer>
-  <!--
-    <app-mobile [items]="data[0].data" [condor]="data[4].data"></app-mobile>
-   -->
 </main>
-<!-- <helper-selector *ngIf="init" type="alert" [load]="true"></helper-selector> -->
 <!--
 
 <div mdbModal #politica="mdbModal" class="modal fade overflow-auto" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">

@@ -1,13 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Observable, timer } from 'rxjs';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { UtilService } from 'src/app/shared/services/util.service';
+import { Observable } from 'rxjs';
+import { slideLeftInOut } from '@core/animations/slide';
+import { DataService } from '@core/services/data.service';
+import { UtilService } from '@core/services/util.service';
 
 @Component({
     selector: 'app-top',
     templateUrl: './top.component.html',
-    styleUrls: ['./top.component.scss']
+    styleUrls: ['./top.component.scss'],
+    animations: [ slideLeftInOut ]
 })
 export class TopComponent implements OnInit {
 
@@ -20,15 +22,20 @@ export class TopComponent implements OnInit {
     @Input() items: any = [];
     ofertas: Observable<any>;
 
+    activeSidebar: string = 'out';
 
-    constructor( private api: ApiService, private util: UtilService) { }
+
+
+    constructor( private db: DataService, private util: UtilService) { }
 
     ngOnInit(): void {
-      this.ofertas = this.api.getMenuOfertas('menuDepartamento');
+      this.ofertas = this.db.getMenuOfertas('menuDepartamento');
       this.loja = this.util.StorageParse('Loja');
     }
 
     toog = (ev: any) => console.log(ev);
+
+    toogleSidebar = () => this.activeSidebar = this.activeSidebar === 'out' ? 'in' : 'out';
 
     toogle = (ev?: any) => {
       if (ev) this.entrada = ev;
@@ -36,6 +43,8 @@ export class TopComponent implements OnInit {
       this.salida.emit(this.entrada);
     }
 
+
+  onLink = (slug: string) => console.log(slug);
   trackByFunction = (index: number, item: any) => item[index];
 
 }

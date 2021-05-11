@@ -5,9 +5,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router';
 import { HelperModule } from 'src/app/component/helper/helper.module';
 
-// import { SidebarModule } from '@sharing/menu-sidebar/sidebar.module';
+import { MobileModule } from '@widgets/mobile/mobile.module';
 import { DropMenuModule } from '@sharing/drop-menu/drop-menu.module';
 import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
+import { MenuSidebarModule } from '@sharing/menu-sidebar/menu-sidebar.module';
 
 @NgModule({
   declarations: [TopComponent],
@@ -16,10 +17,11 @@ import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
     CommonModule,
     RouterModule,
     HelperModule,
-    // SidebarModule,
+    MobileModule,
     DropMenuModule,
     SelectLojaModule,
-    MDBBootstrapModule
+    MenuSidebarModule,
+    MDBBootstrapModule,
   ]
 })
 export class TopModule { }

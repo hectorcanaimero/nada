@@ -7,33 +7,28 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HelperModule } from 'src/app/component/helper/helper.module';
+
+import { LinkModule } from '@sharing/link/link.module';
+import { PipesModule } from '@core/pipes/pipes.module';
 import { OfertasModule } from '@widgets/ofertas/ofertas.module';
-import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { MobileLinkModule } from '@sharing/mobile-link/mobile-link.module';
+import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
 
-const config = {
-  breakPoints: {
-      xs: {max: 600},
-      sm: {min: 601, max: 959},
-      md: {min: 960, max: 1279},
-      lg: {min: 1280, max: 1919},
-      xl: {min: 1920}
-  },
-  debounceTime: 100
-};
-
+import { environment } from 'src/environments/environment.prod';
 @NgModule({
   declarations: [MobileComponent],
   exports: [MobileComponent],
   imports: [
+    LinkModule,
     FormsModule,
     PipesModule,
-    HelperModule,
     CommonModule,
     RouterModule,
     OfertasModule,
+    MobileLinkModule,
+    SelectLojaModule,
     MDBBootstrapModule,
-    ResponsiveModule.forRoot(config)
+    ResponsiveModule.forRoot(environment.responsive)
   ]
 })
 export class MobileModule { }

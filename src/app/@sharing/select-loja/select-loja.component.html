@@ -1,25 +1,29 @@
 <div *ngIf="(miObjeto | async ) as loja">
-  <div *ngIf="type ==='simple'">
+  <div *ngIf="type ==='simple'; else alert">
     <a class="nav-link py-N header-menu d-none d-lg-block" (click)="open()" style="color: white!important;">
       <mdb-icon fas icon="map-marker"></mdb-icon> {{ loja['nome'] }}
     </a>
     <div class="bg-ver p-2 d-lg-none">
         <a class="nav-link py-N header-menu white-text position-relative" (click)="frame.show()">
-            <p class="mb-0 w-ajustes">Mostrando as ofertas para {{ loja['nome'] }}</p>
+            <p class="mb-0 w-ajustes">Mostrando as ofertas para {{ loja.nome }}</p>
             <mdb-icon fas icon="map-marker" class="ajuste"></mdb-icon>
         </a>
     </div>
   </div>
-  <div  *ngIf="type === 'alert'" class="alert alert-info" role="alert">
-    <div>
-      <a class="" (click)="frame.show()">
-        <p class="mb-0 f-1">Mostrando as ofertas para <span class="b-7">{{ loja['nome'] }}</span>
-            <span class="ml-1"><i class="fas fa-retweet"></i></span>
-        </p>
-      </a>
+  <ng-template #alert>
+    <div class="alert alert-info" role="alert">
+      <div>
+        <a class="" (click)="frame.show()">
+          <p class="mb-0 f-1">Mostrando as ofertas para <span class="b-7">{{ loja.nome }}</span>
+              <span class="ml-1"><i class="fas fa-retweet"></i></span>
+          </p>
+        </a>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>
+
+
 
 <div mdbModal #frame="mdbModal" class="modal slide bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
   aria-hidden="true"  style="z-index: 10000;"[config]="{backdrop: true, ignoreBackdropClick: true}">

@@ -1,0 +1,38 @@
+.items {
+  flex: row;
+  display: flex;
+  font-size: .9rem;
+  align-items: center;
+  padding: .35rem .5rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ececec;
+  img {
+    width: 30px;
+    margin-right: 10px;
+  }
+  .item{
+    width: 90%;
+    margin-bottom: 0;
+  }
+  .icon {
+    width: 10%;
+    text-align: right;
+  }
+}
+
+.sub-menu-items{
+  flex: row;
+  display: flex;
+  align-items: center;
+  padding: .35rem .5rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ececec;
+  .item {
+    width: 85%;
+    font-size: .8rem;
+    margin-bottom: 0;
+  }
+  .icon{
+    width: 15%;
+  }
+}
