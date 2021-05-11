@@ -1,11 +1,10 @@
-import { BlogService } from '@core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
-import { NewsService } from '@core/services/news.service';
+import { BlogService } from '@core/services/blog.service';
 import { Post } from '@core/interfaces/blog';
 
 @Component({
@@ -29,8 +28,6 @@ export class AllInComponent implements OnInit {
 
 
   constructor(
-    private news: NewsService,
-    private router: Router,
     private db: BlogService,
     private act: ActivatedRoute,
   ) { }

@@ -30,7 +30,6 @@ export class DetailComponent implements OnInit {
 
   getPost = (slug: string) => {
     this.items$ = this.db.getPostSlug(slug).pipe(delay(1000));
-    this.items$.subscribe((res) => console.log(res));
   }
 
   getSeo = (item: any) => {
