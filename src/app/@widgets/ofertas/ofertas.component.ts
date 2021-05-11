@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Observable, timer } from 'rxjs';
 import { map, tap  } from 'rxjs/operators';
@@ -15,7 +15,7 @@ SwiperCore.use([EffectFade, Navigation, Pagination, A11y, Lazy]);
   templateUrl: './ofertas.component.html',
   styleUrls: ['./ofertas.component.scss'],
 })
-export class OfertasComponent implements OnInit, OnChanges {
+export class OfertasComponent implements OnInit {
 
   // titulo
   @Input() icon: string = '';
@@ -59,13 +59,6 @@ export class OfertasComponent implements OnInit, OnChanges {
       this.storage.get('Loja').subscribe((res) => this.loja = res)
     })
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log(changes);
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-
-  }
   getOfertas = (code: any) => {
     let result: any = [];
     this.items$ = this.db.getOfertas$().pipe(
@@ -75,11 +68,7 @@ export class OfertasComponent implements OnInit, OnChanges {
         else if (this.type === 'departamento') result = res?.filter((row => row.departamento === code));
           return result?.slice(0,15);
       }),
-      tap((res) => {
-        console.log(res);
-        this.total = res.length;
-        console.log(`Ofertas => ${this.type}: ${this.total}`);
-      } )
+      tap((res) => this.total = res.length)
     );
   }
 }

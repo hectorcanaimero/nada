@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, forkJoin, of } from 'rxjs';
-import { tap, map, retry, catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
+import { tap, map, retry } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Imagens, Page, Campanha, Loja, Post, Tabloide, Lojas } from './interfaces/news';
-import { ajax } from 'rxjs/ajax';
+import { Imagens, Page, Campanha, Loja, Materia, Tabloide, Lojas } from '@core/interfaces/news';
 
 const url: string = environment.news.url;
 const headers = new HttpHeaders({Authorization: `${ environment.news.key }`});
@@ -20,93 +19,72 @@ const headersBlog = new HttpHeaders({Authorization: `${ environment.blog.key }`}
 export class NewsService {
 
   private loja$: BehaviorSubject<Lojas[]> = new BehaviorSubject(null);
-  private region$: BehaviorSubject<any> = new BehaviorSubject(null);
-  private banner$: BehaviorSubject<Imagens> = new BehaviorSubject(null);
+  private region$: BehaviorSubject<any[]> = new BehaviorSubject(null);
+  private banner$: BehaviorSubject<Imagens[]> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
 
 
   // Banners
-  setBanners$  = (items: Imagens) => this.banner$.next(items);
-  getBanners$  = (): Observable<Imagens> => this.banner$.asObservable();
-  getBanners  = (): Observable<Imagens> =>  this.http.get<Imagens>(`${url}/imagens`, { params: { per_page: `100` }}).pipe(tap((data) => this.setBanners$(data)));
-
-  // getBanners = () => ajax(`${url}/imagens?per_page=100`).pipe(
-  //   map((res) => res.response),
-  //   tap((data) => this.setBanners$(data)),
-  //   catchError(error =>of(error))
-  // );
-
+  setBanners$  = (items: Imagens[]) => this.banner$.next(items);
+  getBanners$  = (): Observable<Imagens[]> => this.banner$.asObservable();
+  getBanners  = (): Observable<Imagens[]> =>  {
+    return this.http.get<Imagens[]>(`${ url }/imagens?per_page=100`).pipe(tap((data) => this.setBanners$(data)));
+  }
 
   // Cidade
-  setRegion$  = (items: any) => this.region$.next(items);
-  getRegion$  = (): Observable<any> => this.region$.asObservable();
-  getRegion  = (): Observable<any> =>  this.http.get<any>(`${url}/region`, { params: { per_page: `100` }}).pipe(tap((data) => this.setRegion$(data)));
-  // getRegion = () => ajax(`${url}/region?per_page=100`).pipe(
-  //   map((res) => res.response),
-  //   tap((data) => this.setRegion$(data)),
-  //   catchError(error =>of(error))
-  // );
-
-
+  setRegion$  = (items: any[]) => this.region$.next(items);
+  getRegion$  = (): Observable<any[]> => this.region$.asObservable();
+  getRegion  = (): Observable<any[]> => {
+    return this.http.get<any[]>(`${url}/region`, { params: { per_page: `100` }})
+      .pipe(tap((data) => this.setRegion$(data)));
+  }
 
   // Loja
   setLoja$  = (items: Lojas[]) => this.loja$.next(items);
   getLoja$  = (): Observable<Lojas[]> => this.loja$.asObservable();
-  getLoja  = (): Observable<Lojas[]> =>  this.http.get<Lojas[]>(`${url}/loja?per_page=100`).pipe(tap((data) => this.setLoja$(data)));
-
+  getLoja  = (): Observable<Lojas[]> =>  {
+    return this.http.get<Lojas[]>(`${url}/loja?per_page=100`).pipe(tap((data) => this.setLoja$(data)));
+  }
 
   getSelector = () => {
     return forkJoin(
       {
-        region: this.http.get<any[]>(`${url}/region`, { params: { per_page: `100`}}).pipe(map(data => data)),
-        lojas: this.http.get<any[]>(`${url}/loja`, { params: { per_page: `100`}}).pipe(map(data => data))
+        region: this.http.get<any[]>(`${url}/region?per_page=100`),
+        lojas: this.http.get<any[]>(`${url}/loja?per_page=100`)
       }
     );
   }
 
-
-
   getImage(id: number): Observable<any[]> {
-    return this.http
-      .get<any[]>(`${url}/media/${id}`, { headers })
-      .pipe(tap(data => data));
+    return this.http.get<any[]>(`${url}/media/${id}`, { headers });
   }
 
   /** Module Page */
   Page(): Observable<Page[]> {
-    return this.http.get<Page[]>(`${url}/pages`)
-    .pipe(tap(data => data));
+    return this.http.get<Page[]>(`${url}/pages`);
   }
 
-  LastNews(limit: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${url}/posts`).pipe(retry(3), map(res => res), map((data) => data['slice'](0,limit)));
+  LastNews(limit: number): Observable<Materia[]> {
+    return this.http.get<Materia[]>(`${url}/posts`).pipe(map((data) => data['slice'](0, limit)));
   }
 
   PageCollection(collection: string): Observable<Page> {
-    return this.http.get<Page>(`${url}/pages${collection}`).pipe(retry(3), map(res => res));
+    return this.http.get<Page>(`${url}/pages${collection}`);
   }
 
-  PageSlug = (slug: string): Observable<Page> => this.http.get<Page>(`${url}/pages`, { params: { slug: `${slug}` }}).pipe(map((res) => res[0]));
+  PageSlug = (slug: string): Observable<Page> => {
+    return this.http.get<Page>(`${url}/pages?slug=slug}`).pipe(map((res) => res[0]));
+  }
 
   PageId(id: number): Observable<Page[]> {
-    const sql = `${url}/pages`;
-    return this.http.get<Page[]>(`${url}/pages/${id}`)
-    .pipe(tap(data => data));
+    return this.http.get<Page[]>(`${url}/pages/${id}`);
   }
-
-  /** Module Post */
-  Posts = (p: number, page: number): Observable<any> => this.http.get<any>(`${url}/posts?page=${p}&per_page=${page}`, {observe: 'response'}).pipe(map((data) => data));
-  PostId = (id: number): Observable<Post> => this.http.get<Post>(`${url}/posts/${id}`).pipe(map(data => data));
-  PostSlug = (slug: string): Observable<Post> => this.http.get<Post>(`${url}/posts`, { params: { slug: `${slug}` } }).pipe(map((data) => data[0]));
-  PostSearch = (search: string): Observable<Post[]> => this.http.get<Post[]>(`${url}/posts`, { params: { search: `${search}`}, headers }).pipe(map(data => data));
 
   /** Module Imagens */
   ImagensPosition(position: string): Observable<Imagens[]> {
-    return this.http.get<Imagens[]>(`${url}/imagens`, {
-      params: { position }, headers
-    }).pipe(
-      retry(3),
+    return this.http.get<Imagens[]>(`${url}/imagens`, { params: { position }, headers })
+    .pipe(
       map(res => res.filter(row => row.status === 'publish' || row.position == position))
     );
   }
@@ -114,9 +92,7 @@ export class NewsService {
 
   /** Module Campanha */
   Campanha(slug: string): Observable<Campanha[]> {
-    return this.http.get<Campanha[]>(`${url}/posto`, {
-      params: { slug: `${slug}` }
-    }).pipe(tap(data => data));
+    return this.http.get<Campanha[]>(`${url}/posto?slug=${slug}`);
   }
 
   /** Module Loja */
