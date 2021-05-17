@@ -1,13 +1,13 @@
-import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { HelperModule } from 'src/app/component/helper/helper.module';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { RouterModule } from '@angular/router';
 
+import { HeaderComponent } from './header.component';
+import { PipesModule } from '@core/pipes/pipes.module';
 import { LinkModule } from '@sharing/link/link.module';
+import { DirectiveModule } from '@core/directives/directive.module';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -17,7 +17,7 @@ import { LinkModule } from '@sharing/link/link.module';
     PipesModule,
     CommonModule,
     RouterModule,
-    HelperModule,
+    DirectiveModule,
     MDBBootstrapModule,
     AutocompleteLibModule,
   ]

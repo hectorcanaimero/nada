@@ -27,4 +27,5 @@ const app: Routes = [
   { path: 'cartao-presente', redirectTo: 'para-sua-empresa/cartao-presente-condor' },
 ];
 
-export const APP_ROUTE = RouterModule.forRoot(app, { scrollPositionRestoration: 'enabled', preloadingStrategy: QuicklinkStrategy });
+export const APP_ROUTE = RouterModule.forRoot(
+  app, { scrollPositionRestoration: 'enabled', preloadingStrategy: QuicklinkStrategy });

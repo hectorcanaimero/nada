@@ -51,7 +51,7 @@ export class DataService {
   }
   // Ofertas Loja Campanha
   OfertasLojaCampanha(loja: number, campanha: number, limit: number = 100): Observable<Ofertas[]> {
-    return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosCampanha?loja=${loja}&campanha=${campanha}&limit=${limit}`).pipe(retry(3), map((res) => res));
+    return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosCampanha?loja=${loja}&campanha=${campanha}&limit=${limit}`);
   }
 
   // Ofertas Loja Departamento

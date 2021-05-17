@@ -1,6 +1,7 @@
+import { LgpdModule } from './@widgets/lgpd/lgpd.module';
 import { NgModule } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -16,48 +17,39 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { APP_ROUTE } from './app.routes';
 import { AppComponent } from './app.component';
 import { EXTERNAL_ROUTES } from './external.routes';
-import { RedirectGuard } from './shared/services/redirect.guard';
-import { HelperModule } from './component/helper/helper.module';
-
-registerLocaleData(localePt);
+import { RedirectGuard } from '@core/services/redirect.guard';
 
 import { TopModule } from '@widgets/top/top.module';
 import { MenuModule } from '@widgets/menu/menu.module';
-import { environment } from '../environments/environment';
 import { FooterModule } from '@widgets/footer/footer.module';
 import { HeaderModule } from '@widgets/header/header.module';
 import { MobileModule } from '@widgets/mobile/mobile.module';
+import { environment } from '../environments/environment.prod';
+registerLocaleData(localePt);
 
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: { domain: 'www.condor.com.br' },
+  position: "bottom",
+  theme: "edgeless",
+  palette: {
+    popup:  { background: "#000000", text: "#ffffff" },
+    button: { background: "#f1d600", text: "#000000" }
+  },
+  layout: 'my-custom-layout',
+  layouts: { "my-custom-layout": '{{messagelink}}{{compliance}}' },
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}}
+      <a aria-label="learn more about cookies" tabindex="0" class="cc-link cc-politica">Políticas de privacidade</a>.
+    </span>
+    `,
+  },
+  type: 'info'
+};
 
-
-
-
-
-
-
-
-// const cookieConfig: NgcCookieConsentConfig = {
-//   cookie: { domain: 'localhost' },
-//   position: "bottom",
-//   theme: "edgeless",
-//   palette: {
-//     popup:  { background: "#000000", text: "#ffffff" },
-//     button: { background: "#f1d600", text: "#000000" }
-//   },
-//   layout: 'my-custom-layout',
-//   layouts: { "my-custom-layout": '{{messagelink}}{{compliance}}' },
-//   elements:{
-//     messagelink: `
-//     <span id="cookieconsent:desc" class="cc-message">{{message}}
-//       <a aria-label="learn more about cookies" tabindex="0" class="cc-link cc-politica" href="#">Políticas de privacidade</a> e as
-//       <a aria-label="learn more about our privacy policy" tabindex="1" class="cc-link cc-regras" href="#">Termo de uso</a>.
-//     </span>
-//     `,
-//   },
-//   type: 'opt-in'
-// };
-
-export function HttpLoaderFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -66,22 +58,30 @@ export function HttpLoaderFactory(httpClient: HttpClient) { return new Translate
   ],
   imports: [
     APP_ROUTE,
-    EXTERNAL_ROUTES,
     TopModule,
     MenuModule,
+    LgpdModule,
+    CommonModule,
     HeaderModule,
     FooterModule,
     MobileModule,
-    HelperModule,
+    QuicklinkModule,
+    EXTERNAL_ROUTES,
     HttpClientModule,
     NgtUniversalModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
-    QuicklinkModule,
-    // NgcCookieConsentModule.forRoot(cookieConfig),
+    NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    TranslateModule.forRoot({ loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] } }),
+    ServiceWorkerModule.register('ngsw-worker.js',
+      { enabled: environment.production }),
+    TranslateModule.forRoot({
+      loader: {
+        deps: [HttpClient],
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+      }
+    }),
   ],
   providers: [
     // { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },

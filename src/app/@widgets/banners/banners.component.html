@@ -5,7 +5,7 @@
         <mdb-carousel class="carousel slide carousel-fade z-depth-1" [interval]="2050" [animation]="'fade'"
           [isControls]="false">
           <mdb-carousel-item *ngFor="let l of banner.left">
-            <helper-image [code]="l" idImage="banner-middle-left"></helper-image>
+            <app-image [code]="l" idImage="banner-middle-left"></app-image>
           </mdb-carousel-item>
         </mdb-carousel>
       </div>
@@ -13,7 +13,7 @@
         <mdb-carousel class="carousel slide carousel-fade z-depth-1" [interval]="2050" [animation]="'fade'"
           [isControls]="false">
           <mdb-carousel-item *ngFor="let c of banner.center">
-            <helper-image [code]="c" idImage="banner-middle-center"></helper-image>
+            <app-image [code]="c" idImage="banner-middle-center"></app-image>
           </mdb-carousel-item>
         </mdb-carousel>
       </div>
@@ -21,7 +21,7 @@
         <mdb-carousel class="carousel slide carousel-fade z-depth-1" [interval]="2050" [animation]="'fade'"
           [isControls]="false">
           <mdb-carousel-item *ngFor="let r of banner.right">
-            <helper-image [code]="r" idImage="banner-middle-right"></helper-image>
+            <app-image [code]="r" idImage="banner-middle-right"></app-image>
           </mdb-carousel-item>
         </mdb-carousel>
       </div>
@@ -33,7 +33,7 @@
         <mdb-carousel class="carousel slide carousel-fade z-depth-1" [interval]="3500" [animation]="'false'"
           [isControls]="false">
           <mdb-carousel-item *ngFor="let m of mobile">
-            <helper-image [code]="m" idImage="banner-X"></helper-image>
+            <app-image [code]="m" idImage="banner-X"></app-image>
           </mdb-carousel-item>
         </mdb-carousel>
       </div>

@@ -10,8 +10,7 @@
         </div>
         <div class="col-lg-8 col-xl-9">
           <img *ngIf="!items.full" src="./assets/images/sem-imagem.jpg" [alt]="items.title" class="w-100 mb-4" />
-          <img *ngIf="items.full"  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-          data-src="{{ items.full }}" [alt]="items.title" class="w-100 mb-4" />
+          <img *ngIf="items.full"  [src]="items.full"  [alt]="items.title" class="w-100 mb-4" />
           <div [innerHTML]="items.content | safe: 'html'" id="conteudo"></div>
         </div>
         <div class="col-lg-4 col-xl-3 bg-red">

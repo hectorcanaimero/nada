@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { RedirectGuard } from './shared/services/redirect.guard';
+import { RedirectGuard } from '@core/services/redirect.guard';
 
 const appRoute: Routes = [
   {

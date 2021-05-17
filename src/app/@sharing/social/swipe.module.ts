@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-import { LgpdComponent } from './lgpd.component';
-
-
+import { SocialComponent } from './social.component';
 
 @NgModule({
-  declarations: [LgpdComponent],
-  exports: [LgpdComponent],
+  declarations: [SocialComponent],
+  exports: [SocialComponent],
   imports: [
     CommonModule,
     MDBBootstrapModule,
   ]
 })
-export class LgpdModule { }
+export class SocialModule { }

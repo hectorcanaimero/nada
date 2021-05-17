@@ -7,6 +7,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { PipesModule } from '@core/pipes/pipes.module';
 import { SidebarModule } from '@sharing/sidebar/sidebar.module';
 import { SemDataModule } from '@sharing/sem-data/sem-data.module';
+import { DirectiveModule } from '@core/directives/directive.module';
 
 import { NewsComponent } from './news.component';
 
@@ -19,6 +20,7 @@ const app: Routes = [ { path: ':id', component: NewsComponent } ]
     CommonModule,
     SemDataModule,
     SidebarModule,
+    DirectiveModule,
     MDBBootstrapModule,
     RouterModule.forChild(app)
   ]

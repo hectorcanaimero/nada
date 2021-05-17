@@ -14,6 +14,7 @@ import { InstitucionalModule } from '@widgets/institucional/institucional.module
 import { HOME_ROUTE } from './home.routes';
 import { HomeComponent } from './home.component';
 import { environment } from 'src/environments/environment.prod';
+import { BannersModule } from '@widgets/banners/banners.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -23,6 +24,7 @@ import { environment } from 'src/environments/environment.prod';
     FaixaModule,
     CommonModule,
     OfertasModule,
+    BannersModule,
     SemDataModule,
     CarouselModule,
     SelectLojaModule,

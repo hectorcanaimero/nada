@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ResponsiveModule } from 'ngx-responsive';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-import { HelperModule } from '../../../component/helper/helper.module';
 import { PipesModule } from '@core/pipes/pipes.module';
 import { DirectiveModule } from '@core/directives/directive.module';
 import { SemDataModule } from '@sharing/sem-data/sem-data.module';
@@ -25,7 +24,6 @@ const app: Routes = [
   imports: [
     PipesModule,
     CommonModule,
-    HelperModule,
     SemDataModule,
     OfertasModule,
     DirectiveModule,

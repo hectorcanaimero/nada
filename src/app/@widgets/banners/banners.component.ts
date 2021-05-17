@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../../shared/services/news.service';
-import { Subscription, forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
+import { NewsService } from '@core/services/news.service';
 
 @Component({
   selector: 'app-banners',
@@ -23,12 +23,10 @@ export class BannersComponent implements OnInit {
   getImage() {
     this.items = this.news.getBanners$().pipe(
       debounceTime(500), map((res) => {
-        if(res) {
-          return {
-            left: res['filter']((rows) => rows.position === 'middle-left'),
-            center: res['filter']((rows) => rows.position === 'middle-center'),
-            right: res['filter']((rows) => rows.position === 'middle-right')
-          }
+        return {
+          left: res.filter((rows) => rows.position === 'middle-left'),
+          center: res.filter((rows) => rows.position === 'middle-center'),
+          right: res.filter((rows) => rows.position === 'middle-right')
         }
       }),
       tap((res) => {

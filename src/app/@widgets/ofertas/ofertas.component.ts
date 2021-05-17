@@ -45,7 +45,10 @@ export class OfertasComponent implements OnInit {
       1024: { slidesPerView: 4.5 },
       1200: { slidesPerView: 5 },
     },
-    navigation: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
   }
 
   constructor(

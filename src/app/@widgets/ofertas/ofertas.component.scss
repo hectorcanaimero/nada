@@ -1,17 +1,15 @@
-@import '../../../variable.scss';
-
 section > div {
   padding: 2rem 0 !important;
 
 }
 
 .titulo-black{
-  color: $red !important;
-  a{ color: $red !important; }
+  color: var(--color-red-primary) !important;
+  a{ color: var(--color-red-primary) !important; }
 }
 
 .bg-black {
-    background: $blue;
+    background: var(--color-blue-primary);
 }
 
 

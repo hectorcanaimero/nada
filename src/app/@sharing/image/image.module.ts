@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { DirectiveModule } from '@core/directives/directive.module';
 
 import { ImageComponent } from './image.component';
@@ -16,6 +16,7 @@ import { ImageComponent } from './image.component';
     CommonModule,
     DirectiveModule,
     MDBBootstrapModule,
+    LazyLoadImageModule,
   ]
 })
 export class ImageModule { }

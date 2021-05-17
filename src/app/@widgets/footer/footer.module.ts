@@ -1,19 +1,22 @@
-import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './footer.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router';
-import { HelperModule } from '../../component/helper/helper.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+import { FooterComponent } from './footer.component';
+import { PipesModule } from '@core/pipes/pipes.module';
+import { SocialModule } from '@sharing/social/swipe.module';
+import { MenuSharingModule } from '@sharing/menu/mobile-link.module';
 
 @NgModule({
   declarations: [FooterComponent],
   exports: [FooterComponent],
   imports: [
+    MenuSharingModule,
+    PipesModule,
     CommonModule,
     RouterModule,
-    HelperModule,
-    PipesModule,
+    SocialModule,
     MDBBootstrapModule
   ]
 })

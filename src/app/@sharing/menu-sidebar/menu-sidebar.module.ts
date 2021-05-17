@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { MDBRootModule } from 'angular-bootstrap-md';
 
 import { MenuSidebarComponent } from './menu-sidebar.component';
-import { HelperModule } from 'src/app/component/helper/helper.module';
-
 
 @NgModule({
   declarations: [MenuSidebarComponent],
@@ -14,7 +12,6 @@ import { HelperModule } from 'src/app/component/helper/helper.module';
   imports: [
     CommonModule,
     RouterModule,
-    HelperModule,
     MDBRootModule,
     MobileLinkModule,
   ]

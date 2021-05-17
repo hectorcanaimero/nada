@@ -8,7 +8,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SidebarModule } from '@sharing/sidebar/sidebar.module';
 import { SemDataModule } from '@sharing/sem-data/sem-data.module';
-import { HelperModule } from '../../component/helper/helper.module';
 
 import { ImprensaComponent } from './imprensa.component';
 import { DetailComponent } from './detail/detail.component';
@@ -23,7 +22,6 @@ const app: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    HelperModule,
     SemDataModule,
     SidebarModule,
     MDBBootstrapModule,

@@ -351,3 +351,24 @@ body {
 .red {
     background-color: $red !important;
 }
+
+
+
+
+// Swiper
+.swiper-button-next, .swiper-button-prev {
+  color: var(--color-red-secondary);
+  &::after {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+}
+
+
+// Cookies Consent
+
+.cc-politica{
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  font-weight: 900;
+}

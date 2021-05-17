@@ -38,13 +38,13 @@
       </div>
     </div>
     <div class="row ios mb-3">
-      <div class="col-md-6 mb-4 mb-md-0" *ngIf="setores?.length > 1">
+      <div class="col-md-6 mb-4 mb-md-0" *ngIf="setores?.app-widget-ofertas > 1">
         <div class="px-3">
           <h3 class="b-07 pb-1 mb-4 border-bottom">Setores</h3>
           <mdb-badge primary="true" *ngFor="let sec of setores" class="mr-2 mb-1"> {{ sec }} </mdb-badge>
         </div>
       </div>
-      <div class="col-md-6" *ngIf="servicos?.length > 1">
+      <div class="col-md-6" *ngIf="servicos?.app-widget-ofertas > 1">
         <div class="px-3">
           <h3 class="b-07 pb-1 mb-4 border-bottom">Serviços</h3>
           <mdb-badge danger="true" *ngFor="let ser of servicos" class="mr-2 mb-1"> {{ ser }} </mdb-badge>

@@ -25,11 +25,7 @@ export class MenuSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuOfertas$ = this.db.getMenuOfertas('menuDepartamento');
-    timer(300).subscribe(() => {
-      console.log(this.activeSidebar);
-      console.log(this.condor);
-      this.convertFaleConosco();
-    });
+    timer(300).subscribe(() => this.convertFaleConosco());
   }
 
   convertFaleConosco = () => {

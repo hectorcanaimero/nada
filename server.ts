@@ -6,19 +6,27 @@ import { join } from 'path';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
+
+function setBrowserGlobalsr(distFolder) {
+  const template= readFileSync(join(distFolder, 'index.html')).toString();
+  const domino = require('domino');
+  const win = domino.createWindow(template);
+  global['window'] = win;
+  global['Node']= win.Node;
+  global['document'] = win.document;
+  global['navigator'] = win.navigator;
+  global['Event']= win.Event;
+  global['Event']['prototype']= win.Event.prototype;
+  global['window']['cookieconsent']= { initialise: () => console.warn('Cookie consent is not working on server side') };
+}
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/condor-v2/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
-  const domino = require('domino');
-  const win = domino.createWindow(indexHtml);
-  global['window'] = win;
-  global['document'] = win.document;
-  global['navigator'] = win.navigator;
-
+  setBrowserGlobalsr(distFolder);
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({

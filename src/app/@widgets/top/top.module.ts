@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TopComponent } from './top.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router';
-import { HelperModule } from 'src/app/component/helper/helper.module';
 
 import { MobileModule } from '@widgets/mobile/mobile.module';
 import { DropMenuModule } from '@sharing/drop-menu/drop-menu.module';
@@ -16,7 +15,6 @@ import { MenuSidebarModule } from '@sharing/menu-sidebar/menu-sidebar.module';
   imports: [
     CommonModule,
     RouterModule,
-    HelperModule,
     MobileModule,
     DropMenuModule,
     SelectLojaModule,

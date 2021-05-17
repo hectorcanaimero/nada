@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap, delay } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
@@ -13,10 +13,9 @@ import { NewsService } from '@core/services/news.service';
 
 export class ImprensaComponent implements OnInit {
 
-  public header: any;
   p: number = 1;
   ip: number = 6;
-  subscription: Subscription;
+  public header: any;
   items$: Observable<any>;
 
   constructor(

@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { OfertasComponent } from './ofertas.component';
 import { TituloModule } from '@sharing/titulo/titulo.module';
 import { ProductModule } from '@sharing/product/product.module';
-import { HelperModule } from 'src/app/component/helper/helper.module';
 
 @NgModule({
   declarations: [OfertasComponent],
@@ -18,7 +17,6 @@ import { HelperModule } from 'src/app/component/helper/helper.module';
     TituloModule,
     RouterModule,
     CommonModule,
-    HelperModule,
     ProductModule,
     MDBBootstrapModule
   ]

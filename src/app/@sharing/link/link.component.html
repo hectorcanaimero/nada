@@ -1,10 +1,10 @@
 <a [class]="class" [style]="style" [href]="item.url" rel="noopener" target="_blank" *ngIf="item.external">
-  <img *ngIf="item.icon" LazyLoad [src]="item.icon" height="30px" [alt]="item.name || item.alt" /><br />
+  <img LazyLoad *ngIf="item.icon" LazyLoad [src]="item.icon" height="30px" [alt]="item.name || item.alt" /><br />
   <span class="d-none d-lg-block mt-2">{{ item.name }}</span>
 </a>
 
 <a [class]="class" [style]="style" [routerLink]="[item.url]" *ngIf="!item.external">
-  <img *ngIf="item.icon" LazyLoad [src]="item.icon" height="30px" [alt]="item.name || item.alt" /><br />
+  <img LazyLoad *ngIf="item.icon" LazyLoad [src]="item.icon" height="30px" [alt]="item.name || item.alt" /><br />
   <span class="d-none d-lg-block mt-2">{{ item.name }}</span>
 </a>
 

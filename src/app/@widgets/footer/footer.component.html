@@ -24,23 +24,23 @@
             </ul>
         </div>
         <div class="col-12 col-md-6 col-lg-3 d-none d-md-block">
-            <img Lazy [src]="items['logo']" alt="" class="img-fluid mb-4" />
+            <img Lazy [src]="items.logo" alt="" class="img-fluid mb-4" />
         </div>
         <div class="col-12 col-md-6 col-lg-3 d-lg-none">
-            <helper-social [items]="items['midia']"></helper-social>
+            <app-social [items]="items.midia"></app-social>
         </div>
         <div class="col-12 col-md-6 col-lg-3 d-none d-md-block">
-            <helper-menu [items]="items['institucional']"></helper-menu>
+            <app-menu [items]="items.institucional"></app-menu>
         </div>
         <div class="col-12 col-md-6 col-lg-3 d-none d-md-block">
-            <helper-menu [items]="items['servicos']"></helper-menu>
+            <app-menu [items]="items.servicos"></app-menu>
         </div>
         <div class="col-6 col-md-6 col-lg-3 d-none d-lg-block text-center">
-            <helper-social [items]="items['midia']"></helper-social>
+            <app-social [items]="items.midia"></app-social>
         </div>
       </div>
   </div>
   <div class="copyright">
-      <p class="footer-copyright text-center mb-0 py-2 b-04" [innerHTML]="items['copyright']"></p>
+      <p class="footer-copyright text-center mb-0 py-2 b-04" [innerHTML]="items.copyright"></p>
   </div>
 </footer>
