@@ -9,7 +9,7 @@ import { timer } from 'rxjs';
 export class ImageComponent implements OnInit {
   @Input() code: any = [];
   @Input() idImage?: string = '';
-  @Input() size?: string;
+  @Input() size?: string = '';
   imagem: any = [];
   default = `https://via.placeholder.com/${this.size}?text=Rede+Condor`;
 

@@ -374,6 +374,14 @@ const appRoute: Routes = [
       externalUrl: 'https://www.condor.com.br/especial-mulher/index.html',
     },
   },
+  {
+    path: 'passeio-ciclistico',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/passeio-ciclistico/index.html',
+    },
+  }
 ];
 
 export const EXTERNAL_ROUTES = RouterModule.forChild(appRoute);
