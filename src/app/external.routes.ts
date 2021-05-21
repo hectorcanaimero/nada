@@ -11,6 +11,14 @@ const appRoute: Routes = [
     },
   },
   {
+    path: 'entreposto',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/entreposto/index.html',
+    },
+  },
+  {
     path: 'promocao-peg',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
