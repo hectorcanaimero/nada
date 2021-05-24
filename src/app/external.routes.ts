@@ -3,6 +3,22 @@ import { RedirectGuard } from '@core/services/redirect.guard';
 
 const appRoute: Routes = [
   {
+    path: 'passeio-ciclistico',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/passeio-ciclistico/index.html',
+    },
+  },
+  {
+    path: 'entreposto',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/entreposto/index.html',
+    },
+  },
+  {
     path: 'dia-das-maes',
     canActivate: [RedirectGuard],
     component: RedirectGuard,

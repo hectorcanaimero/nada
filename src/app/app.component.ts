@@ -74,8 +74,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   setCookies = () => {
-    // this.getLang();
-    // this.popupCookies();
+    this.getLang();
+    this.popupCookies();
   }
   private popupCookies = () => {
     this.ccService.initialize$.subscribe((event: NgcInitializeEvent) => console.log(`initialize: ${JSON.stringify(event)}`));
