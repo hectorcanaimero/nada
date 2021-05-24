@@ -13,7 +13,7 @@
     "pm2:stop": "pm2 stop ecosystem.config.js --env production",
     "dev:ssr": "ng run condor-v2:serve-ssr",
     "serve:ssr": "node dist/condor-v2/server/main.js",
-    "build:ssr": "ng build --prod --aot --service-worker && ng run condor-v2:server:production",
+    "build:ssr": "ng build --prod --service-worker && ng run condor-v2:server:production",
     "prerender": "ng run condor-v2:prerender"
   },
   "private": true,

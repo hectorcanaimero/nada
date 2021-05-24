@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 
 import {filter, map} from 'rxjs/operators';
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NewsService } from '@core/services/news.service';
 import { DataService } from '@core/services/data.service';
 import { SeoService } from '@core/services/seo.service';

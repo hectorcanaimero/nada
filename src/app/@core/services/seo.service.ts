@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID, InjectionToken } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -13,7 +13,7 @@ export class SeoService {
     private title: Title,
     private router: Router,
     @Inject(DOCUMENT) private doc,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId,
   ) {
     this.meta.addTags([
       { name: 'og:type', content: 'website' },
@@ -51,20 +51,6 @@ export class SeoService {
     this.updateTag('twitter:description', conteudo);
     this.updateTag('twitter:card', 'summary_large_image');
   }
-
-  // this.meta([
-  //   { name: 'title', 'content': data.title },
-  //   { name: 'og:title', 'content': data.title },
-  //   { name: 'twitter:title', 'content': data.title },
-  //   { name: 'description', 'content': data.description },
-  //   { name: 'og:description', 'content': data.description },
-  //   { name: 'twitter:description', 'content': data.description },
-  //   { name: 'og:image', 'content': data.image },
-  //   { name: 'twitter:image', 'content': data.image },
-  //   { name: 'og:type', content: 'website' },
-  //   { name: 'twitter:card', content: 'summary_large_image' }
-  // ]);
-
 
   private updateTag = (name: string, content: string) => this.meta.updateTag({ name, content });
 

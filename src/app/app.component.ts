@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,6 +15,7 @@ import { Static } from '@core/interfaces/static';
 import { SeoService } from '@core/services/seo.service';
 import { UtilService } from '@core/services/util.service';
 import { NewsService } from '@core/services/news.service';
+import { UpdateService } from './@core/services/update.service';
 import { environment } from 'src/environments/environment.prod';
 
 @Component({
@@ -34,19 +36,24 @@ export class AppComponent implements OnInit, AfterViewInit {
     private seo: SeoService,
     private util: UtilService,
     private news: NewsService,
+    private sw: UpdateService,
     private storageMap: StorageMap,
     private translateService:TranslateService,
     private ccService: NgcCookieConsentService,
     private gtmService: GoogleTagManagerService,
+    @Inject(PLATFORM_ID) private platformId,
   ) {
     router.events.forEach((item) => {
-      if (item instanceof NavigationEnd) this.gtmService.pushTag({ event: 'page', pageName: item.url });
+      if (item instanceof NavigationEnd) {
+        this.gtmService.pushTag({ event: 'page', pageName: item.url });
+      }
     });
+    sw.checkForUpdates();
   }
   ngOnInit(): void {
     this.dados();
     this.getSeo();
-    this.setCookies();
+    if (isPlatformBrowser(this.platformId)) this.setCookies();
   }
 
   ngAfterViewInit() {
@@ -58,44 +65,39 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   onActivate(event: any) {
-    const scrollToTop = window.setInterval(() => {
-      const pos = window.pageYOffset;
-      if (pos > 0) window.scrollTo(0, pos - 20);
-      else window.clearInterval(scrollToTop);
-    }, 16);
+    // const scrollToTop = window.setInterval(() => {
+    //   const pos = window.pageYOffset;
+    //   if (pos > 0) window.scrollTo(0, pos - 20);
+    //   else window.clearInterval(scrollToTop);
+    // }, 16);
   }
 
 
   setCookies = () => {
-    this.getLang();
-    this.popupCookies();
+    // this.getLang();
+    // this.popupCookies();
   }
   private popupCookies = () => {
     this.ccService.initialize$.subscribe((event: NgcInitializeEvent) => console.log(`initialize: ${JSON.stringify(event)}`));
     this.ccService.popupOpen$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const link = document.getElementsByClassName("cc-politica");
-      fromEvent<MouseEvent>( link, 'click').subscribe(() => {
-        this.politica.show();
-      });
+      fromEvent<MouseEvent>( link, 'click').subscribe(() => this.politica.show());
     });
   }
 
   private getLang = () => {
     const browserLang = this.translateService.getBrowserLang();
-    this.translateService.use(browserLang.match(/en|fr|pt/) ? browserLang : 'pt');
+    this.translateService.use(browserLang?.match(/en|fr|pt/) ? browserLang : 'pt');
     this.translateService.addLangs(['en', 'fr', 'pt']);
     this.translateService.setDefaultLang('pt');
-    this.translateService.get(
-      ['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow',
-      'cookie.deny', 'cookie.link', 'cookie.policy', 'cookie.href'])
-      .subscribe(data => {
-      this.ccService.getConfig().content = this.ccService.getConfig().content || {} ;
-      this.ccService.getConfig().content.allow = data['cookie.allow'];
-      this.ccService.getConfig().content.deny = data['cookie.deny'];
-      this.ccService.getConfig().content.link = data['cookie.link'];
-      this.ccService.getConfig().content.href = data['cookie.href'];
-      this.ccService.getConfig().content.policy = data['cookie.policy'];
-      this.ccService.getConfig().content.header = data['cookie.header'];
+    this.translateService.get(environment.cookies).subscribe(data => {
+      this.ccService.getConfig().content         = this.ccService.getConfig().content || {} ;
+      this.ccService.getConfig().content.allow   = data['cookie.allow'];
+      this.ccService.getConfig().content.deny    = data['cookie.deny'];
+      this.ccService.getConfig().content.link    = data['cookie.link'];
+      this.ccService.getConfig().content.href    = data['cookie.href'];
+      this.ccService.getConfig().content.policy  = data['cookie.policy'];
+      this.ccService.getConfig().content.header  = data['cookie.header'];
       this.ccService.getConfig().content.message = data['cookie.message'];
       this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
       this.ccService.destroy();
@@ -105,8 +107,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private dados = () => {
     this.data$ = this.util.getStatic();
-    this.news.getLoja().pipe(take(1)).subscribe();
-    this.news.getRegion().pipe(take(1)).subscribe();
+    this.news.getLoja().pipe(takeUntil(this.destroy$)).subscribe();
+    this.news.getRegion().pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   private getSeo = () => {

@@ -11,14 +11,14 @@ import { existsSync, readFileSync } from 'fs';
 function setBrowserGlobalsr(distFolder) {
   const template= readFileSync(join(distFolder, 'index.html')).toString();
   const domino = require('domino');
-  const win = domino.createWindow(template);
-  global['window'] = win;
-  global['Node']= win.Node;
-  global['document'] = win.document;
-  global['navigator'] = win.navigator;
-  global['Event']= win.Event;
-  global['Event']['prototype']= win.Event.prototype;
-  global['window']['cookieconsent']= { initialise: () => console.warn('Cookie consent is not working on server side') };
+  const win: any = domino.createWindow(template);
+  (global as any).window = win;
+  (global as any).Node = win.Node;
+  (global as any).document = win.document;
+  (global as any).navigator = win.navigator;
+  (global as any).Event = win.Event;
+  (global as any).Event.prototype= win.Event.prototype;
+  (global as any).window.cookieconsent= { initialise: () => console.warn('Cookie consent is not working on server side') };
 }
 
 // The Express app is exported so that it can be used by serverless Functions.

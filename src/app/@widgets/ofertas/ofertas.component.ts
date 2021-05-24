@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap  } from 'rxjs/operators';
 
 import { DataService } from '@core/services/data.service';
@@ -57,11 +57,8 @@ export class OfertasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    timer(300).subscribe(() => {
-      this.getOfertas(this.code);
-      this.storage.get('Loja').subscribe((res) => this.loja = res)
-    })
+    this.getOfertas(this.code);
+    this.storage.get('Loja').subscribe((res) => this.loja = res)
   }
   getOfertas = (code: any) => {
     let result: any = [];

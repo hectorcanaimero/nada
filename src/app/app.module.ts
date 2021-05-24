@@ -74,12 +74,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ServiceWorkerModule.register('ngsw-worker.js',
-      { enabled: environment.production }),
+      { enabled: environment.production, scope: './', registrationStrategy: 'registerImmediately' }),
     TranslateModule.forRoot({
       loader: {
-        deps: [HttpClient],
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        deps: [HttpClient], provide: TranslateLoader, useFactory: HttpLoaderFactory,
       }
     }),
   ],

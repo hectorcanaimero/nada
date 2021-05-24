@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-image',

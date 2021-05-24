@@ -1,21 +1,18 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 
-import { timer, Subscription } from 'rxjs';
 
 import { SeoService } from '@core/services/seo.service';
 import { UtilService } from '@core/services/util.service';
-
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit, OnChanges, OnDestroy {
+export class ProductComponent implements OnInit {
 
   @Input() code: any = [];
   @Input() loja: any = [];
@@ -23,8 +20,6 @@ export class ProductComponent implements OnInit, OnChanges, OnDestroy {
 
   product: any = [];
   imagem: any = [];
-
-  subscription: Subscription;
 
   constructor(
     private router: Router,
@@ -34,27 +29,14 @@ export class ProductComponent implements OnInit, OnChanges, OnDestroy {
   ) { }
 
   ngOnInit() {
-    timer(500).subscribe(() => {
-      this.product = this.code.produtos;
-      this.subscription = this.storageMap.watch('Loja').subscribe((res) => {
-        if (res) this.loja = res;
-        else this.loja = { loja: 0, slug: '', nome: '' };
-      });
-    })
+    this.product = this.code.produtos;
+    this.storageMap.watch('Loja').subscribe((res) => {
+      if (res) this.loja = res;
+      else this.loja = { loja: 0, slug: '', nome: '' };
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //. console.log(changes);
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) this.subscription.unsubscribe();
-  }
-
-
-
-
-  goToProduct() {
+  goToProduct =() => {
     this.seo.dataLayerTracking({
       event: 'productInteraction',
       productAction: 'Visualizar Produto',

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
-import { Observable, timer } from 'rxjs';
+import { map, tap, delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Post } from '@core/interfaces/blog';
 import { BlogService } from '@core/services/blog.service';
 
@@ -27,12 +27,11 @@ export class BlogLatestComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    timer(300).subscribe(() => {
-      this.items$  =this.data.pipe(
-        tap((res) => this.totalItem = res.headers.keys().map(key => res.headers.get(key))[4]),
-        map((res) => res.body)
-      )
-    })
+    this.items$  =this.data.pipe(
+      delay(300),
+      tap((res) => this.totalItem = res.headers.keys().map(key => res.headers.get(key))[4]),
+      map((res) => res.body)
+    )
   }
 
   pageChanged = (ev: any) => {

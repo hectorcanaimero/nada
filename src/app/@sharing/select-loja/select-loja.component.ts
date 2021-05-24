@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
@@ -17,7 +17,7 @@ import { DataService } from '@core/services/data.service';
   styleUrls: ['./select-loja.component.scss']
 })
 
-export class SelectLojaComponent implements OnInit {
+export class SelectLojaComponent implements OnInit, AfterViewInit {
 
   @Output() loja: any;
   @Input() new: any;
@@ -41,8 +41,11 @@ export class SelectLojaComponent implements OnInit {
 
   ngOnInit() {
     this.miObjeto = this.storageMap.watch('Loja');
-    timer(400).subscribe(() => { if (this.load === true) { this.frame.show(); } })
     this.region = this.news.getRegion$();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.load === true) this.frame.show();
   }
 
   getLojas = (e: any) => this.news.LojaPorRegion(e.target.value).pipe(take(1))

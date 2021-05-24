@@ -27,5 +27,7 @@ export const environment = {
     debounceTime: 100
   },
   cookieDomain: 'htpps://www.condor.com.br',
+  cookies: ['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow',
+  'cookie.deny', 'cookie.link', 'cookie.policy', 'cookie.href'],
   loja:  { loja: 21, slug: 'hiper-condor-nilo-pecanha', nome: 'Hiper Condor Nilo Peçanha' }
 };

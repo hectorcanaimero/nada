@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { slideLeftInOut, slideDownInOut } from '@core/animations/slide';
 import { DataService } from '@core/services/data.service';
@@ -25,7 +25,7 @@ export class MenuSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuOfertas$ = this.db.getMenuOfertas('menuDepartamento');
-    timer(300).subscribe(() => this.convertFaleConosco());
+    this.convertFaleConosco();
   }
 
   convertFaleConosco = () => {
