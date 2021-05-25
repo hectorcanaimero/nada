@@ -28,7 +28,7 @@ import { environment } from '../environments/environment.prod';
 registerLocaleData(localePt);
 
 const cookieConfig: NgcCookieConsentConfig = {
-  cookie: { domain: 'https://www.condor.com.br/' },
+  cookie: { domain: 'www.condor.com.br/' },
   position: "bottom",
   theme: "edgeless",
   palette: {

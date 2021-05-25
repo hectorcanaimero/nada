@@ -63,15 +63,14 @@ export class MobileComponent implements OnInit {
     this.faleConosco.push({ nome: 'Notícias', url: '/institucional/imprensa' })
 
   }
-
   onLink = (slug: string) => {
-    this.router.navigateByUrl(slug);
+    const validate = slug.startsWith('http');
+    if (validate) window.open(slug, '_blank');
+    else this.router.navigateByUrl(slug);
     this.activeSidebar = 'out';
   }
 
-  onToogle = (ev: any) => {
-    console.log(ev);
-  }
+  onToogle = (ev: any) =>  this.activeSidebar = ev;
 
   getSearch = (event: any) => {
     if (event.keyCode === 13) {

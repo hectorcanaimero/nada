@@ -1,6 +1,6 @@
 .sidebar {
   width: 300px;
-  height: 100vh;
+  height: 100%;
   z-index: 10 !important;
   position: absolute;
   background-color: #fff !important;
@@ -21,6 +21,7 @@
       font-size: .9rem;
       align-items: center;
       padding: .35rem .5rem;
+      cursor: pointer;
       background-color: #fff;
       border-bottom: 1px solid #ececec;
       img {
@@ -43,6 +44,7 @@
       padding: .35rem .5rem;
       background-color: #fff;
       border-bottom: 1px solid #ececec;
+      cursor: pointer;
       .item {
         width: 85%;
         font-size: .8rem;

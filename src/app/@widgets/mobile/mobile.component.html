@@ -29,7 +29,8 @@
         </div>
       </div>
       <div class="submenu" [@slideDownInOut]="activeMenuOfertas">
-        <div class="sub-menu-items" *ngFor="let menu of menuOfertas$ | async" (click)="onLink(menu.slug)">
+        <div class="sub-menu-items" *ngFor="let menu of menuOfertas$ | async" (click)="onLink(
+          'departamento/' + menu.slug)">
           <p class="item" mdbWavesEffect  routerLinkActive="active">
             <i class="fas fa-shopping-basket mr-1"></i>  {{ menu.nome }}
           </p>

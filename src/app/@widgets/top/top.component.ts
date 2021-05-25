@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { slideLeftInOut } from '@core/animations/slide';
 import { DataService } from '@core/services/data.service';
 import { UtilService } from '@core/services/util.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-top',
@@ -26,7 +27,9 @@ export class TopComponent implements OnInit {
 
 
 
-    constructor( private db: DataService, private util: UtilService) { }
+    constructor(
+      private router: Router,
+      private db: DataService, private util: UtilService) { }
 
     ngOnInit(): void {
       this.ofertas = this.db.getMenuOfertas('menuDepartamento');
@@ -44,7 +47,10 @@ export class TopComponent implements OnInit {
     }
 
 
-  onLink = (slug: string) => console.log(slug);
+  onLink = (slug: string) => this.router.navigateByUrl(`/${slug}`);
+
   trackByFunction = (index: number, item: any) => item[index];
+
+  desligueSidebar = (ev: any) => this.activeSidebar = ev;
 
 }
