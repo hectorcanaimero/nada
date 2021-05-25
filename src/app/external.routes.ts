@@ -228,14 +228,14 @@ const appRoute: Routes = [
       externalUrl: 'https://www.condor.com.br/aniversario/index.html',
     },
   },
-  {
-    path: 'delivery',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://www.condor.com.br/delivery/index.html',
-    },
-  },
+  // {
+  //   path: 'delivery',
+  //   canActivate: [RedirectGuard],
+  //   component: RedirectGuard,
+  //   data: {
+  //     externalUrl: 'https://www.condor.com.br/delivery/index.html',
+  //   },
+  // },
   {
     path: 'gourmet',
     canActivate: [RedirectGuard],
