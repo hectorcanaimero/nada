@@ -39,7 +39,8 @@ export class AllInComponent implements OnInit {
   }
 
 
-  private process = (type: string, slug: string, page?: number) => {
+  private process = (type: string, slug: string, page=1) => {
+    console.log(page);
     this.id = type;
     this.slug = slug;
     if (type === 'categoria') {
@@ -55,7 +56,7 @@ export class AllInComponent implements OnInit {
     this.db.getCategoriesSlug(slug).subscribe((type) => {
       this.type = type;
       this.titulo = `Categoria: ${type.name}`;
-      this.items$ = this.db.getPostsCategories(type.id, this.itemsPerPage).pipe(
+      this.items$ = this.db.getPostsCategories(type.id, page,this.itemsPerPage).pipe(
         tap((res) => this.totalItems = res.headers.keys().map(key => res.headers.get(key))[4]),
         map((res) => res.body)
       );
