@@ -11,6 +11,14 @@ const appRoute: Routes = [
     },
   },
   {
+    path: 'corrente-esperanca',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/corrente-esperanca/index.html',
+    },
+  },
+  {
     path: 'entreposto',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
