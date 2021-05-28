@@ -31,11 +31,25 @@
         <i class="fas fa-angle-right float-right"></i>
       </div>
     </div>
-    <div class="items" *ngFor="let center of items.center" (click)="onLink(center.slug)">
-      <p class="item"> {{ center.name }} </p>
-      <div class="icon">
-        <i class="fas fa-angle-right float-right"></i>
-      </div>
+    <div *ngFor="let center of items.center">
+      <a [href]="center.url" target="_blank" (click)="onLink2()">
+        <div class="items" *ngIf="center.external; else Internal">
+          <p class="item"> {{ center.name }} </p>
+          <div class="icon">
+            <i class="fas fa-angle-right float-right"></i>
+          </div>
+        </div>
+      </a>
+      <ng-template #Internal>
+        <a [routerLink]="[ center.url ]" (click)="onLink2()">
+          <div class="items">
+            <p class="item"> {{ center.name }} </p>
+            <div class="icon">
+              <i class="fas fa-angle-right float-right"></i>
+            </div>
+          </div>
+        </a>
+      </ng-template>
     </div>
     <div class="items" (click)="onLink('/blog')">
       <p class="item"> Blog </p>
@@ -44,12 +58,27 @@
       </div>
     </div>
     <div class="space">
-      <div class="items" *ngFor="let header of items.header" (click)=onLink(header.url)>
-        <img [src]="header.iconmobile" [alt]="header.name">
-        <p class="item"> {{ header.name }} </p>
-        <div class="icon">
-          <i class="fas fa-angle-right float-right"></i>
-        </div>
+      <div *ngFor="let header of items.header">
+        <a [href]="header.url" target="_blank" (click)="activeSidebar = 'out'">
+          <div class="items" *ngIf="header.external; else Internal">
+            <img [src]="header.iconmobile" [alt]="header.name">
+            <p class="item"> {{ header.name }} </p>
+            <div class="icon">
+              <i class="fas fa-angle-right float-right"></i>
+            </div>
+          </div>
+        </a>
+        <ng-template #Internal>
+          <a [routerLink]="[ header.url ]" (click)="activeSidebar = 'out'">
+            <div class="items">
+              <img [src]="header.iconmobile" [alt]="header.name">
+              <p class="item"> {{ header.name }} </p>
+              <div class="icon">
+                <i class="fas fa-angle-right float-right"></i>
+              </div>
+            </div>
+          </a>
+        </ng-template>
       </div>
     </div>
     <app-mobile-link titulo="Fale Conosco" [items]="faleConosco" (toogle)=(onToogle($event))></app-mobile-link>

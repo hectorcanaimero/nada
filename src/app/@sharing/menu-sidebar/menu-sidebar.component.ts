@@ -48,6 +48,11 @@ export class MenuSidebarComponent implements OnInit {
     this.outputSidebar.emit('out');
   }
 
+  onLink2 = () => {
+    this.activeSidebar = 'out';
+    this.outputSidebar.emit('out');
+  }
+
   onToogle=(ev) => {
     this.activeSidebar = ev;
     this.outputSidebar.emit(ev);

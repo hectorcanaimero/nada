@@ -58,16 +58,12 @@ export class CampanhaComponent implements OnInit {
   }
 
   private proccess = (res: any) => {
-    console.log(res);
     this.setSeo(res);
     this.storageMap.watch('Loja').subscribe(({ loja }) => {
       if (res.code) {
-        console.log(res.code);
         this.getMenuDepartamentoCampanha(loja, res.code);
         this.items = this.db.OfertasLojaCampanha(loja, res.code, 60);
-        this.items.subscribe((res) => console.log(res));
       } else {
-        console.log('Code: ', res.code);
         this.getMenuDepartamentoSlug(loja, res.slugCampanha);
         this.items = this.db.OfertasLojaSlug(loja, res.slugCampanha, 60);
       }

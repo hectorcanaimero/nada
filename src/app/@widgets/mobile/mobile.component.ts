@@ -64,6 +64,7 @@ export class MobileComponent implements OnInit {
 
   }
   onLink = (slug: string) => {
+    console.log(slug);
     const validate = slug.startsWith('http');
     if (validate) window.open(slug, '_blank');
     else this.router.navigateByUrl(slug);

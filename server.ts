@@ -26,7 +26,15 @@ export function app() {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/condor-v2/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
-  setBrowserGlobalsr(distFolder);
+  const domino = require('domino');
+  const win = domino.createWindow(indexHtml);
+  global['window'] = win;
+  global['document'] = win.document;
+  global['navigator'] = win.navigator;
+  global['window']['cookieconsent'] = { initialise: function () {
+    console.warn('Cookie consent is not working on server side');
+  }};
+  // setBrowserGlobalsr(distFolder);
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
