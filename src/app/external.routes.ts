@@ -228,6 +228,14 @@ const appRoute: Routes = [
       externalUrl: 'https://www.condor.com.br/marilan/index.html',
     },
   },
+    {
+    path: 'dia-dos-namorados',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/dia-dos-namorados/index.html',
+    },
+  },
   {
     path: 'aniversario',
     canActivate: [RedirectGuard],
