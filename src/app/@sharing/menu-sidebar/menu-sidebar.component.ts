@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-menu-sidebar',
   templateUrl: './menu-sidebar.component.html',
   styleUrls: ['./menu-sidebar.component.scss'],
-  animations: [ slideLeftInOut, slideDownInOut]
+  animations: [slideDownInOut]
 })
 
 export class MenuSidebarComponent implements OnInit {

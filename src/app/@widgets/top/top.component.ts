@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { slideLeftInOut } from '@core/animations/slide';
+import { slideInOut, slideLeftInOut } from '@core/animations/slide';
 import { DataService } from '@core/services/data.service';
 import { UtilService } from '@core/services/util.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
     selector: 'app-top',
     templateUrl: './top.component.html',
     styleUrls: ['./top.component.scss'],
-    animations: [ slideLeftInOut ]
+    animations: [slideInOut, slideLeftInOut]
 })
 export class TopComponent implements OnInit {
 
