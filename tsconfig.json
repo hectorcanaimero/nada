@@ -2,19 +2,17 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
     "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "declaration": false,
+    "importHelpers": true,
+    "strictTemplates": true,
+    "lib": [ "es2018", "dom"],
+    "outDir": "./dist/out-tsc",
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "paths": {
       "@core/*": ["src/app/@core/*"],
       "@widgets/*": ["src/app/@widgets/*"],

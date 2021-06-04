@@ -24,6 +24,7 @@ const app: Routes = [
   { path: 'trabalhe-conosco', redirectTo: 'fale-conosco/trabalhe-conosco'},
   { path: 'radar-de-ofertas', redirectTo: 'institucional/radar-de-ofertas', },
   { path: 'cartao-presente', redirectTo: 'para-sua-empresa/cartao-presente-condor' },
+  { path: 'mundo-saudavel', redirectTo: 'departamento/alimentos/setor/saudaveis' },
   // { path: '', redirectTo: '', pathMatch: 'full' },
 ];
 
