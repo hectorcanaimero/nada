@@ -9,13 +9,11 @@ SwiperCore.use([EffectFade, Navigation, Pagination, A11y, Lazy]);
 })
 export class SwipeComponent implements OnInit {
 
+  @Input() options: { };
   @Input() data: any = [];
   @Input() code: any = [];
-  @Input() size: string = '';
+  @Input() size: any = [];
   @Input() idImage: string = '';
-  @Input() options: {
-
-  };
 
   constructor() { }
 

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
 import { UtilService } from '@core/services/util.service';
@@ -19,15 +19,17 @@ import { DataService } from '@core/services/data.service';
 
 export class SelectLojaComponent implements OnInit, AfterViewInit {
 
-  @Output() loja: any;
-  @Input() new: any;
-  @Input() type?: string = 'simple';
-  @Input() load?: boolean = false;
   @ViewChild('frame', { static: true }) public frame: any;
+
+  @Input() new: any;
+  @Output() loja: any;
+  @Input() load?: boolean = false;
+  @Input() type?: string = 'simple';
+
   condor: number;
-  miObjeto: Observable<any>;
-  region: Observable<any>;
   lojas: any =[ ];
+  region: Observable<any>;
+  miObjeto: Observable<any>;
   lojaDefault = { loja: 21, slug: 'hiper-condor-nilo-pecanha', nome: 'Hiper Condor Nilo Peçanha' };
 
   constructor(
@@ -54,7 +56,7 @@ export class SelectLojaComponent implements OnInit, AfterViewInit {
   setLocalStorageLoja = () => this.storageMap.set('Loja', this.lojaDefault)
     .subscribe(() => {});
 
-    getLocalStorageLoja = () => this.util.StorageParse('Loja');
+  getLocalStorageLoja = () => this.util.StorageParse('Loja');
 
   selectCondor = () => {
     this.news.LojaId(this.condor).subscribe(data => {

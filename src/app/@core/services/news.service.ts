@@ -8,6 +8,7 @@ import { Page, Post } from "@core/interfaces/blog";
 import { Lojas, Imagens, Campanha, Loja, Tabloide } from "@core/interfaces/news";
 
 import { environment } from 'src/environments/environment.prod';
+import { StorageMap } from "@ngx-pwa/local-storage";
 const url: string = environment.news.url;
 const headers = new HttpHeaders({Authorization: `${ environment.news.key }`});
 const urlBlog: string = environment.blog.url;
@@ -23,30 +24,32 @@ export class NewsService {
   private loja$: BehaviorSubject<Lojas[]> = new BehaviorSubject(null);
   private banner$: BehaviorSubject<Imagens[]> = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private storageMap: StorageMap,
+    private http: HttpClient) { }
 
   // Banners
-  setBanners$  = (items: Imagens[]) => this.banner$.next(items);
-  getBanners$  = (): Observable<Imagens[]> => this.banner$.asObservable();
-  getBanners  = (): Observable<Imagens[]> =>  {
+  setBanners$ = (items: Imagens[]) => this.banner$.next(items);
+  getBanners$ = (): Observable<Imagens[]> => this.banner$.asObservable();
+  getBanners = (): Observable<Imagens[]> =>  {
     return this.http.get<Imagens[]>(`${url}/imagens`, { params: { per_page: `100` }})
       .pipe(tap((data) => this.setBanners$(data)));
   }
 
 
   // Cidade
-  setRegion$  = (items: any) => this.region$.next(items);
-  getRegion$  = (): Observable<any> => this.region$.asObservable();
-  getRegion  = (): Observable<any> =>  {
+  setRegion$ = (items: any) => this.region$.next(items);
+  getRegion$ = (): Observable<any> => this.region$.asObservable();
+  getRegion = (): Observable<any> =>  {
     return this.http.get<any>(`${url}/region`, { params: { per_page: `100` }})
       .pipe(tap((data) => this.setRegion$(data)));
   }
 
 
   // Loja
-  setLoja$  = (items: Lojas[]) => this.loja$.next(items);
-  getLoja$  = (): Observable<Lojas[]> => this.loja$.asObservable();
-  getLoja  = (): Observable<Lojas[]> =>  {
+  setLoja$ = (items: Lojas[]) => this.loja$.next(items);
+  getLoja$ = (): Observable<Lojas[]> => this.loja$.asObservable();
+  getLoja = (): Observable<Lojas[]> =>  {
     return this.http.get<Lojas[]>(`${url}/loja?per_page=100`)
       .pipe(tap((data) => this.setLoja$(data)));
   }

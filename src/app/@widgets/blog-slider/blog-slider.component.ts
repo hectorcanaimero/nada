@@ -37,7 +37,7 @@ export class BlogSliderComponent implements OnInit {
   }
   onSlideChange = (ev: any) => this.slide = ev.realIndex;
 
-  trackByFunction = (index: number, item: any): number => item[index];
+  trackByFunction = (index: number, item: any): number => item.id;
 
   onBlogId = (slug: string) => this.router.navigateByUrl(`/blog/${slug}`);
 }

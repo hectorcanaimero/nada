@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageMap } from '@ngx-pwa/local-storage';
 import { tap, retry, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -15,11 +16,13 @@ const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-
 })
 
 export class DataService {
-
-  // Ofertas Dia
   private menu$: BehaviorSubject<MenuDepartamento> = new BehaviorSubject(null);
   private oferta$: BehaviorSubject<Ofertas[]> = new BehaviorSubject(null);
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+    private storageMap: StorageMap,
+  ) { }
 
   private Query = <T>(query: string) => this.http.get<T>(url + query);
   add = (table: string, data: any): Observable<any[]> => this.http.post<any[]>(`${url}/${table}`, data, { headers });
@@ -30,7 +33,7 @@ export class DataService {
   getOfertas$  = (): Observable<Ofertas[]> => this.oferta$.asObservable();
   getOfertas = (loja: any): Observable<Ofertas[]> => {
     return this.Query<Ofertas[]>(`/Ofertas/LojaProdutos?loja=${loja}`).pipe(
-      map((res) => res), tap((res) => this.setOfertas$(res)));
+      tap((data) => this.storageMap.set('ofertas', data).subscribe(() => {})));
   }
 
   /** Menus */

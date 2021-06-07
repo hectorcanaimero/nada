@@ -35,5 +35,5 @@ export class BlogSidebarComponent implements OnInit {
     }
   }
 
-  trackBy = (index: number, item: any) => item[index];
+  trackBy = (index: number, item: any) => item.id;
 }

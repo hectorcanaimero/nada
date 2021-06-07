@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Ofertas } from './../../@core/interfaces/ofertas';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Observable } from 'rxjs';
@@ -16,12 +17,13 @@ import { UtilService } from '@core/services/util.service';
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
 
   show: boolean = true;
   ofertasdia: any = [];
   isLoading: boolean = false;
   data$: Observable<any[]>;
+  items$: Observable<Ofertas[]>;
   banner$: Observable<Imagens[]>;
   lojaSelecionada$: Observable<any>;
 
@@ -40,18 +42,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.seo.dataLayerPage('Home');
     this.news.getBanners().pipe(take(1)).subscribe();
     this.data$ = this.util.getStatic$().pipe(
-      map((res) => res[3].data),
-      finalize(() => this.isLoading = false)
+      map((res) => res[3].data), finalize(() => this.isLoading = false)
     );
-  }
-
-  ngAfterViewInit () {
-    this.getLoadOfertas();
   }
 
   getLoadOfertas = () => {
     this.storageMap.watch('Loja').pipe(take(1)).subscribe((res) => {
-      this.db.getOfertas(res['loja']).pipe(take(1)).subscribe();
+      this.db.getOfertas(res['loja']).subscribe();
     });
     this.ch.detectChanges();
   }

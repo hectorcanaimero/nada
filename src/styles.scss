@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import './variable.scss';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-@import "~cookieconsent/build/cookieconsent.min";
 @import '~swiper/swiper-bundle';
+@import "~cookieconsent/build/cookieconsent.min";
 
 body {
   font-family: "Nunito", sans-serif !important;
@@ -352,7 +350,7 @@ body {
     background-color: $red !important;
 }
 
-
+.white-text { color: #fff !important;}
 
 
 // Swiper
@@ -375,4 +373,9 @@ body {
   cursor: pointer !important;
   text-decoration: underline !important;
   font-weight: 900;
+}
+.cc-floating.cc-theme-edgeless .cc-message {
+  margin: 1em !important;
+  margin-bottom: .8em !important;
+  font-size: 13px !important;
 }

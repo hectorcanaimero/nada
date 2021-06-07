@@ -26,6 +26,7 @@ export class OfertasComponent implements OnInit {
   @Input() code: any;
   @Input() type: any;
   @Input() sector: number;
+  @Input() data$: Observable<Ofertas[]>;
 
   items$: Observable<Ofertas[]>;
   loja: any = [];
@@ -61,9 +62,10 @@ export class OfertasComponent implements OnInit {
     this.getOfertas(this.code);
     this.storage.get('Loja').subscribe((res) => this.loja = res)
   }
+
   getOfertas = (code: any) => {
     let result: any = [];
-    this.items$ = this.db.getOfertas$().pipe(
+    this.items$ = this.storage.get('ofertas').pipe(
       map((res: Ofertas) => {
         if (this.type === 'slug') result = res?.filter((row => row.slug === code));
         else if (this.type === 'campanha') result = res?.filter((row => row.campanha === code));
@@ -72,7 +74,8 @@ export class OfertasComponent implements OnInit {
       }),
       tap((res) => this.total = res?.length)
     );
+    this.items$.subscribe((res) => console.log(res));
   }
 
-  trackBy = (index: number, item: any) => item[index];
+  trackBy = (index: number, item: any) => item.host;
 }

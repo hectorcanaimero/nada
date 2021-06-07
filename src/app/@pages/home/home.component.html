@@ -4,7 +4,9 @@
     [icon]="ofertas[0].icon" [link]="ofertas[0].link" type="slug"></app-widget-ofertas>
     <app-faixa type="whats"></app-faixa>
     <div class="container my-2"> <app-select-loja type="alert"></app-select-loja> </div>
-    <app-widget-ofertas [code]="ofertas[1].code" [title]="ofertas[1].titulo" [icon]="ofertas[1].icon" [link]="ofertas[1].link" type="slug"> </app-widget-ofertas>
+    <app-widget-ofertas
+      [code]="ofertas[1].code" [title]="ofertas[1].titulo" [data$]="items$"
+      [icon]="ofertas[1].icon" [link]="ofertas[1].link" type="slug"> </app-widget-ofertas>
     <app-banners></app-banners>
     <app-widget-ofertas [code]="ofertas[2].code" [title]="ofertas[2].titulo" [icon]="ofertas[2].icon" [link]="ofertas[2].link" type="slug">
     </app-widget-ofertas>
