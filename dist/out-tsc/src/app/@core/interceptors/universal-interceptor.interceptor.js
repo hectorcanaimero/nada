@@ -1,7 +1,7 @@
-import { __decorate, __param } from "tslib";
 import { Inject, Injectable, Optional } from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
-let UniversalInterceptor = class UniversalInterceptor {
+import * as i0 from "@angular/core";
+export class UniversalInterceptor {
     constructor(request) {
         this.request = request;
     }
@@ -17,10 +17,15 @@ let UniversalInterceptor = class UniversalInterceptor {
         }
         return next.handle(serverReq);
     }
-};
-UniversalInterceptor = __decorate([
-    Injectable(),
-    __param(0, Optional()), __param(0, Inject(REQUEST))
-], UniversalInterceptor);
-export { UniversalInterceptor };
+}
+UniversalInterceptor.ɵfac = function UniversalInterceptor_Factory(t) { return new (t || UniversalInterceptor)(i0.ɵɵinject(REQUEST, 8)); };
+UniversalInterceptor.ɵprov = i0.ɵɵdefineInjectable({ token: UniversalInterceptor, factory: UniversalInterceptor.ɵfac });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UniversalInterceptor, [{
+        type: Injectable
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [REQUEST]
+            }] }]; }, null); })();
 //# sourceMappingURL=universal-interceptor.interceptor.js.map

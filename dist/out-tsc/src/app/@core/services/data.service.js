@@ -1,12 +1,13 @@
-import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { tap, retry, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment.prod';
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/common/http";
 const url = environment.v1.url;
 const headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
-let DataService = class DataService {
+export class DataService {
     constructor(http) {
         this.http = http;
         // Ofertas Dia
@@ -52,11 +53,13 @@ let DataService = class DataService {
     ProdutoLoja(loja, host) {
         return this.Query(`/Ofertas/LojaProduto?loja=${loja}&host=${host}`).pipe(retry(3), map((res) => res[0]));
     }
-};
-DataService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    })
-], DataService);
-export { DataService };
+}
+DataService.ɵfac = function DataService_Factory(t) { return new (t || DataService)(i0.ɵɵinject(i1.HttpClient)); };
+DataService.ɵprov = i0.ɵɵdefineInjectable({ token: DataService, factory: DataService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(DataService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: i1.HttpClient }]; }, null); })();
 //# sourceMappingURL=data.service.js.map

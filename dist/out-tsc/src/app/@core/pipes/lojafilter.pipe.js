@@ -1,6 +1,6 @@
-import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
-let LojafilterPipe = class LojafilterPipe {
+import * as i0 from "@angular/core";
+export class LojafilterPipe {
     transform(items, search) {
         if (!items) {
             return [];
@@ -15,11 +15,13 @@ let LojafilterPipe = class LojafilterPipe {
             return false;
         });
     }
-};
-LojafilterPipe = __decorate([
-    Pipe({
-        name: 'lojafilter'
-    })
-], LojafilterPipe);
-export { LojafilterPipe };
+}
+LojafilterPipe.ɵfac = function LojafilterPipe_Factory(t) { return new (t || LojafilterPipe)(); };
+LojafilterPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "lojafilter", type: LojafilterPipe, pure: true });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(LojafilterPipe, [{
+        type: Pipe,
+        args: [{
+                name: 'lojafilter'
+            }]
+    }], null, null); })();
 //# sourceMappingURL=lojafilter.pipe.js.map

@@ -1,4 +1,3 @@
-import { __decorate } from "tslib";
 import { environment } from './../../../environments/environment.prod';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,13 +8,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ResponsiveModule } from 'ngx-responsive';
 import { OfertasModule } from '../ofertas/ofertas.module';
 import { SwipeModule } from '@sharing/swipe/swipe.module';
-let CarouselModule = class CarouselModule {
-};
-CarouselModule = __decorate([
-    NgModule({
-        declarations: [CarouselComponent],
-        exports: [CarouselComponent],
-        imports: [
+import * as i0 from "@angular/core";
+import * as i1 from "ngx-responsive";
+export class CarouselModule {
+}
+CarouselModule.ɵmod = i0.ɵɵdefineNgModule({ type: CarouselModule });
+CarouselModule.ɵinj = i0.ɵɵdefineInjector({ factory: function CarouselModule_Factory(t) { return new (t || CarouselModule)(); }, imports: [[
             SwipeModule,
             CommonModule,
             RouterModule,
@@ -23,8 +21,27 @@ CarouselModule = __decorate([
             MDBBootstrapModule,
             NgxSkeletonLoaderModule,
             ResponsiveModule.forRoot(environment.responsive)
-        ]
-    })
-], CarouselModule);
-export { CarouselModule };
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(CarouselModule, { declarations: [CarouselComponent], imports: [SwipeModule,
+        CommonModule,
+        RouterModule,
+        OfertasModule,
+        MDBBootstrapModule,
+        NgxSkeletonLoaderModule, i1.ResponsiveModule], exports: [CarouselComponent] }); })();
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(CarouselModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [CarouselComponent],
+                exports: [CarouselComponent],
+                imports: [
+                    SwipeModule,
+                    CommonModule,
+                    RouterModule,
+                    OfertasModule,
+                    MDBBootstrapModule,
+                    NgxSkeletonLoaderModule,
+                    ResponsiveModule.forRoot(environment.responsive)
+                ]
+            }]
+    }], null, null); })();
 //# sourceMappingURL=carousel.module.js.map

@@ -1,9 +1,10 @@
-import { __decorate } from "tslib";
 import { makeStateKey } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
-let BrowserStateInterceptor = class BrowserStateInterceptor {
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/platform-browser";
+export class BrowserStateInterceptor {
     constructor(transferState) {
         this.transferState = transferState;
     }
@@ -18,9 +19,10 @@ let BrowserStateInterceptor = class BrowserStateInterceptor {
         }
         return next.handle(req);
     }
-};
-BrowserStateInterceptor = __decorate([
-    Injectable()
-], BrowserStateInterceptor);
-export { BrowserStateInterceptor };
+}
+BrowserStateInterceptor.ɵfac = function BrowserStateInterceptor_Factory(t) { return new (t || BrowserStateInterceptor)(i0.ɵɵinject(i1.TransferState)); };
+BrowserStateInterceptor.ɵprov = i0.ɵɵdefineInjectable({ token: BrowserStateInterceptor, factory: BrowserStateInterceptor.ɵfac });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(BrowserStateInterceptor, [{
+        type: Injectable
+    }], function () { return [{ type: i1.TransferState }]; }, null); })();
 //# sourceMappingURL=browserstate.interceptor.js.map

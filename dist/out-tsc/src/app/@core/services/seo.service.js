@@ -1,7 +1,9 @@
-import { __decorate, __param } from "tslib";
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-let SeoService = class SeoService {
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/platform-browser";
+import * as i2 from "@angular/router";
+export class SeoService {
     constructor(meta, title, router, doc, platformId) {
         this.meta = meta;
         this.title = title;
@@ -122,11 +124,17 @@ let SeoService = class SeoService {
             { name: 'twitter:title', content }
         ]);
     }
-};
-SeoService = __decorate([
-    Injectable({ providedIn: 'root' }),
-    __param(3, Inject(DOCUMENT)),
-    __param(4, Inject(PLATFORM_ID))
-], SeoService);
-export { SeoService };
+}
+SeoService.ɵfac = function SeoService_Factory(t) { return new (t || SeoService)(i0.ɵɵinject(i1.Meta), i0.ɵɵinject(i1.Title), i0.ɵɵinject(i2.Router), i0.ɵɵinject(DOCUMENT), i0.ɵɵinject(PLATFORM_ID)); };
+SeoService.ɵprov = i0.ɵɵdefineInjectable({ token: SeoService, factory: SeoService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(SeoService, [{
+        type: Injectable,
+        args: [{ providedIn: 'root' }]
+    }], function () { return [{ type: i1.Meta }, { type: i1.Title }, { type: i2.Router }, { type: undefined, decorators: [{
+                type: Inject,
+                args: [DOCUMENT]
+            }] }, { type: undefined, decorators: [{
+                type: Inject,
+                args: [PLATFORM_ID]
+            }] }]; }, null); })();
 //# sourceMappingURL=seo.service.js.map

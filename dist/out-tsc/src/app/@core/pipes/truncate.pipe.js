@@ -1,6 +1,6 @@
-import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
-let TruncatePipe = class TruncatePipe {
+import * as i0 from "@angular/core";
+export class TruncatePipe {
     transform(value, limit = 35, completeWords = false, ellipsis = '...') {
         value = `${value}`;
         if (completeWords) {
@@ -8,11 +8,13 @@ let TruncatePipe = class TruncatePipe {
         }
         return (value === null || value === void 0 ? void 0 : value.length) > limit ? value.substr(0, limit) + ellipsis : value;
     }
-};
-TruncatePipe = __decorate([
-    Pipe({
-        name: 'truncate'
-    })
-], TruncatePipe);
-export { TruncatePipe };
+}
+TruncatePipe.ɵfac = function TruncatePipe_Factory(t) { return new (t || TruncatePipe)(); };
+TruncatePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "truncate", type: TruncatePipe, pure: true });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(TruncatePipe, [{
+        type: Pipe,
+        args: [{
+                name: 'truncate'
+            }]
+    }], null, null); })();
 //# sourceMappingURL=truncate.pipe.js.map

@@ -1,4 +1,3 @@
-import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResponsiveModule } from 'ngx-responsive';
@@ -13,12 +12,13 @@ import { HOME_ROUTE } from './home.routes';
 import { HomeComponent } from './home.component';
 import { environment } from 'src/environments/environment.prod';
 import { BannersModule } from '@widgets/banners/banners.module';
-let HomeModule = class HomeModule {
-};
-HomeModule = __decorate([
-    NgModule({
-        declarations: [HomeComponent],
-        imports: [
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/router";
+import * as i2 from "ngx-responsive";
+export class HomeModule {
+}
+HomeModule.ɵmod = i0.ɵɵdefineNgModule({ type: HomeModule });
+HomeModule.ɵinj = i0.ɵɵdefineInjector({ factory: function HomeModule_Factory(t) { return new (t || HomeModule)(); }, imports: [[
             HOME_ROUTE,
             PostModule,
             FaixaModule,
@@ -30,8 +30,33 @@ HomeModule = __decorate([
             SelectLojaModule,
             InstitucionalModule,
             ResponsiveModule.forRoot(environment.responsive),
-        ]
-    })
-], HomeModule);
-export { HomeModule };
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(HomeModule, { declarations: [HomeComponent], imports: [i1.RouterModule, PostModule,
+        FaixaModule,
+        CommonModule,
+        OfertasModule,
+        BannersModule,
+        SemDataModule,
+        CarouselModule,
+        SelectLojaModule,
+        InstitucionalModule, i2.ResponsiveModule] }); })();
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HomeModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [HomeComponent],
+                imports: [
+                    HOME_ROUTE,
+                    PostModule,
+                    FaixaModule,
+                    CommonModule,
+                    OfertasModule,
+                    BannersModule,
+                    SemDataModule,
+                    CarouselModule,
+                    SelectLojaModule,
+                    InstitucionalModule,
+                    ResponsiveModule.forRoot(environment.responsive),
+                ]
+            }]
+    }], null, null); })();
 //# sourceMappingURL=home.module.js.map

@@ -1,6 +1,6 @@
-import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
-let FiltroPipe = class FiltroPipe {
+import * as i0 from "@angular/core";
+export class FiltroPipe {
     transform(items, searchText, fieldName) {
         if (!items) {
             return [];
@@ -16,11 +16,13 @@ let FiltroPipe = class FiltroPipe {
             return false;
         });
     }
-};
-FiltroPipe = __decorate([
-    Pipe({
-        name: 'filtro'
-    })
-], FiltroPipe);
-export { FiltroPipe };
+}
+FiltroPipe.ɵfac = function FiltroPipe_Factory(t) { return new (t || FiltroPipe)(); };
+FiltroPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "filtro", type: FiltroPipe, pure: true });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(FiltroPipe, [{
+        type: Pipe,
+        args: [{
+                name: 'filtro'
+            }]
+    }], null, null); })();
 //# sourceMappingURL=filtro.pipe.js.map

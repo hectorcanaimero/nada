@@ -1,14 +1,15 @@
-import { __decorate } from "tslib";
 import { Injectable } from "@angular/core";
 import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, forkJoin } from "rxjs";
 import { tap, map, retry } from "rxjs/operators";
 import { environment } from 'src/environments/environment.prod';
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/common/http";
 const url = environment.news.url;
 const headers = new HttpHeaders({ Authorization: `${environment.news.key}` });
 const urlBlog = environment.blog.url;
 const headersBlog = new HttpHeaders({ Authorization: `${environment.blog.key}` });
-let NewsService = class NewsService {
+export class NewsService {
     constructor(http) {
         this.http = http;
         this.region$ = new BehaviorSubject(null);
@@ -100,11 +101,13 @@ let NewsService = class NewsService {
             params: { slug: `${slug}` }
         }).pipe(tap(data => data));
     }
-};
-NewsService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    })
-], NewsService);
-export { NewsService };
+}
+NewsService.ɵfac = function NewsService_Factory(t) { return new (t || NewsService)(i0.ɵɵinject(i1.HttpClient)); };
+NewsService.ɵprov = i0.ɵɵdefineInjectable({ token: NewsService, factory: NewsService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NewsService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: i1.HttpClient }]; }, null); })();
 //# sourceMappingURL=news.service.js.map

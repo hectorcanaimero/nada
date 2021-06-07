@@ -1,6 +1,6 @@
-import { __decorate } from "tslib";
 import { Directive, HostBinding, Input } from '@angular/core';
-let LazyLoadDirective = class LazyLoadDirective {
+import * as i0 from "@angular/core";
+export class LazyLoadDirective {
     constructor(el) {
         this.el = el;
         this.srcAttr = null;
@@ -25,17 +25,20 @@ let LazyLoadDirective = class LazyLoadDirective {
     loadImage() {
         this.srcAttr = this.src;
     }
-};
-__decorate([
-    HostBinding('attr.src')
-], LazyLoadDirective.prototype, "srcAttr", void 0);
-__decorate([
-    Input()
-], LazyLoadDirective.prototype, "src", void 0);
-LazyLoadDirective = __decorate([
-    Directive({
-        selector: 'img[LazyLoad]'
-    })
-], LazyLoadDirective);
-export { LazyLoadDirective };
+}
+LazyLoadDirective.ɵfac = function LazyLoadDirective_Factory(t) { return new (t || LazyLoadDirective)(i0.ɵɵdirectiveInject(i0.ElementRef)); };
+LazyLoadDirective.ɵdir = i0.ɵɵdefineDirective({ type: LazyLoadDirective, selectors: [["img", "LazyLoad", ""]], hostVars: 1, hostBindings: function LazyLoadDirective_HostBindings(rf, ctx) { if (rf & 2) {
+        i0.ɵɵattribute("src", ctx.srcAttr, i0.ɵɵsanitizeUrl);
+    } }, inputs: { src: "src" } });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(LazyLoadDirective, [{
+        type: Directive,
+        args: [{
+                selector: 'img[LazyLoad]'
+            }]
+    }], function () { return [{ type: i0.ElementRef }]; }, { srcAttr: [{
+            type: HostBinding,
+            args: ['attr.src']
+        }], src: [{
+            type: Input
+        }] }); })();
 //# sourceMappingURL=lazy-load.directive.js.map

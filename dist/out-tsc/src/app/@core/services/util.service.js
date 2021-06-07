@@ -1,4 +1,3 @@
-import { __decorate, __param } from "tslib";
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -7,8 +6,10 @@ import { ajax } from 'rxjs/ajax';
 import { BehaviorSubject, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/common/http";
 const v2 = environment.v2.url;
-let UtilService = class UtilService {
+export class UtilService {
     constructor(
     // tslint:disable-next-line: ban-types
     platformId, localStorage, http) {
@@ -113,13 +114,19 @@ let UtilService = class UtilService {
     sweetalert(title, text, icon = 'success', position = 'top-end') {
         Swal.fire({ icon, title, text, position });
     }
-};
-UtilService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __param(0, Inject(PLATFORM_ID)),
-    __param(1, Inject(LOCAL_STORAGE))
-], UtilService);
-export { UtilService };
+}
+UtilService.ɵfac = function UtilService_Factory(t) { return new (t || UtilService)(i0.ɵɵinject(PLATFORM_ID), i0.ɵɵinject(LOCAL_STORAGE), i0.ɵɵinject(i1.HttpClient)); };
+UtilService.ɵprov = i0.ɵɵdefineInjectable({ token: UtilService, factory: UtilService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UtilService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: Object, decorators: [{
+                type: Inject,
+                args: [PLATFORM_ID]
+            }] }, { type: undefined, decorators: [{
+                type: Inject,
+                args: [LOCAL_STORAGE]
+            }] }, { type: i1.HttpClient }]; }, null); })();
 //# sourceMappingURL=util.service.js.map

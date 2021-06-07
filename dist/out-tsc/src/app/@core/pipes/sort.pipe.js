@@ -1,6 +1,6 @@
-import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
-let SortPipe = class SortPipe {
+import * as i0 from "@angular/core";
+export class SortPipe {
     transform(array, field) {
         if (!Array.isArray(array)) {
             return;
@@ -18,11 +18,13 @@ let SortPipe = class SortPipe {
         });
         return array;
     }
-};
-SortPipe = __decorate([
-    Pipe({
-        name: 'sort'
-    })
-], SortPipe);
-export { SortPipe };
+}
+SortPipe.ɵfac = function SortPipe_Factory(t) { return new (t || SortPipe)(); };
+SortPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "sort", type: SortPipe, pure: true });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(SortPipe, [{
+        type: Pipe,
+        args: [{
+                name: 'sort'
+            }]
+    }], null, null); })();
 //# sourceMappingURL=sort.pipe.js.map

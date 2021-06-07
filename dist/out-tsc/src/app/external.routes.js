@@ -2,6 +2,30 @@ import { RouterModule } from '@angular/router';
 import { RedirectGuard } from '@core/services/redirect.guard';
 const appRoute = [
     {
+        path: 'passeio-ciclistico',
+        canActivate: [RedirectGuard],
+        component: RedirectGuard,
+        data: {
+            externalUrl: 'https://www.condor.com.br/passeio-ciclistico/index.html',
+        },
+    },
+    {
+        path: 'corrente-esperanca',
+        canActivate: [RedirectGuard],
+        component: RedirectGuard,
+        data: {
+            externalUrl: 'https://www.condor.com.br/corrente-esperanca/index.html',
+        },
+    },
+    {
+        path: 'entreposto',
+        canActivate: [RedirectGuard],
+        component: RedirectGuard,
+        data: {
+            externalUrl: 'https://www.condor.com.br/entreposto/index.html',
+        },
+    },
+    {
         path: 'dia-das-maes',
         canActivate: [RedirectGuard],
         component: RedirectGuard,
@@ -199,6 +223,14 @@ const appRoute = [
         component: RedirectGuard,
         data: {
             externalUrl: 'https://www.condor.com.br/marilan/index.html',
+        },
+    },
+    {
+        path: 'dia-dos-namorados',
+        canActivate: [RedirectGuard],
+        component: RedirectGuard,
+        data: {
+            externalUrl: 'https://www.condor.com.br/dia-dos-namorados/index.html',
         },
     },
     {

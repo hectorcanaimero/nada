@@ -1,4 +1,3 @@
-import { __decorate } from "tslib";
 import { LgpdModule } from './@widgets/lgpd/lgpd.module';
 import { NgModule } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
@@ -23,9 +22,16 @@ import { FooterModule } from '@widgets/footer/footer.module';
 import { HeaderModule } from '@widgets/header/header.module';
 import { MobileModule } from '@widgets/mobile/mobile.module';
 import { environment } from '../environments/environment.prod';
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/router";
+import * as i2 from "angular-bootstrap-md";
+import * as i3 from "ngx-cookieconsent";
+import * as i4 from "@angular/platform-browser";
+import * as i5 from "@angular/service-worker";
+import * as i6 from "@ngx-translate/core";
 registerLocaleData(localePt);
 const cookieConfig = {
-    cookie: { domain: 'www.condor.com.br' },
+    cookie: { domain: 'condor.com.br' },
     position: "bottom",
     theme: "edgeless",
     palette: {
@@ -46,14 +52,14 @@ const cookieConfig = {
 export function HttpLoaderFactory(httpClient) {
     return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
-let AppModule = class AppModule {
-};
-AppModule = __decorate([
-    NgModule({
-        declarations: [
-            AppComponent
-        ],
-        imports: [
+export class AppModule {
+}
+AppModule.ɵmod = i0.ɵɵdefineNgModule({ type: AppModule, bootstrap: [AppComponent] });
+AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
+        // { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+        { provide: 'googleTagManagerId', useValue: 'GTM-T7FLP2C' },
+        RedirectGuard,
+    ], imports: [[
             APP_ROUTE,
             TopModule,
             MenuModule,
@@ -70,20 +76,59 @@ AppModule = __decorate([
             MDBBootstrapModule.forRoot(),
             NgcCookieConsentModule.forRoot(cookieConfig),
             BrowserModule.withServerTransition({ appId: 'serverApp' }),
-            ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+            ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, scope: './', registrationStrategy: 'registerImmediately' }),
             TranslateModule.forRoot({
                 loader: {
                     deps: [HttpClient], provide: TranslateLoader, useFactory: HttpLoaderFactory,
                 }
             }),
-        ],
-        providers: [
-            // { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
-            { provide: 'googleTagManagerId', useValue: 'GTM-T7FLP2C' },
-            RedirectGuard,
-        ],
-        bootstrap: [AppComponent]
-    })
-], AppModule);
-export { AppModule };
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(AppModule, { declarations: [AppComponent], imports: [i1.RouterModule, TopModule,
+        MenuModule,
+        LgpdModule,
+        CommonModule,
+        HeaderModule,
+        FooterModule,
+        MobileModule,
+        QuicklinkModule, i1.RouterModule, HttpClientModule,
+        NgtUniversalModule,
+        BrowserAnimationsModule, i2.MDBRootModule, i3.NgcCookieConsentModule, i4.BrowserModule, i5.ServiceWorkerModule, i6.TranslateModule] }); })();
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AppModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [
+                    AppComponent
+                ],
+                imports: [
+                    APP_ROUTE,
+                    TopModule,
+                    MenuModule,
+                    LgpdModule,
+                    CommonModule,
+                    HeaderModule,
+                    FooterModule,
+                    MobileModule,
+                    QuicklinkModule,
+                    EXTERNAL_ROUTES,
+                    HttpClientModule,
+                    NgtUniversalModule,
+                    BrowserAnimationsModule,
+                    MDBBootstrapModule.forRoot(),
+                    NgcCookieConsentModule.forRoot(cookieConfig),
+                    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+                    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, scope: './', registrationStrategy: 'registerImmediately' }),
+                    TranslateModule.forRoot({
+                        loader: {
+                            deps: [HttpClient], provide: TranslateLoader, useFactory: HttpLoaderFactory,
+                        }
+                    }),
+                ],
+                providers: [
+                    // { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+                    { provide: 'googleTagManagerId', useValue: 'GTM-T7FLP2C' },
+                    RedirectGuard,
+                ],
+                bootstrap: [AppComponent]
+            }]
+    }], null, null); })();
 //# sourceMappingURL=app.module.js.map

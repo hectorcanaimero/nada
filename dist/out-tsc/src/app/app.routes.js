@@ -1,8 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { QuicklinkStrategy } from 'ngx-quicklink';
 const app = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', loadChildren: () => import('./@pages/home/home.module').then(mod => mod.HomeModule) },
+    { path: '', loadChildren: () => import('./@pages/home/home.module').then(mod => mod.HomeModule) },
     { path: 'institucional/imprensa', loadChildren: () => import('./@pages/imprensa/imprensa.module').then(mod => mod.ImprensaModule) },
     { path: 'institucional', loadChildren: () => import('./@pages/news/news.module').then(mod => mod.NewsModule) },
     { path: 'tabloide-online', loadChildren: () => import('./@pages/tabloide/tabloide.module').then(mod => mod.TabloideModule) },
@@ -23,6 +22,7 @@ const app = [
     { path: 'trabalhe-conosco', redirectTo: 'fale-conosco/trabalhe-conosco' },
     { path: 'radar-de-ofertas', redirectTo: 'institucional/radar-de-ofertas', },
     { path: 'cartao-presente', redirectTo: 'para-sua-empresa/cartao-presente-condor' },
+    { path: 'mundo-saudavel', redirectTo: 'departamento/alimentos/setor/saudaveis' },
 ];
 export const APP_ROUTE = RouterModule.forRoot(app, { scrollPositionRestoration: 'enabled', preloadingStrategy: QuicklinkStrategy });
 //# sourceMappingURL=app.routes.js.map
