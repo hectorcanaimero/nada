@@ -356,6 +356,10 @@ body {
 
 
 // Swiper
+.swiper-pagination{
+  z-index: 10000000000 !important;
+  bottom: 0px !important;
+}
 .swiper-button-next, .swiper-button-prev {
   color: var(--color-red-secondary);
   &::after {

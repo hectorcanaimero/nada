@@ -7,7 +7,6 @@
     "target": "es2015",
     "declaration": false,
     "importHelpers": true,
-    "strictTemplates": true,
     "lib": [ "es2018", "dom"],
     "outDir": "./dist/out-tsc",
     "downlevelIteration": true,

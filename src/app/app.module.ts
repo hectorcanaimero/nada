@@ -73,11 +73,16 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MDBBootstrapModule.forRoot(),
     NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    ServiceWorkerModule.register('ngsw-worker.js',
-      { enabled: environment.production, scope: './', registrationStrategy: 'registerImmediately' }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      scope: './',
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
+    }),
     TranslateModule.forRoot({
       loader: {
-        deps: [HttpClient], provide: TranslateLoader, useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
       }
     }),
   ],

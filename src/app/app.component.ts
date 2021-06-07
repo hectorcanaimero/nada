@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.gtmService.pushTag({ event: 'page', pageName: item.url });
       }
     });
-    sw.checkForUpdates();
+    if (isPlatformBrowser(this.platformId)) sw.checkForUpdates();
   }
   ngOnInit(): void {
     this.dados();
