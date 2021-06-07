@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'condorV2.1',
+    name: 'condorV2.2',
     script: './dist/condor-v2/server/main.js',
     instances: 1,
     autorestart: true,
