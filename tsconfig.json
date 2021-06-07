@@ -11,6 +11,8 @@
     "outDir": "./dist/out-tsc",
     "downlevelIteration": true,
     "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types" ],
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "paths": {
       "@core/*": ["src/app/@core/*"],

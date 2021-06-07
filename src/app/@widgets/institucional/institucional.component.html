@@ -5,7 +5,7 @@
       <div class="col-12 col-sm-3 col-md-6 col-lg-3 mb-3" *ngFor="let item of items | sort: 'id'; trackBy: trackByFunction">
         <a [routerLink]="['institucional', item.slug]" class="text-muted b-06">
           <div class="view z-depth-3">
-            <img Lazy [src]="item.medium" class="w-100" [alt]="item.title">
+            <img width="300" height="150" Lazy [src]="item.medium" class="w-100" [alt]="item.title">
             <div class="mask flex-center rgba-black-light cursor">
               <h3 class="b-07 white-text text-center text-shadow">{{ item.title }}</h3>
             </div>

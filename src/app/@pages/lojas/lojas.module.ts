@@ -1,4 +1,3 @@
-import { SemDataModule } from './../../@sharing/sem-data/sem-data.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,6 +8,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { LojasComponent } from './lojas.component';
 import { LojaIdComponent } from './detail/loja-id.component';
+import { SemDataModule } from '@sharing/sem-data/sem-data.module';
 
 const app: Routes = [
   { path: '', component: LojasComponent },
