@@ -64,7 +64,7 @@ export class OfertasComponent implements OnInit {
   getOfertas = (code: any) => {
     let result: any = [];
     this.items$ = this.db.getOfertas$().pipe(
-      map((res) => {
+      map((res: Ofertas) => {
         if (this.type === 'slug') result = res?.filter((row => row.slug === code));
         else if (this.type === 'campanha') result = res?.filter((row => row.campanha === code));
         else if (this.type === 'departamento') result = res?.filter((row => row.departamento === code));

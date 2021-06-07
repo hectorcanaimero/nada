@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import SwiperCore, { EffectFade,   Navigation, Pagination, A11y, Lazy } from "swiper/core";
+import { Imagens } from '@core/interfaces/news';
 import { NewsService } from '@core/services/news.service';
 
+import SwiperCore, { EffectFade,   Navigation, Pagination, A11y, Lazy } from "swiper/core";
 SwiperCore.use([EffectFade, Navigation, Pagination, A11y, Lazy]);
 
 @Component({
@@ -13,7 +14,7 @@ SwiperCore.use([EffectFade, Navigation, Pagination, A11y, Lazy]);
 })
 export class CarouselComponent implements OnInit {
 
-  data$: Observable<any>;
+  data$: Observable<Carousel>;
 
   constructor(private news: NewsService) { }
 
@@ -27,4 +28,9 @@ export class CarouselComponent implements OnInit {
       })
     );
   }
+}
+
+export interface Carousel {
+  left: Imagens[];
+  right: Imagens[];
 }
