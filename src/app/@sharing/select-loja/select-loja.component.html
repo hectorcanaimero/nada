@@ -41,13 +41,13 @@
                 <div class="pb-2">
                     <select class="browser-default custom-select" (change)="getLojas($event)">
                         <option selected>Selecione a Cidade</option>
-                        <option [value]="r.id" *ngFor="let r of region | async">{{ r.name }}</option>
+                        <option [value]="r.id" *ngFor="let r of region | async; trackBy: trackBy">{{ r.name }}</option>
                     </select>
                 </div>
                 <div class="pb-2">
                     <select class="browser-default custom-select" [(ngModel)]="condor">
                         <option selected>Selecione o Condor</option>
-                        <option *ngFor="let l of lojas" [value]="l.id">{{ l.title1 }}</option>
+                        <option *ngFor="let l of lojas; trackBy: trackBy" [value]="l.id">{{ l.title1 }}</option>
                     </select>
                 </div>
                 <div class="text-center">

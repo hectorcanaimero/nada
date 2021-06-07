@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { tap, delay } from 'rxjs/operators';
+import { tap, delay, finalize } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
 import { NewsService } from '@core/services/news.service';
@@ -13,6 +13,7 @@ import { NewsService } from '@core/services/news.service';
 export class TabloideComponent implements OnInit, AfterViewInit {
 
   show: string;
+  isLoading: boolean = false;
   active: any = [];
   items: any = [];
 
@@ -22,13 +23,14 @@ export class TabloideComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.getSeo();
     this.items = this.news.Tabloides(100).pipe(
       tap((res) => {
         this.seo.dataLayerTracking({ event: 'clickTabloid', tabloidName: res[0].title });
         this.show = `<iframe class="embed-responsive-item" src="//e.issuu.com/embed.html#${res[0]['condor'].issuu[0]}" allowfullscreen ></iframe>`;
       }),
-      delay(1000)
+      finalize(() => this.isLoading = false)
     )
   }
 
@@ -65,4 +67,6 @@ export class TabloideComponent implements OnInit, AfterViewInit {
     });
     this.seo.addCanonical();
   }
+
+  trackBy = (index: number, item: any) => item[index]
 }

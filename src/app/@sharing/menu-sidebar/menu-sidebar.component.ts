@@ -59,6 +59,7 @@ export class MenuSidebarComponent implements OnInit {
   }
 
   toogleMenuOfertas = () => this.activeMenuOfertas = this.activeMenuOfertas === 'out' ? 'in' : 'out';
+  trackBy = (index: number, item: any) => item[index];
 
 
 }

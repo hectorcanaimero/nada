@@ -36,4 +36,5 @@ export class BannersComponent implements OnInit {
       })
     );
   }
+  trackBy = (index: number, item: any) => item.id;
 }

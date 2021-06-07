@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, finalize } from 'rxjs/operators';
 
 import { BlogService } from '@core/services/blog.service';
 import { Post } from '@core/interfaces/blog';
@@ -20,6 +20,8 @@ export class AllInComponent implements OnInit {
   totalItems: any = 0;
   currentPage: number = 1;
   itemsPerPage: number = 6;
+
+  isLoading: boolean = false;
 
   type: any = [];
   slug$: Observable<string>;
@@ -40,6 +42,7 @@ export class AllInComponent implements OnInit {
 
 
   private process = (type: string, slug: string, page=1) => {
+    this.isLoading = true;
     console.log(page);
     this.id = type;
     this.slug = slug;
@@ -58,7 +61,8 @@ export class AllInComponent implements OnInit {
       this.titulo = `Categoria: ${type.name}`;
       this.items$ = this.db.getPostsCategories(type.id, page,this.itemsPerPage).pipe(
         tap((res) => this.totalItems = res.headers.keys().map(key => res.headers.get(key))[4]),
-        map((res) => res.body)
+        map((res) => res.body),
+        finalize(() => this.isLoading = false)
       );
     });
   }
@@ -68,7 +72,8 @@ export class AllInComponent implements OnInit {
       this.titulo = `Etiqueta: ${type.name}`;
       this.items$ = this.db.getPostsTags(type.id, this.itemsPerPage).pipe(
         tap((res) => this.totalItems = res.headers.keys().map(key => res.headers.get(key))[4]),
-        map((res) => res.body)
+        map((res) => res.body),
+        finalize(() => this.isLoading = false)
       );
     });
   }
@@ -81,7 +86,8 @@ export class AllInComponent implements OnInit {
         this.titulo = `Resultado da busca por <b>"${ slug }"</b> (${this.totalItems})`;
       }
       ),
-      map((res) => res.body)
+      map((res) => res.body),
+      finalize(() => this.isLoading = false)
     );
   }
 
@@ -89,4 +95,6 @@ export class AllInComponent implements OnInit {
     this.currentPage = ev++;
     this.process(this.id, this.slug, this.currentPage);
   }
+
+  trackBy = (index: number, item: any) => item[index];
 }

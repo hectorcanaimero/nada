@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription, Observable } from 'rxjs';
-import { map, tap, delay } from 'rxjs/operators';
+import { map, tap, delay, finalize } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
 import { DataService } from '@core/services/data.service';
@@ -20,7 +20,7 @@ import { Campanha } from '@core/interfaces/news';
 export class CampanhaComponent implements OnInit {
 
   subscription: Subscription;
-
+  isLoading: boolean = false;
   p: number = 1;
   search: string = '';
   str: number;
@@ -30,7 +30,7 @@ export class CampanhaComponent implements OnInit {
 
   loja: any = [];
   menu: any = [];
-  items: any = [];
+  items$: Observable<any[]>;
   departamento: any = [];
 
   slug$: Observable<string>;
@@ -53,19 +53,23 @@ export class CampanhaComponent implements OnInit {
 
   getCampanha = (slug: string) => {
     this.campanha$ = this.news.Campanha(slug).pipe(
-      map((res) => res[0]), tap((res) => this.proccess(res)), delay(1000)
-    );
+      map((res) => res[0]), tap((res) => this.proccess(res)));
   }
 
   private proccess = (res: any) => {
+    this.isLoading  =false;
     this.setSeo(res);
     this.storageMap.watch('Loja').subscribe(({ loja }) => {
       if (res.code) {
         this.getMenuDepartamentoCampanha(loja, res.code);
-        this.items = this.db.OfertasLojaCampanha(loja, res.code, 60);
+        this.items$ = this.db.OfertasLojaCampanha(loja, res.code, 60).pipe(
+          finalize(() => this.isLoading = false)
+        );
       } else {
         this.getMenuDepartamentoSlug(loja, res.slugCampanha);
-        this.items = this.db.OfertasLojaSlug(loja, res.slugCampanha, 60);
+        this.items$ = this.db.OfertasLojaSlug(loja, res.slugCampanha, 60).pipe(
+          finalize(() => this.isLoading = false)
+        );
       }
     })
   }
@@ -93,4 +97,7 @@ export class CampanhaComponent implements OnInit {
     this.seo.addCanonical();
     this.seo.dataLayerPage(item.title);
   }
+
+
+  trackBy = (index: number, item: any) => item[index];
 }

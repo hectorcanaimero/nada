@@ -40,14 +40,14 @@
             <select class="browser-default custom-select" (change)="getLojas($event)" formControlName="cidade"
               id="cidade">
               <option selected>Selecione a Cidade</option>
-              <option [value]="r.id" *ngFor="let r of region">{{ r.name }}</option>
+              <option [value]="r.id" *ngFor="let r of region; trackBy: trackBy">{{ r.name }}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="loja">Loja</label>
             <select class="browser-default custom-select" formControlName="loja" id="loja">
               <option selected>Selecione o Condor</option>
-              <option [value]="l.title?.rendered" *ngFor="let l of allLojas">{{ l.title?.rendered }}</option>
+              <option [value]="l.title?.rendered" *ngFor="let l of allLojas; trackBy: trackBy">{{ l.title?.rendered }}</option>
             </select>
           </div>
           <h5 class="mt-5 mb-4 border-bottom pb-1 b-07">

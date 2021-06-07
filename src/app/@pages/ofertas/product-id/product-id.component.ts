@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StorageMap } from '@ngx-pwa/local-storage';
 
 import { Observable } from 'rxjs';
-import { delay, map, tap } from 'rxjs/operators';
+import { delay, map, tap, finalize } from 'rxjs/operators';
 
 import { Ofertas } from '@core/interfaces/ofertas';
 import { SeoService } from '@core/services/seo.service';
@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 
 export class ProductIdComponent implements OnInit {
-
+  isLoading: boolean = false;
   image: string;
   code: any = [];
   product: any = [];
@@ -51,10 +51,12 @@ export class ProductIdComponent implements OnInit {
 
 
   getProduct = (host: number) => {
+    this.isLoading = true;
     this.storageMap.watch('Loja').subscribe(({ loja, nome }) => {
       this.loja = nome;
       this.items$ = this.db.ProdutoLoja(loja, host).pipe(
-        tap((res) => this.getSeo(res)), delay(100)
+        tap((res) => this.getSeo(res)),
+        finalize(() => this.isLoading = false)
       );
     })
   }

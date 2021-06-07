@@ -99,4 +99,6 @@ export class MobileComponent implements OnInit {
       return this.router.navigate(['blog', 'search', this.util.toSlug(event.target.value)]);
     }
   }
+
+  trackBy = (index: number, item: any) => item[index];
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tap, map, delay } from 'rxjs/operators';
+import { tap, map, delay, finalize } from 'rxjs/operators';
 import { SeoService } from '@core/services/seo.service';
 import { NewsService } from '@core/services/news.service';
 
@@ -13,6 +13,7 @@ import { NewsService } from '@core/services/news.service';
 export class DetailComponent implements OnInit {
 
   items$: any = [];
+  isLoading: boolean = false;
   slug$: Observable<string>;
 
 
@@ -28,9 +29,10 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {}
 
   getPost = (slug: string) => {
+    this.isLoading = true;
     this.items$ = this.news.PostSlug(slug).pipe(
       tap((res) => this.setSeo(res)),
-      delay(1000)
+      finalize(() => this.isLoading = false)
     );
   }
 

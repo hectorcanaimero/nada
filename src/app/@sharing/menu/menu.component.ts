@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class MenuComponent {
 
   @Input() items: any = [];
+  trackBy = (index: number, item: any) => item[index];
 
 }

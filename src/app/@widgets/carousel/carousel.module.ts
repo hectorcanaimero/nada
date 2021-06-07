@@ -1,4 +1,3 @@
-import { environment } from './../../../environments/environment.prod';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from './carousel.component';
@@ -9,6 +8,7 @@ import { ResponsiveModule } from 'ngx-responsive';
 import { OfertasModule } from '../ofertas/ofertas.module';
 import { SwipeModule } from '@sharing/swipe/swipe.module';
 
+import { environment } from './../../../environments/environment.prod';
 
 @NgModule({
   declarations: [CarouselComponent],

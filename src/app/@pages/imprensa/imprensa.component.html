@@ -1,10 +1,10 @@
-<section id="imprensa" class="py-4" *ngIf="(items$ | async) as items; else semData">
+<section id="imprensa" class="py-4" *ngIf="(items$ | async) as items">
   <div class="container">
     <h2 class="h1-responsive font-weight-bold text-left border-bottom my-5">Notícias</h2>
     <div class="row ios">
       <div class="col-xl-9">
         <div class="row">
-          <div class="col-md-6 mb-4" *ngFor=" let item of items | paginate: { itemsPerPage: ip, currentPage: p, totalItems: header } ">
+          <div class="col-md-6 mb-4" *ngFor=" let item of items | paginate: { itemsPerPage: ip, currentPage: p, totalItems: header }; trackBy: trackBy ">
             <div class="cards">
               <a [routerLink]="['/institucional/imprensa', item.slug]">
                 <div class="image" [ngStyle]="{'background': 'url('+ item.medium +') no-repeat center center'}">
@@ -29,6 +29,4 @@
     </div>
   </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

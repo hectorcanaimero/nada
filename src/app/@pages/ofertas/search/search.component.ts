@@ -96,5 +96,5 @@ export class SearchComponent implements OnInit {
       );
     });
   }
-
+  trackBy = (index: number, item: any) => item[index];
 }

@@ -49,6 +49,7 @@ export class OfertasComponent implements OnInit {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+    pagination: { el: '.swiper-pagination', clickable: true },
   }
 
   constructor(
@@ -69,7 +70,9 @@ export class OfertasComponent implements OnInit {
         else if (this.type === 'departamento') result = res?.filter((row => row.departamento === code));
           return result?.slice(0,15);
       }),
-      tap((res) => this.total = res.length)
+      tap((res) => this.total = res?.length)
     );
   }
+
+  trackBy = (index: number, item: any) => item[index];
 }

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Subscription, Observable } from 'rxjs';
-import { delay, map, tap, debounceTime } from 'rxjs/operators';
+import { map, tap, finalize } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
 import { UtilService } from '@core/services/util.service';
@@ -19,7 +19,7 @@ import { Ofertas } from '@core/interfaces/ofertas';
 export class SectorComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-
+  isLoading: boolean = false;
   p: number = 1;
   search: string = '';
 
@@ -59,9 +59,11 @@ export class SectorComponent implements OnInit, OnDestroy {
   }
 
   getSector = (slug: string) => {
+    this.isLoading = true;
     this.url = { nome: this.router.url.split('/')[2], link: this.util.toSlug(this.router.url.split('/')[2]) };
     this.menuSector$ = this.db.getMenuOfertas(`menuSetorSlug?slug=${slug}`).pipe(
-      map((res) => res[0]), tap(({ dep_id, codigo }) => this.watchStorage(dep_id, codigo), debounceTime(1000))
+      map((res) => res[0]), tap(({ dep_id, codigo }) => this.watchStorage(dep_id, codigo),
+      finalize(() => this.isLoading = false))
     );
   }
 
@@ -87,4 +89,6 @@ export class SectorComponent implements OnInit, OnDestroy {
     this.seo.updateTagName(`${title} | Rede Condor`);
     this.seo.dataLayerPage(title);
   }
+  trackBy = (index: number, item: any) => item[index];
+
 }

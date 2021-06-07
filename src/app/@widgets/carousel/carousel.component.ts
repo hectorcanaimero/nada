@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import SwiperCore, { EffectFade,   Navigation, Pagination, A11y, Lazy } from "swiper/core";
 import { NewsService } from '@core/services/news.service';
+
+SwiperCore.use([EffectFade, Navigation, Pagination, A11y, Lazy]);
 
 @Component({
   selector: 'app-carousel',

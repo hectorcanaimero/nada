@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, finalize } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
 import { BlogService } from '@core/services/blog.service';
@@ -13,6 +13,7 @@ import { BlogService } from '@core/services/blog.service';
 })
 export class BlogComponent implements OnInit {
 
+  isLoading: boolean = false;
   items$: Observable<any>;
 
   constructor(
@@ -22,7 +23,8 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSeo();
-    this.items$ = this.db.getPosts(1, 6).pipe(delay(1000));
+    this.isLoading = true;
+    this.items$ = this.db.getPosts(1, 6).pipe(finalize(() => this.isLoading = false));
   }
 
   private getSeo = () => {

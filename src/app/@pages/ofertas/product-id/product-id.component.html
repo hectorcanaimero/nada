@@ -1,4 +1,4 @@
-<section id="DetalheProduto" class="py-2 py-md-5" *ngIf="items$ | async as code; else semData">
+<section id="DetalheProduto" class="py-2 py-md-5" *ngIf="items$ | async as code;">
   <div class="container">
     <mdb-breadcrumb class="mb-5">
       <mdb-breadcrumb-item class="bread blue-text text-uppercase"> {{code.produtos.dsc_departamento}}</mdb-breadcrumb-item>
@@ -185,7 +185,4 @@
     </div>
   </div>
 </section>
-
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

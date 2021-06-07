@@ -34,4 +34,6 @@ export class BlogSidebarComponent implements OnInit {
       return this.router.navigate(['blog', 'search', this.util.toSlug(ev.target.value)]);
     }
   }
+
+  trackBy = (index: number, item: any) => item[index];
 }

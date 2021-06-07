@@ -1,4 +1,4 @@
-<section id="Post" class="py-5" *ngIf="(items$ | async) as items; else semData">
+<section id="Post" class="py-5" *ngIf="(items$ | async) as items">
   <div class="container">
     <p class="date">
       <i class="far fa-calendar-alt mr-1"></i>
@@ -19,6 +19,4 @@
     </div>
   </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

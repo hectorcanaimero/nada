@@ -3,7 +3,7 @@
 </div>
 
 <div class="list" *ngIf="type ==='list'; else media">
-  <div class="line" *ngFor="let item of items$ | async" (click)="onBlogId(item.slug)">
+  <div class="line" *ngFor="let item of items$ | async; trackBy: trackBy" (click)="onBlogId(item.slug)">
     <div class="image">
       <img [src]="item.thumbnail" class="w-100" [alt]="item.titulo">
     </div>
@@ -21,7 +21,7 @@
   <div class="media">
     <div class="row">
       <div class="col-md-7">
-        <div class="cards" *ngFor="let item of items$ | async | slice: 0 : 1" (click)="onBlogId(item.slug)">
+        <div class="cards" *ngFor="let item of items$ | async | slice: 0 : 1; trackBy: trackBy" (click)="onBlogId(item.slug)">
           <div class="image">
             <img [src]="item.large" class="w-100" [alt]="item.titulo">
           </div>
@@ -36,7 +36,7 @@
       </div>
       <div class="col-md-5">
         <div class="list">
-          <div class="line" *ngFor="let item of items$ | async | slice: 1 : 6" (click)="onBlogId(item.slug)">
+          <div class="line" *ngFor="let item of items$ | async | slice: 1 : 6; trackBy: trackBy" (click)="onBlogId(item.slug)">
             <div class="image">
               <img [src]="item.thumbnail" class="w-100" alt="">
             </div>

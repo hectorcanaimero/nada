@@ -88,4 +88,6 @@ export class SacComponent implements OnInit, OnDestroy {
     this.seo.addTagName('Atendimento ao cliente');
     this.seo.addCanonical();
   }
+  trackBy = (index: number, item: any) => item[index];
+
 }

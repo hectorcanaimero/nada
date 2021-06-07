@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { SeoService } from '@core/services/seo.service';
 import { NewsService } from '@core/services/news.service';
-import { delay, debounceTime } from 'rxjs/operators';
+import { delay, debounceTime, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lojas',
@@ -15,6 +15,7 @@ import { delay, debounceTime } from 'rxjs/operators';
 export class LojasComponent implements OnInit {
 
   p = 1;
+  isLoading: boolean = false;
   items$: Observable<any>;
   region$: Observable<any[]>;
 
@@ -26,7 +27,8 @@ export class LojasComponent implements OnInit {
 
   ngOnInit() {
     this.setSeo();
-    this.items$ = this.news.Lojas(100).pipe(debounceTime(1000));
+    this.isLoading = true;
+    this.items$ = this.news.Lojas(100).pipe(finalize(() => this.isLoading = false));
     this.region$ = this.news.LojaRegion();
   }
 
@@ -51,4 +53,5 @@ export class LojasComponent implements OnInit {
     if (value !== 'All') this.router.navigate(['lojas', value])
   }
 
+  trackBy = (index: number, item: any) => item[index];
 }

@@ -1,4 +1,4 @@
-<section id="departamento" class="py-3 py-md-5" *ngIf="(menuDepartamento$ | async) as departamento; else semData">
+<section id="departamento" class="py-3 py-md-5" *ngIf="(menuDepartamento$ | async) as departamento">
   <div class="container">
     <mdb-breadcrumb class="mb-5">
       <mdb-breadcrumb-item class="blue-text text-uppercase d-none d-md-block"
@@ -44,6 +44,4 @@
     </div>
   </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

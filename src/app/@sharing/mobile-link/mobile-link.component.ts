@@ -28,4 +28,6 @@ export class MobileLinkComponent {
     this.router.navigateByUrl(slug);
     this.toogle.emit('out');
   }
+  trackBy = (index: number, item: any) => item[index];
+
 }

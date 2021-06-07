@@ -3,7 +3,8 @@
     <h2>{{ titulo }}</h2>
   </div>
   <div class="row no-gutters">
-    <div [ngClass]="column" *ngFor="let item of items |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItem }">
+    <div [ngClass]="column"
+      *ngFor="let item of items |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItem }; trackBy: trackBy">
       <div class="cards px-1" (click)="onBlogId(item.slug)">
         <div class="image">
           <img LazyLoad [src]="item.large" class="w-100" [alt]="item.titulo">

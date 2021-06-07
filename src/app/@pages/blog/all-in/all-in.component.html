@@ -1,10 +1,10 @@
-<section id="Blog" *ngIf="items$ | async as items; else semData">
+<section id="Blog" *ngIf="items$ | async as items;">
     <div id="Conteudo" class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <h1 *ngIf="titulo" class="message" [innerHtml]="titulo"></h1>
                 <div class="row no-gutters">
-                    <div class="col-md-6 col-lg-4" *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
+                    <div class="col-md-6 col-lg-4" *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }; trackBy: trackBy">
                         <div class="item m-2 rounded">
                             <a [routerLink]="['/blog', item.slug]">
                                 <img LazyLoad [src]="item.medium" class="w-100 rounded-top" alt="">
@@ -39,6 +39,4 @@
         </div>
     </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

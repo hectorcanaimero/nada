@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map, tap, delay } from 'rxjs/operators';
+import { map, tap, delay, finalize } from 'rxjs/operators';
 
 import { Page } from '@core/interfaces/news';
 import { SeoService } from '@core/services/seo.service';
@@ -17,6 +17,7 @@ import { NewsService } from '@core/services/news.service';
 
 export class NewsComponent implements OnInit {
 
+  isLoading: boolean = false;
   items$: Observable<Page>;
   slug$: Observable<string>;
 
@@ -31,12 +32,15 @@ export class NewsComponent implements OnInit {
     this.slug$.subscribe(data => this.getPost(`${data}`));
   }
 
-  private getPost = (id: string) => this.items$ = this.news.PageSlug(id).pipe(
-    tap((res) => {
-      this.seo.addCanonical();
-      this.seo.updateTags( { title: res.title, image: res.medium, description: res.content } );
-      this.seo.dataLayerPage(res.title);
-    }),
-    delay(1000)
-  );
+  private getPost = (id: string) => {
+    this.isLoading = true;
+    this.items$ = this.news.PageSlug(id).pipe(
+      tap((res) => {
+        this.seo.addCanonical();
+        this.seo.updateTags( { title: res.title, image: res.medium, description: res.content } );
+        this.seo.dataLayerPage(res.title);
+      }),
+      finalize(() => this.isLoading = false)
+    );
+  }
 }

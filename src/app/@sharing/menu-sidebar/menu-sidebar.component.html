@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="submenu" [@slideDownInOut]="activeMenuOfertas">
-      <div class="sub-menu-items" *ngFor="let menu of menuOfertas$ | async" (click)="onLink('departamento/' + menu.slug)">
+      <div class="sub-menu-items" *ngFor="let menu of menuOfertas$ | async; trackBy: trackBy" (click)="onLink('departamento/' + menu.slug)">
         <p class="item" mdbWavesEffect  routerLinkActive="active">
           <i class="fas fa-shopping-basket mr-1"></i>  {{ menu.nome }}
         </p>
@@ -25,13 +25,13 @@
         </div>
       </div>
     </div>
-    <div class="items" *ngFor="let campanha of items.campanha" (click)="onLink(campanha.slug)">
+    <div class="items" *ngFor="let campanha of items.campanha; trackBy: trackBy" (click)="onLink(campanha.slug)">
       <p class="item"> {{ campanha.nome }} </p>
       <div class="icon">
         <i class="fas fa-angle-right float-right"></i>
       </div>
     </div>
-    <div *ngFor="let center of items.center">
+    <div *ngFor="let center of items.center; trackBy: trackBy">
       <a [href]="center.url" target="_blank" (click)="onLink2()">
         <div class="items" *ngIf="center.external; else Internal">
           <p class="item"> {{ center.name }} </p>
@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="space">
-      <div *ngFor="let header of items.header">
+      <div *ngFor="let header of items.header; trackBy: trackBy">
         <a [href]="header.url" target="_blank" (click)="activeSidebar = 'out'">
           <div class="items" *ngIf="header.external; else Internal">
             <img [src]="header.iconmobile" [alt]="header.name">

@@ -1,4 +1,4 @@
-<section id="blog" class="my-4" *ngIf="items$ | async; else semData">
+<section id="blog" class="my-4" *ngIf="items$ | async">
   <div class="container">
     <div class="mb-5">
       <app-blog-slider></app-blog-slider>
@@ -15,6 +15,4 @@
     </div>
   </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

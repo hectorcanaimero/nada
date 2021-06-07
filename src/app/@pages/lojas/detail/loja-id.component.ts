@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map, tap, delay } from 'rxjs/operators';
+import { map, tap, delay, finalize } from 'rxjs/operators';
 
 import { Lojas } from '@core/interfaces/news';
 import { SeoService } from '@core/services/seo.service';
@@ -19,6 +19,7 @@ export class LojaIdComponent implements OnInit {
   items$: Observable<Lojas>;
   region$: Observable<any[]>;
   lojas$: Observable<any>;
+  isLoading: boolean = false;
 
   setores: any [];
   servicos: any = [];
@@ -37,14 +38,11 @@ export class LojaIdComponent implements OnInit {
   }
 
   getItems = (slug: any) => {
+    this.isLoading = true;
     this.items$ = this.news.LojaSlug(slug).pipe(
-      tap((res) => {
-        this.setSeo(res);
-        this.splitTypes(res)
-      }),
-      map((res) => res),
-      delay(1000),
-      );
+      tap((res) => { this.setSeo(res); this.splitTypes(res) }),
+      map((res) => res), finalize(() => this.isLoading = false)
+    );
   }
 
 
@@ -80,4 +78,6 @@ export class LojaIdComponent implements OnInit {
       image: items.medium
     } );
   }
+
+  trackBy = (index: number, item: any) => item[index];
 }

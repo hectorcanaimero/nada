@@ -36,4 +36,7 @@ export class BlogListComponent implements OnInit {
   }
 
   onBlogId = (slug: string) => this.router.navigateByUrl(`/blog/${slug}`);
+
+  trackBy = (index: number, item: any) => item[index];
+
 }

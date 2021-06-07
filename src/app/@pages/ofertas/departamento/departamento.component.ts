@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
 
-import { map, tap, delay } from 'rxjs/operators';
+import { map, tap, delay, finalize } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
 
 import { DataService } from '@core/services/data.service';
@@ -25,7 +25,7 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
 
   p: number = 1;
   search: string = '';
-
+  isLoading: boolean = false;
   viewDepart: boolean = true;
   viewSector: string = 'out';
   init: boolean = false;
@@ -73,9 +73,10 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
   }
 
   getData = (codigo: number) => {
+    this.isLoading = true;
     this.storageMap.watch('Loja').subscribe(({ loja }) => {
       this.menuSector$ = this.db.getCollection(`/Menus/MenuSectorOfertasLojaDepartamento?loja=${loja}&departamento=${codigo}`);
-      this.items$ = this.db.OfertasLojaDepartamento(loja, codigo);
+      this.items$ = this.db.OfertasLojaDepartamento(loja, codigo).pipe(finalize(() => this.isLoading = false));
     })
   }
 

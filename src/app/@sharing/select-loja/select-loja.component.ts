@@ -70,5 +70,6 @@ export class SelectLojaComponent implements OnInit, AfterViewInit {
   }
 
   close = () => this.frame.hide();
+  trackBy = (index: number, item: any) => item[index];
 
 }

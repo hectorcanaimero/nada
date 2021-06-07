@@ -1,4 +1,4 @@
-<section id="departamento" class="py-3 py-md-5" *ngIf="(campanha$ | async) as campanha; else semData">
+<section id="departamento" class="py-3 py-md-5" *ngIf="(campanha$ | async) as campanha">
     <div class="container">
         <div class="d-lg-none">
             <img *ngIf="campanha['full']" [src]="campanha['full']" alt="{{ campanha['title'] }}" class="w-100 mb-2">
@@ -12,7 +12,7 @@
               </div>
               <div class="row mt-3">
                   <div class="col-6 col-md-4 col-lg-3 mb-4"
-                      *ngFor="let a of items | async | paginate: { itemsPerPage: 12, currentPage: p }">
+                      *ngFor="let a of items$ | async | paginate: { itemsPerPage: 12, currentPage: p }; trackBy: trackBy">
                       <app-product [code]="a"></app-product>
                   </div>
               </div>
@@ -25,9 +25,4 @@
         </div>
     </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
-
-
-
+<app-sem-data *ngIf="isLoading"></app-sem-data>

@@ -1,4 +1,4 @@
-<section id="sector" class="py-5" *ngIf="(menuSector$ | async) as path; else semData">
+<section id="sector" class="py-5" *ngIf="(menuSector$ | async) as path">
   <div class="container">
     <mdb-breadcrumb class="mb-5">
       <mdb-breadcrumb-item class="blue-text text-uppercase" [routerLink]="['/departamento', url.link]">
@@ -28,7 +28,7 @@
           <input type="text" class="form-control" placeholder="Procure produtos deste setor" (change)="busca($event)">
           <div class="row mt-3">
             <div class="col-6 col-md-4 col-lg-4 col-xl-4 mb-3"
-              *ngFor="let item of items$ | async | filtro: search:'dsc_produto'  | paginate: { itemsPerPage: 6, currentPage: p }; let i = index">
+              *ngFor="let item of items$ | async | filtro: search:'dsc_produto'  | paginate: { itemsPerPage: 6, currentPage: p }; let i = index; trackBy: trackBy">
               <app-product [code]="item"></app-product>
             </div>
           </div>
@@ -41,6 +41,4 @@
     </div>
   </div>
 </section>
-<ng-template #semData>
-  <app-sem-data></app-sem-data>
-</ng-template>
+<app-sem-data *ngIf="isLoading"></app-sem-data>

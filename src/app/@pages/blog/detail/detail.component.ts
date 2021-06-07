@@ -2,7 +2,7 @@ import { BlogService } from '@core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, finalize } from 'rxjs/operators';
 import { SeoService } from '@core/services/seo.service';
 import { Post } from '@core/interfaces/blog';
 
@@ -14,6 +14,7 @@ import { Post } from '@core/interfaces/blog';
 })
 export class DetailComponent implements OnInit {
 
+  isLoading: boolean = false;
   slug$: Observable<string>;
   items$: Observable<Post>;
 
@@ -29,7 +30,9 @@ export class DetailComponent implements OnInit {
   }
 
   getPost = (slug: string) => {
-    this.items$ = this.db.getPostSlug(slug).pipe(delay(1000));
+    this.isLoading = true;
+    this.items$ = this.db.getPostSlug(slug).pipe(
+      finalize(() => this.isLoading = false));
   }
 
   getSeo = (item: any) => {

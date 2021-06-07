@@ -9,4 +9,5 @@ export class SocialComponent  {
 
   @Input() items: any = [];
 
+  trackBy = (index: number, item: any) => item[index];
 }

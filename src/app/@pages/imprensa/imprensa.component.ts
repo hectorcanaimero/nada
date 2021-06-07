@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap, delay } from 'rxjs/operators';
+import { map, tap, delay, finalize } from 'rxjs/operators';
 
 import { SeoService } from '@core/services/seo.service';
 import { NewsService } from '@core/services/news.service';
@@ -15,6 +15,7 @@ export class ImprensaComponent implements OnInit {
 
   p: number = 1;
   ip: number = 6;
+  isLoading: boolean = false;
   public header: any;
   items$: Observable<any>;
 
@@ -30,10 +31,11 @@ export class ImprensaComponent implements OnInit {
   }
 
   getPost = (page: number) => {
+    this.isLoading = true;
     this.items$ = this.news.Posts(page, this.ip).pipe(
       tap((res) => this.header = res?.headers.keys().map(key => res.headers.get(key))[4]),
       map((res) => res.body),
-      delay(1000),
+      finalize(() => this.isLoading = false)
     );
   }
 
@@ -41,4 +43,6 @@ export class ImprensaComponent implements OnInit {
     this.p = ev;
     this.items$ = this.news.Posts(this.p, this.ip).pipe(map((res) => res.body));
   }
+
+  trackBy = (index: number, item: any) => item[index];
 }
