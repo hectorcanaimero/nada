@@ -1,7 +1,7 @@
 <section *ngIf="(items$ | async) as items">
   <div class="container" *ngIf="total > 0">
     <app-titulo [titulo]="title" [icon]="icon" [link]="link"></app-titulo>
-    <swiper [lazy]="false" [config]="options">
+    <swiper [lazy]="true" [config]="options">
     <ng-template swiperSlide *ngFor="let item of items; let i = index; trackBy: trackBy">
       <app-product [code]="item" [loja]="loja"></app-product>
     </ng-template>
