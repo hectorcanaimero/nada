@@ -18,11 +18,11 @@ export const environment = {
   },
   responsive: {
     breakPoints: {
-      xs: {max: 600},
-      sm: {min: 601, max: 959},
-      md: {min: 960, max: 1279},
-      lg: {min: 1280, max: 1919},
-      xl: {min: 1920}
+      xs: {max: 359},
+      sm: {min: 360, max: 450},
+      md: {min: 451, max: 769},
+      lg: {min: 770, max: 1024},
+      xl: {min: 1025}
     },
     debounceTime: 100
   },

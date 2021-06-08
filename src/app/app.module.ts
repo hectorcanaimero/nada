@@ -31,6 +31,7 @@ import { FooterModule } from '@widgets/footer/footer.module';
 import { HeaderModule } from '@widgets/header/header.module';
 import { MobileModule } from '@widgets/mobile/mobile.module';
 import { environment } from '../environments/environment.prod';
+import { ResponsiveModule } from 'ngx-responsive';
 registerLocaleData(localePt);
 
 const cookieConfig: NgcCookieConsentConfig = {
@@ -67,6 +68,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     NgcCookieConsentModule.forRoot(cookieConfig),
+    ResponsiveModule.forRoot(environment.responsive),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       scope: './',

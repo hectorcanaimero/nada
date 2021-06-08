@@ -1,8 +1,8 @@
 <main *ngIf="(data$ | async) as data">
-  <app-mobile [items]="data[0].data" [condor]="data[4].data"></app-mobile>
-  <app-top [items]="data[0].data" [json]="data[4].data"></app-top>
-  <app-header [items]="data[2].data"></app-header>
-  <app-menu [json]="data[0].data"></app-menu>
+  <app-mobile *showItBootstrap="['xs', 'sm', 'md']" [items]="data[0].data" [condor]="data[4].data"></app-mobile>
+  <app-top *showItBootstrap="['xl', 'lg']" [items]="data[0].data" [json]="data[4].data"></app-top>
+  <app-header *showItBootstrap="['xl', 'lg']" [items]="data[2].data"></app-header>
+  <app-menu *showItBootstrap="['xl', 'lg']" [json]="data[0].data"></app-menu>
   <div class="type">
     <router-outlet (activate)="onActivate($event)"></router-outlet>
   </div>
