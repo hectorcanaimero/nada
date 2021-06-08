@@ -81,3 +81,4 @@ export class LojaIdComponent implements OnInit {
 
   trackBy = (index: number, item: any) => item[index];
 }
+

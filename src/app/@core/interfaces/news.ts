@@ -11,6 +11,7 @@ export interface Imagens {
   thumbnail?: string;
   medium?: string;
   full?: string;
+  webp?: string;
 }
 
 export interface Page {

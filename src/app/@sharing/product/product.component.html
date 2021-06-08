@@ -4,7 +4,10 @@
     <div class="kit" *ngIf="code.kit"> <p>KIT</p> </div>
   </div>
   <div class="images">
-    <img appProduct [src]="code.host" [alt]="code.produtos.dsc_produto" />
+    <picture>
+      <source webpProduct [src]="code.host" type="image/webp">
+      <img appProduct [src]="code.host" [alt]="code.produtos.dsc_produto" width="500" height="500" />
+    </picture>
     <div class="promotion">
       <img Lazy *ngIf="code.preco_clube" src="./assets/images/clube.png"
         alt="Tag Clube Condor" class="selo_clube" width="500" height="500">

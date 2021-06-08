@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { debounceTime, map, tap, finalize } from 'rxjs/operators';
+import { map, tap, finalize } from 'rxjs/operators';
 import { NewsService } from '@core/services/news.service';
 
 @Component({
@@ -26,15 +26,15 @@ export class BannersComponent implements OnInit {
     this.items = this.news.getBanners$().pipe(
       map((res) => {
         return {
-          left:   res.filter((rows) => rows.position === 'middle-left'),
-          center: res.filter((rows) => rows.position === 'middle-center'),
-          right:  res.filter((rows) => rows.position === 'middle-right')
+          left:   res?.filter((rows) => rows.position === 'middle-left'),
+          center: res?.filter((rows) => rows.position === 'middle-center'),
+          right:  res?.filter((rows) => rows.position === 'middle-right')
         }
       }),
       tap((res) => {
-        this.mobile.push(res.left[0]);
-        this.mobile.push(res.center[0]);
-        this.mobile.push(res.right[0]);
+        this.mobile?.push(res.left[0]);
+        this.mobile?.push(res.center[0]);
+        this.mobile?.push(res.right[0]);
       }),
       finalize(() => this.isLoading = false)
     );

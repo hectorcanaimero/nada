@@ -74,7 +74,6 @@ export class OfertasComponent implements OnInit {
       }),
       tap((res) => this.total = res?.length)
     );
-    this.items$.subscribe((res) => console.log(res));
   }
 
   trackBy = (index: number, item: any) => item.host;
