@@ -30,16 +30,13 @@
         <div class="mobile">
           <div class="row mt-3">
             <img src="./assets/images/banner_campanha.jpg" onerror="this.style.display='none'" class="img-fluid mb-4"/>
-            <div class="col-6 col-md-4 mb-3 mb-xl-4" *ngFor="let item of items$ | async | filtro: search:'dsc_produto'  | paginate: { itemsPerPage: 12, currentPage: p }; trackBy: trackById">
-              <app-product [code]="item"></app-product>
-            </div>
+              <div class="col-6 col-md-4 mb-3 mb-xl-4"
+                *ngFor="let item of items$ | async | filtro: search:'dsc_produto'">
+                <app-product [code]="item"></app-product>
+              </div>
           </div>
         </div>
-        <div class="mt-5">
-          <pagination-controls class="animated fade text-center mt-5 border-top pt-1"
-            (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true">
-          </pagination-controls>
-        </div>
+
       </div>
     </div>
   </div>

@@ -62,8 +62,7 @@ export class SectorComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.url = { nome: this.router.url.split('/')[2], link: this.util.toSlug(this.router.url.split('/')[2]) };
     this.menuSector$ = this.db.getMenuOfertas(`menuSetorSlug?slug=${slug}`).pipe(
-      map((res) => res[0]), tap(({ dep_id, codigo }) => this.watchStorage(dep_id, codigo),
-      finalize(() => this.isLoading = false))
+      map((res) => res[0]), tap(({ dep_id, codigo }) => this.watchStorage(dep_id, codigo))
     );
   }
 
@@ -72,7 +71,8 @@ export class SectorComponent implements OnInit, OnDestroy {
       this.getMenuDepartamento(loja);
       this.sector$ = this.db.getCollection(`/Menus/MenuSectorOfertasLojaDepartamento?loja=${loja}&departamento=${depId}`);
       this.items$ = this.db.OfertasLojaDepartamentoSetor(loja, depId, codigo).pipe(
-        map((data) => data.filter((row) => row.produtos))
+        map((data) => data.filter((row) => row.produtos)),
+        finalize(() => this.isLoading = false)
       );
     })
   }

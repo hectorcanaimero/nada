@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnChanges {
 
   @Input() code: any = [];
   @Input() loja: any = [];
@@ -30,14 +30,16 @@ export class ProductComponent implements OnInit {
     private storageMap: StorageMap
   ) { }
 
-  ngOnInit() {
-    this.webp = `${ environment.v1.url }/Containers/webp/download/${this.code.host}.webp`;
-    this.webp = `${ environment.v1.url }/Containers/produtos/download/${this.code.host}.jpg`;
-    this.product = this.code.produtos;
-    this.storageMap.watch('Loja').subscribe((res) => {
-      if (res) this.loja = res;
-      else this.loja = { loja: 0, slug: '', nome: '' };
-    });
+  // ngOnInit() {
+  //   this.storageMap.watch('Loja').subscribe((res) => {
+  //     if (res) this.loja = res;
+  //     else this.loja = { loja: 0, slug: '', nome: '' };
+  //   });
+  // }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    this.code = changes.code.currentValue;
   }
 
   goToProduct =() => {

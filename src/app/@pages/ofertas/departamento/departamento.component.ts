@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { StorageMap } from '@ngx-pwa/local-storage';
-
 import { map, tap, delay, finalize } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
 
@@ -21,9 +20,13 @@ import { slideDownInOut } from '@core/animations/slide';
 })
 export class DepartamentoComponent implements OnInit, OnDestroy {
 
+
   subscription: Subscription;
 
   p: number = 1;
+  itemsPerPage: number = 12;
+  currentPage: number = 1;
+  totalItem: number = 0;
   search: string = '';
   isLoading: boolean = false;
   viewDepart: boolean = true;
@@ -63,7 +66,6 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
     this.menuDepartamento$ = this.db.getMenuOfertas(`menuDepartamentoSlug?slug=${slug}`).pipe(
       map((res) => res[0]),
       tap(({ nome, codigo }) => this.proccess(nome, codigo)),
-      delay(1000)
     )
   }
 
@@ -76,7 +78,9 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.storageMap.watch('Loja').subscribe(({ loja }) => {
       this.menuSector$ = this.db.getCollection(`/Menus/MenuSectorOfertasLojaDepartamento?loja=${loja}&departamento=${codigo}`);
-      this.items$ = this.db.OfertasLojaDepartamento(loja, codigo).pipe(finalize(() => this.isLoading = false));
+      this.items$ = this.db.OfertasLojaDepartamento(loja, codigo).pipe(
+        tap((res) => this.totalItem = res.length),
+        finalize(() => this.isLoading = false));
     })
   }
 
@@ -94,6 +98,13 @@ export class DepartamentoComponent implements OnInit, OnDestroy {
     });
     this.seo.addCanonical();
     this.seo.dataLayerPage(departamento);
+  }
+
+  pageChange = (ev: any) => {
+    console.log(ev);
+    this.itemsPerPage = ev -1;
+    const data = this.items$.pipe(map((res) => res.slice(this.itemsPerPage, this.itemsPerPage)))
+    this.items$ = data;
   }
 
   trackById = (index: number, items: any) => items[index];
