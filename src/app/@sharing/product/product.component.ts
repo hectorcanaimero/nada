@@ -1,3 +1,4 @@
+import { timer } from 'rxjs';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,11 +14,11 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnChanges {
+export class ProductComponent implements OnInit, OnChanges {
 
   @Input() code: any = [];
   @Input() loja: any = [];
-  mas18 = 'Aprecie com moderação. É proibida a venda de bebidas alcoólicas a menores de 18 anos (Lei nº 8.069/90 Art.81, Estatuto da Criança e do Adolescente).';
+  mas18: any;
   webp: string = '';
   image: string = '';
   product: any = [];
@@ -30,17 +31,17 @@ export class ProductComponent implements OnChanges {
     private storageMap: StorageMap
   ) { }
 
-  // ngOnInit() {
-  //   this.storageMap.watch('Loja').subscribe((res) => {
-  //     if (res) this.loja = res;
-  //     else this.loja = { loja: 0, slug: '', nome: '' };
-  //   });
-  // }
+  ngOnInit() {
+    timer(200).subscribe(() => {
+      this.mas18 = this.findMas18(this.code.produtos.image);
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     this.code = changes.code.currentValue;
   }
+
+  findMas18 = (str: any) => `${str}`.indexOf('alcoólicas');
 
   goToProduct =() => {
     this.seo.dataLayerTracking({

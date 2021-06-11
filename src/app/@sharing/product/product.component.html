@@ -1,7 +1,6 @@
 <div class="product" (click)="goToProduct()">
   <div class="message">
-    <div class="mas18" *ngIf="code.image === mas18"> <p>+18</p> </div>
-    <div class="kit" *ngIf="code.kit"> <p>KIT</p> </div>
+    <div class="mas18" *ngIf="mas18 > 0"><p>+18</p> </div>
   </div>
   <div class="images">
     <picture>
@@ -17,6 +16,11 @@
   </div>
   <div class="content">
     <p class="title">{{ code.produtos.dsc_produto | truncate: 70 }}</p>
+  </div>
+  <div class="kit" *ngIf="code.dsc_kit; else semKit">
+    <p>{{ code.dsc_kit }}</p>
+  </div>
+  <div class="content">
     <div class="regular">
       <div *ngIf="!code.preco_clube"></div>
       <div style="height: 54px;" *ngIf="!code.preco_clube"></div>
@@ -50,4 +54,8 @@
 
 <ng-template #semParcela>
   <div style="height: 18px;"></div>
+</ng-template>
+
+<ng-template #semKit>
+  <div style="height: 57px;"></div>
 </ng-template>

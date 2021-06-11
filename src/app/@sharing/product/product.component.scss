@@ -26,16 +26,16 @@
     .kit {
       border-radius: 0 10px 0 0;
       position: absolute;
-      background-color: var(--product-kit);
-      width: auto;
-      height: 30px;
+      background-color: var(--color-blue-primary);
+      width: 30%;
+      height: auto;
       top: 0;
       right: 0;
       p {
         margin-top: 3px;
         padding: 0 10px;
-        font-weight: 600;
-        font-size: 1rem;
+        font-weight: 400;
+        font-size: .8rem;
         text-align: center;
         margin-bottom: 0px;
         color: var(--product-color-text-mas18);
@@ -66,6 +66,19 @@
       height: 130px;
       width: auto;
       margin: 0 auto;
+    }
+  }
+  .kit {
+    border-radius: 0 10px 0 0;
+    background-color: var(--color-blue-primary);
+    p {
+      margin-top: 3px;
+      padding: 0 10px;
+      font-weight: 400;
+      font-size: .8rem;
+      text-align: center;
+      margin-bottom: 0px;
+      color: var(--product-color-text-mas18);
     }
   }
   .content {

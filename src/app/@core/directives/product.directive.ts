@@ -32,7 +32,6 @@ export class ProductDirective implements AfterViewInit {
   }
 
   private loadImage() {
-    console.log(this.src);
     const image = `${ environment.v1.url }/Containers/produtos/download/${this.src}.jpg`;
     this.srcAttr = image;
   }

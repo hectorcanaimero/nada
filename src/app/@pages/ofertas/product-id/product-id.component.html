@@ -55,6 +55,9 @@
                 <span>{{code.produtos.embalagem }}</span></p>
             </div>
           </div>
+          <div class="kit" *ngIf="code.dsc_kit">
+            <p class="mb-0">{{ code.dsc_kit }}</p>
+          </div>
           <div class="parcelas" *ngIf="code.qtd_clube">
             <p>
               <span>{{ code.qtd_clube || 0 }}x</span> de

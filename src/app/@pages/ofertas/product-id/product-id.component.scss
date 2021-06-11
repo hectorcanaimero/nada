@@ -6,6 +6,17 @@ section {
     border-radius: 10px;
     border: 1px solid #efefef;
   }
+  .kit {
+    margin: 1rem 0;
+    border-radius: 10px;
+    background-color: var(--product-kit);
+    padding: 1rem;
+    p {
+      font-size: 1.1rem;
+      color: #fff;
+      text-align: justify;
+    }
+  }
   .precos {
     position: relative;
     .image-clube {
