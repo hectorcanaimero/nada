@@ -36,10 +36,5 @@
         <a rel="noopener noreferrer" class="nav-link b-06" *ngIf="item.external" [href]="[item.url]" target="_blank">{{ item.name }}</a>
       </li>
     </ul>
-    <ul class="navbar-nav mr-auto border-left-menu pl-3" id="iconsrr">
-      <li class="nav-item waves-light mr-1" mdbWavesEffect *ngFor="let item of json.right; trackBy: trackByFunction">
-        <app-link [item]="item" class="nav-link b-06 py-0 mt-1 px-1"></app-link>
-      </li>
-    </ul>
   </links>
 </mdb-navbar>

@@ -1,11 +1,10 @@
+import { StorageMap } from '@ngx-pwa/local-storage';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { map, tap  } from 'rxjs/operators';
 
 import { DataService } from '@core/services/data.service';
 import { Ofertas } from '@core/interfaces/ofertas';
-import { StorageMap } from '@ngx-pwa/local-storage';
 
 import SwiperCore, { EffectFade,   Navigation, Pagination, A11y, Lazy } from "swiper/core";
 SwiperCore.use([EffectFade, Navigation, Pagination, A11y, Lazy]);
@@ -26,31 +25,23 @@ export class OfertasComponent implements OnInit {
   @Input() code: any;
   @Input() type: any;
   @Input() sector: number;
-  @Input() data$: Observable<Ofertas[]>;
+  @Input() loja: any = [];
 
-  items$: Observable<Ofertas[]>;
-  loja: any = [];
   total: number = 0;
+  items$: Observable<Ofertas[]>;
+
 
   options = {
-    freeMode: true,
-    spaceBetween: 15,
-    grabCursor: true,
-    slidesPerView: 1.5,
-    type: 'progressbar',
-    loop: true,
+    freeMode: true, spaceBetween: 15,
+    grabCursor: true, slidesPerView: 1.5,
+    type: 'progressbar', loop: true,
     autoplay: { delay: 1800 },
     breakpoints: {
-      360:  { slidesPerView: 2 },
-      768:  { slidesPerView: 3.5 },
-      1024: { slidesPerView: 4.5 },
-      1200: { slidesPerView: 5 },
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      360:  { slidesPerView: 2 }, 768:  { slidesPerView: 3.5 },
+      1024: { slidesPerView: 4.5 }, 1200: { slidesPerView: 5 },
     },
     pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', },
   }
 
   constructor(
@@ -59,21 +50,16 @@ export class OfertasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getOfertas(this.code);
-    this.storage.get('Loja').subscribe((res) => this.loja = res)
+    this.getOfertas();
   }
 
-  getOfertas = (code: any) => {
-    let result: any = [];
-    this.items$ = this.storage.get('ofertas').pipe(
-      map((res: Ofertas) => {
-        if (this.type === 'slug') result = res?.filter((row => row.slug === code));
-        else if (this.type === 'campanha') result = res?.filter((row => row.campanha === code));
-        else if (this.type === 'departamento') result = res?.filter((row => row.departamento === code));
-          return result?.slice(0,15);
-      }),
-      tap((res) => this.total = res?.length)
-    );
+  getOfertas = () => {
+    this.storage.get('Loja').pipe().subscribe((res) => {
+      this.loja = res;
+      if (this.type === 'slug') this.items$ = this.db.OfertasLojaSlug(this.loja.loja, this.code);
+      else if (this.type === 'campanha') this.items$ = this.db.OfertasLojaCampanha(this.loja.loja, this.code);
+      else if (this.type === 'departamento') this.items$ = this.db.OfertasLojaDepartamento(this.loja.loja, this.code);
+    });
   }
 
   trackBy = (index: number, item: any) => item.host;

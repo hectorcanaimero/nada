@@ -1,14 +1,12 @@
-import { Ofertas } from './../../@core/interfaces/ofertas';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
-import { StorageMap } from '@ngx-pwa/local-storage';
-import { Observable } from 'rxjs';
-import { map, take, delay, finalize } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, finalize, takeUntil } from 'rxjs/operators';
 
 import { Imagens } from '@core/interfaces/news';
+import { Ofertas } from '@core/interfaces/ofertas';
 import { SeoService } from '@core/services/seo.service';
 import { NewsService } from '@core/services/news.service';
-import { DataService } from '@core/services/data.service';
 import { UtilService } from '@core/services/util.service';
 
 @Component({
@@ -26,30 +24,27 @@ export class HomeComponent implements OnInit {
   items$: Observable<Ofertas[]>;
   banner$: Observable<Imagens[]>;
   lojaSelecionada$: Observable<any>;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private seo: SeoService,
-    private db: DataService,
     private util: UtilService,
     private news: NewsService,
     private ch: ChangeDetectorRef,
-    private storageMap: StorageMap,
   ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     this.getLoadOfertas();
     this.seo.dataLayerPage('Home');
-    this.news.getBanners().pipe(take(1)).subscribe();
+    this.news.getBanners().pipe(takeUntil(this.destroy$)).subscribe();
     this.data$ = this.util.getStatic$().pipe(
-      map((res) => res[3].data), finalize(() => this.isLoading = false)
+      map((res) => res[3].data),
+      finalize(() => this.isLoading = false)
     );
   }
 
   getLoadOfertas = () => {
-    this.storageMap.watch('Loja').pipe(take(1)).subscribe((res) => {
-      this.db.getOfertas(res['loja']).subscribe();
-    });
     this.ch.detectChanges();
   }
 }

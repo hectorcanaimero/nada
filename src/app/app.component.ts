@@ -1,3 +1,4 @@
+import { DataService } from './@core/services/data.service';
 import { Component, OnInit, ViewChild, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     router: Router,
     private seo: SeoService,
+    private db: DataService,
     private util: UtilService,
     private news: NewsService,
     private sw: UpdateService,
@@ -51,7 +53,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (isPlatformBrowser(this.platformId)) sw.checkForUpdates();
   }
   ngOnInit(): void {
-	this.storageMap.delete('ofertas').subscribe({});	
     this.dados();
     this.getSeo();
     if (isPlatformBrowser(this.platformId)) this.setCookies();

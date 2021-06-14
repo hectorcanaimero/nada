@@ -44,23 +44,23 @@ export class DataService {
 
   getCollection = (collection: string): Observable<any[]> => this.Query<any[]>(collection).pipe(retry(3), map((res) => res));
 
-  OfertasLojaDepartamento = (loja: number, departamento: number): Observable<Ofertas[]> => this.Query<Ofertas[]>(
-    `/Ofertas/LojaProdutosDepartamento?loja=${loja}&departamento=${departamento}`).pipe(map((res) => res));
+  OfertasLojaDepartamento = (loja: number, departamento: number, limit: number = 15): Observable<Ofertas[]> => this.Query<Ofertas[]>(
+    `/Ofertas/LojaProdutosDepartamento?loja=${loja}&departamento=${departamento}&limit=${limit}`);
 
 
     // Ofertas Loja Slug
-  OfertasLojaSlug(loja: number, slug: string, limit: number = 100): Observable<Ofertas[]> {
-    return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosSlug?loja=${loja}&slug=${slug}&limit=${limit}`).pipe(retry(3), map((res) => res));
+  OfertasLojaSlug(loja: number, slug: string, limit: number = 15): Observable<Ofertas[]> {
+    return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosSlug?loja=${loja}&slug=${slug}&limit=${limit}`);
   }
   // Ofertas Loja Campanha
-  OfertasLojaCampanha(loja: number, campanha: number, limit: number = 100): Observable<Ofertas[]> {
+  OfertasLojaCampanha(loja: number, campanha: number, limit: number = 15): Observable<Ofertas[]> {
     return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosCampanha?loja=${loja}&campanha=${campanha}&limit=${limit}`);
   }
 
   // Ofertas Loja Departamento
   OfertasLojaDepartamentoSetor(loja: number, departamento: number, setor: number, limit: number = 100): Observable<Ofertas[]> {
     const query = `/Ofertas/LojaProdutosDepartamentoSetor?loja=${loja}&departamento=${departamento}&setor=${setor}`;
-    return this.Query<Ofertas[]>(`${query}&limit${limit}`).pipe(retry(3), map((res) => res));
+    return this.Query<Ofertas[]>(`${query}&limit${limit}`);
   }
 
   // Search
