@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (isPlatformBrowser(this.platformId)) sw.checkForUpdates();
   }
   ngOnInit(): void {
-	this.storageMap.delete('ofertas').subscribe({});	
+	this.storageMap
     this.dados();
     this.getSeo();
     if (isPlatformBrowser(this.platformId)) this.setCookies();
