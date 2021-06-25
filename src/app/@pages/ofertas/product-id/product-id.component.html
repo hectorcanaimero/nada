@@ -23,18 +23,19 @@
           <div class="row justify-content-center my-4">
             <div class="col-md-6 col-lg-5 col-xl-6 text-center" *ngIf="code.departamento !== 11">
               <a class="btn btn-primary btn-rounded" href="https://www.sitemercado.com.br/condor" target="_blank"
-                (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                (click)="onTracking(code.produtos.dsc_produto, code,'comprar_online')">
                 Comprar online
               </a>
             </div>
             <div class="col-md-6 col-lg-5 col-xl-6 text-center" *ngIf="code.departamento === 11">
               <a class="btn btn-primary btn-rounded" href="https://loja.condor.com.br" target="_blank"
-                (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                (click)="onTracking(code.produtos.dsc_produto, code,'comprar_online')">
                 Comprar online
               </a>
             </div>
             <div class="col-md-6 col-lg-5 col-xl-6 text-center">
-              <a class="btn btn-danger btn-rounded" href="https://www.google.com.br/maps/search/condor" target="_blank" (click)="onTracking(code['produtos'].dsc_produto  ,'comprar_online')">
+              <a class="btn btn-danger btn-rounded" href="https://www.google.com.br/maps/search/condor" target="_blank"
+                (click)="onTracking(code['produtos'].dsc_produto, code,'comprar_online')">
                 Comprar na loja
               </a>
             </div>
@@ -100,18 +101,19 @@
                 <div class="row">
                   <div class="col-6 text-center" *ngIf="code.departamento !== 11">
                     <a class="btn btn-primary btn-rounded" href="https://www.sitemercado.com.br/condor" target="_blank"
-                      (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                      (click)="onTracking(code.produtos.dsc_produto, code, 'comprar_online')">
                       Comprar online
                     </a>
                   </div>
                   <div class="col-6 text-center" *ngIf="code.departamento === 11">
                     <a class="btn btn-primary btn-rounded" href="https://loja.condor.com.br" target="_blank"
-                      (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                      (click)="onTracking(code.produtos.dsc_produto, code,'comprar_online')">
                       Comprar online
                     </a>
                   </div>
                   <div class="col-6 text-center">
-                    <a class="btn btn-danger btn-rounded" href="https://www.google.com.br/maps/search/condor" target="_blank" (click)="onTracking(code['produtos'].dsc_produto  ,'comprar_online')">
+                    <a class="btn btn-danger btn-rounded" href="https://www.google.com.br/maps/search/condor" target="_blank"
+                      (click)="onTracking(code['produtos'].dsc_produto, code,'comprar_online')">
                       Comprar na loja
                     </a>
                   </div>
@@ -157,18 +159,19 @@
             <div class="row no-gutters d-md-none">
               <div class="col-6 col-md-6 text-center" *ngIf="code.departamento !== 11">
                 <a class="btn btn-primary" href="https://www.sitemercado.com.br/condor" target="_blank"
-                  (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                  (click)="onTracking(code.produtos.dsc_produto, code,'comprar_online')">
                   Comprar online
                 </a>
               </div>
               <div class="col-6 text-center" *ngIf="code.departamento === 11">
                 <a class="btn btn-primary" href="https://loja.condor.com.br" target="_blank"
-                  (click)="onTracking(code.produtos.dsc_produto  ,'comprar_online')">
+                  (click)="onTracking(code.produtos.dsc_produto, code, 'comprar_online')">
                   Comprar online
                 </a>
               </div>
               <div class="col-6 text-center">
-                <a class="btn btn-danger" href="https://www.google.com.br/maps/search/condor" target="_blank" (click)="onTracking(code['produtos'].dsc_produto  ,'comprar_online')">
+                <a class="btn btn-danger" href="https://www.google.com.br/maps/search/condor" target="_blank"
+                  (click)="onTracking(code['produtos'].dsc_produto,  code,'comprar_online')">
                   Comprar na loja
                 </a>
               </div>

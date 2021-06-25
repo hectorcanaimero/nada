@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { PipesModule } from '@core/pipes/pipes.module';
-import { OfertasModule } from '@widgets/ofertas/ofertas.module';
+import { OfertasModule } from '@sharing/@widgets/ofertas/ofertas.module';
 import { ProductModule } from '@sharing/product/product.module';
 
 import { SearchComponent } from './search.component';

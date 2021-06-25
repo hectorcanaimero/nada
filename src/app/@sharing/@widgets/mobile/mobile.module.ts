@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LinkModule } from '@sharing/link/link.module';
 import { PipesModule } from '@core/pipes/pipes.module';
-import { OfertasModule } from '@widgets/ofertas/ofertas.module';
+import { OfertasModule } from '@sharing/@widgets/ofertas/ofertas.module';
 import { MobileLinkModule } from '@sharing/mobile-link/mobile-link.module';
 import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
 

@@ -65,7 +65,7 @@ export class ProductIdComponent implements OnInit {
   br_setor = (depart: any, setor: any) => this.router.navigate(['departamento', this.util.toSlug(this.product.dsc_departamento),
                                                                 'setor', this.util.toSlug(this.product.dsc_setor)]);
 
-  onTracking = (name: string, type: string) => this.seo.dataLayerTracking({ event: 'productpageAction', productName: name, productButton: type })
+  onTracking = (name: string, source: any,type: string) => this.seo.dataLayerTracking({ event: 'productpageAction', productName: name, source: source,productButton: type })
 
   getSeo = (code: any) => {
     this.seo.updateTags({

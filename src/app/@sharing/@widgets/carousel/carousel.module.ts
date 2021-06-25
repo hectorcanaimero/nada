@@ -8,7 +8,7 @@ import { ResponsiveModule } from 'ngx-responsive';
 import { CarouselComponent } from './carousel.component';
 import { OfertasModule } from '../ofertas/ofertas.module';
 import { SwipeModule } from '@sharing/swipe/swipe.module';
-import { environment } from './../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment.prod';
 
 @NgModule({
   declarations: [CarouselComponent],

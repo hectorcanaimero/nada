@@ -32,9 +32,9 @@ export class BannersComponent implements OnInit {
         }
       }),
       tap((res) => {
-        this.mobile?.push(res?.left[0]);
-        this.mobile?.push(res?.center[0]);
-        this.mobile?.push(res?.right[0]);
+        this.mobile?.push(res?.left);
+        this.mobile?.push(res?.center);
+        this.mobile?.push(res?.right);
       }),
       finalize(() => this.isLoading = false)
     );

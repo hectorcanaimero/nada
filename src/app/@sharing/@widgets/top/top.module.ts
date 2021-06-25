@@ -4,7 +4,7 @@ import { TopComponent } from './top.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router';
 
-import { MobileModule } from '@widgets/mobile/mobile.module';
+import { MobileModule } from '@sharing/@widgets/mobile/mobile.module';
 import { DropMenuModule } from '@sharing/drop-menu/drop-menu.module';
 import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
 import { MenuSidebarModule } from '@sharing/menu-sidebar/menu-sidebar.module';

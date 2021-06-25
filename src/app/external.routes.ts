@@ -19,6 +19,14 @@ const appRoute: Routes = [
     },
   },
   {
+    path: 'doce-alegria',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/doce-alegria/',
+    },
+  },
+  {
     path: 'entreposto',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
