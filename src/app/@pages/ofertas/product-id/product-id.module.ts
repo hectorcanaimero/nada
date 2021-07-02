@@ -9,7 +9,7 @@ import { PipesModule } from '@core/pipes/pipes.module';
 import { DirectiveModule } from '@core/directives/directive.module';
 import { SemDataModule } from '@sharing/sem-data/sem-data.module';
 import { SelectLojaModule } from '@sharing/select-loja/select-loja.module';
-import { OfertasModule } from '@sharing/@widgets/ofertas/ofertas.module';
+import { OfertasModule } from 'src/app/@widgets/ofertas/ofertas.module';
 
 import { ProductIdComponent } from './product-id.component';
 import { environment } from 'src/environments/environment.prod';

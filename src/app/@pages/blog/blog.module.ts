@@ -8,10 +8,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PipesModule } from '@core/pipes/pipes.module';
 import { SemDataModule } from '@sharing/sem-data/sem-data.module';
-import { BlogListModule } from '@sharing/@widgets/blog-list/blog-list.module';
-import { BlogLatestModule } from '@sharing/@widgets/blog-latest/blog-latest.module';
-import { BlogSliderModule } from '@sharing/@widgets/blog-slider/blog-slider.module';
-import { BlogSidebarModule } from '@sharing/@widgets/blog-sidebar/blog-sidebar.module';
+import { BlogListModule } from 'src/app/@widgets/blog-list/blog-list.module';
+import { BlogLatestModule } from 'src/app/@widgets/blog-latest/blog-latest.module';
+import { BlogSliderModule } from 'src/app/@widgets/blog-slider/blog-slider.module';
+import { BlogSidebarModule } from 'src/app/@widgets/blog-sidebar/blog-sidebar.module';
 
 import { BlogComponent } from './blog.component';
 import { AllInComponent } from './all-in/all-in.component';

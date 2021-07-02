@@ -12,4 +12,9 @@ export class ImageComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  match = (url: string) => {
+    const text = `${url}`.toLowerCase().includes('http');
+    return text;
+  }
 }

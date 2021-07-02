@@ -1,0 +1,30 @@
+<section id="latest" *ngIf="(items$ | async) as items; else semData">
+  <div class="titulo">
+    <h2>{{ titulo }}</h2>
+  </div>
+  <div class="row no-gutters">
+    <div [ngClass]="column"
+      *ngFor="let item of items |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItem }; trackBy: trackBy">
+      <div class="cards px-1" (click)="onBlogId(item.slug)">
+        <div class="image">
+          <img LazyLoad [src]="item.large" class="w-100" [alt]="item.titulo">
+        </div>
+        <div class="content">
+          <p class="date">
+            <i class="far fa-calendar-alt mr-1"></i>
+            {{ item.date | date: 'dd/MM/yyyy' }}
+          </p>
+          <p class="title">{{ item.title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 mb-3">
+    <pagination-controls class="animated fade text-center" (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)" previousLabel="Anterior" nextLabel="Próximo" responsive="true">
+    </pagination-controls>
+</div>
+</section>
+<ng-template #semData>
+  <app-sem-data height="40vh"></app-sem-data>
+</ng-template>

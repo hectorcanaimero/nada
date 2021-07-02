@@ -16,7 +16,7 @@ import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsen
 import { APP_ROUTE } from './app.routes';
 import { AppComponent } from './app.component';
 import { EXTERNAL_ROUTES } from './external.routes';
-import { LgpdModule } from './@sharing/@widgets/lgpd/lgpd.module';
+import { LgpdModule } from './@widgets/lgpd/lgpd.module';
 import { SeoService } from './@core/services/seo.service';
 import { UtilService } from './@core/services/util.service';
 import { NewsService } from './@core/services/news.service';
@@ -25,11 +25,11 @@ import { BlogService } from './@core/services/blog.service';
 import { RedirectGuard } from '@core/services/redirect.guard';
 import { UpdateService } from './@core/services/update.service';
 
-import { TopModule } from '@sharing/@widgets/top/top.module';
-import { MenuModule } from '@sharing/@widgets/menu/menu.module';
-import { FooterModule } from '@sharing/@widgets/footer/footer.module';
-import { HeaderModule } from '@sharing/@widgets/header/header.module';
-import { MobileModule } from '@sharing/@widgets/mobile/mobile.module';
+import { TopModule } from 'src/app/@widgets/top/top.module';
+import { MenuModule } from 'src/app/@widgets/menu/menu.module';
+import { FooterModule } from 'src/app/@widgets/footer/footer.module';
+import { HeaderModule } from 'src/app/@widgets/header/header.module';
+import { MobileModule } from 'src/app/@widgets/mobile/mobile.module';
 import { environment } from '../environments/environment.prod';
 import { ResponsiveModule } from 'ngx-responsive';
 registerLocaleData(localePt);

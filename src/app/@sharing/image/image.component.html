@@ -1,15 +1,15 @@
-<a rel="noopener noreferrer" [href]="code?.url || code?.link" *ngIf="code?.url.match('https')" target="_blank">
+<a rel="noopener noreferrer" [href]="code?.url || code?.link" *ngIf="match(code?.url)" target="_blank">
   <picture>
-    <source webLazy [src]="code.webp" type="image/webp">
-    <source webLazy [src]="code.large" type="image/jpg">
-    <source webLazy [src]="code.large" type="image/png">
+    <source webLazy [src]="code?.webp" type="image/webp">
+    <source webLazy [src]="code?.large" type="image/jpg">
+    <source webLazy [src]="code?.large" type="image/png">
     <img LazyLoad [src]="code?.large || code?.image" [alt]="code?.title || code?.titulo || code?.name"
       class="img-fluid w-100" [width]="size[0]" [height]="size[1]"  [id]="idImage" />
   </picture>
 </a>
-<a [routerLink]="[code?.url || code?.link]" *ngIf="!code?.url.match('https')" target="_blank">
+<a [routerLink]="[code?.url || code?.link]" *ngIf="!match(code?.url)" target="_blank">
   <picture>
-    <source webLazy [src]="code.webp" type="image/webp">
+    <source webLazy [src]="code?.webp" type="image/webp">
     <source webLazy [src]="code?.large || code?.image" type="image/jpg">
     <img LazyLoad [src]="code?.large || code?.image" [alt]="code?.title || code?.titulo || code?.name"
       class="img-fluid w-100" [width]="size[0]" [height]="size[1]"  [id]="idImage" />

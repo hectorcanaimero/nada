@@ -16,7 +16,7 @@
     "experimentalDecorators": true,
     "paths": {
       "@core/*": ["src/app/@core/*"],
-      "@widgets/*": ["src/app/@sharing/@widgets/*"],
+      "@widgets/*": ["src/app/@widgets/*"],
       "@sharing/*": ["src/app/@sharing/*"]
     }
   },

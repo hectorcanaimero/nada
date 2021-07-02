@@ -1,0 +1,3 @@
+<div class="container" *ngIf="items$ | async as item">
+  <div [innerHtml]="item.content"></div>
+</div>

@@ -1,0 +1,63 @@
+<section id="topHeader" class="sticky-top d-none d-md-block">
+  <div id="top-header" class="header-A py-1 d-none d-lg-block">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark ie-nav" [containerInside]="true" >
+      <mdb-navbar-brand>
+        <i class="fas white-text cursor" [ngClass]="activeSidebar === 'out' ? 'fa-bars' : 'fa-times'" (click)="toogleSidebar()"></i>
+      </mdb-navbar-brand>
+      <links>
+        <ul id="top-menu" class="navbar-nav mx-auto">
+          <li class="nav-item dropdown mega-dropdown" dropdown style="width: auto!important;" >
+            <a dropdownToggle type="button" class="nav-link py-N header-menu dropdown-toggle waves-light" mdbWavesEffect >
+              <i class="fas fa-briefcase"></i> Institucional
+            </a>
+            <div class="dropdown-menu mega-menu v-2 row justify-content-center z-depth-1 header-B  w-100" >
+              <div class="container">
+                <div class="w-100 d-flex flex-row justify-content-around mx-md-0 mx-1">
+                  <app-drop-menu [data]="json.institucional.menu" [titulo]="json.institucional.title"></app-drop-menu>
+                  <app-drop-menu [data]="json.acoes.menu" [titulo]="json.acoes.title"></app-drop-menu>
+                  <app-drop-menu [data]="json.servicos.menu" [titulo]="json.servicos.title"></app-drop-menu>
+                  <app-drop-menu [data]="json.empresa.menu" [titulo]="json.empresa.title"></app-drop-menu>
+                  <app-drop-menu [data]="json.financeiro.menu" [titulo]="json.financeiro.title"></app-drop-menu>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item dropdown mega-dropdown" dropdown style="width: auto!important;" >
+            <a dropdownToggle type="button" class="nav-link py-N header-menu dropdown-toggle waves-light" mdbWavesEffect >
+              <i class="fas fa-comments"></i> Fale Conosco<span class="caret"></span>
+            </a>
+            <div class="dropdown-menu mega-menu v-2 row justify-content-center z-depth-1 header-B  w-100" >
+              <div class="container">
+                <div class="w-100 d-flex flex-row justify-content-around mx-md-0 mx-1">
+                  <app-drop-menu [data]="json.sac" titulo="SAC"></app-drop-menu>
+                  <app-drop-menu [data]="json.trabalhe" titulo="Trabalhe Conosco"></app-drop-menu>
+                  <app-drop-menu [data]="json.denuncia" titulo="Disque Denúncia"></app-drop-menu>
+                  <app-drop-menu [data]="json.fornecedores" titulo="Fornecedores"></app-drop-menu>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item waves-light" *ngFor="let menu of json.menu; trackBy:trackByFunction">
+            <a class="nav-link py-N header-menu" [routerLink]="[menu.url]" *ngIf="menu.inter" >
+              <i class="{{ menu.icon }}" *ngIf="menu.type === 'font'"></i>
+              <img [src]="menu.icon" height="20px" alt="{{ menu.name }}" *ngIf="menu.type === 'svg'" />
+              {{ menu.name }}
+            </a>
+            <a class="nav-link py-N header-menu" href="{{ menu.url }}" *ngIf="!menu.inter" rel="noopener">
+              <i class="{{ menu.icon }}" *ngIf="menu.type === 'font'"></i>
+              <img [src]="menu.icon" height="20px" alt="{{ menu.name }}" *ngIf="menu.type === 'svg'" />
+              {{ menu.name }}
+            </a>
+          </li>
+          <app-select-loja></app-select-loja>
+        </ul>
+      </links>
+    </mdb-navbar>
+  </div>
+</section>
+<app-menu-sidebar
+  [@slideLeftInOut]="activeSidebar"
+  [items]="items" [condor]="json">
+</app-menu-sidebar>
+
+

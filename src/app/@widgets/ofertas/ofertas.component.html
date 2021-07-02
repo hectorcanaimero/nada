@@ -1,0 +1,16 @@
+<section *ngIf="(items$ | async) as items">
+  <div class="container">
+    <app-titulo [titulo]="title" [icon]="icon" [link]="link"></app-titulo>
+    <swiper [lazy]="true" [config]="options">
+    <ng-template swiperSlide *ngFor="let item of items; let i = index; trackBy: trackBy">
+      <app-product [code]="item" [loja]="loja"></app-product>
+    </ng-template>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </swiper>
+  </div>
+</section>

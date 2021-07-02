@@ -1,0 +1,109 @@
+<main id="mobile">
+  <header class="fixed-top">
+    <div class="top">
+      <div class="menu">
+        <i class="fa white-text fa-bars" (click)="toogleSidebar()"></i>
+      </div>
+      <a href="#">
+        <img src="./assets/images/logo.png" alt="Logo Condor" class="logo" width="265" height="55">
+      </a>
+    </div>
+    <div class="select-loja"> <app-select-loja></app-select-loja> </div>
+    <div class="search">
+      <input #search placeholder="O que você está procurando?" (keyup)="getSearch($event)">
+    </div>
+  </header>
+  <section class="sidebar" [@slideLeftInOut]="activeSidebar">
+    <div class="menu overflow-auto">
+      <div style="height: 40px"></div>
+      <div class="items" (click)="onLink('')">
+        <p class="item"> Home </p>
+        <div class="icon">
+          <i class="fas fa-angle-right float-right"></i>
+        </div>
+      </div>
+      <div class="items" (click)="toogleMenuOfertas()">
+        <p class="item"> Ofertas </p>
+        <div class="icon">
+          <i class="fas" [ngClass]=" activeMenuOfertas === 'out' ? 'fa-plus': 'fa-minus'"></i>
+        </div>
+      </div>
+      <div class="submenu" [@slideDownInOut]="activeMenuOfertas">
+        <div class="sub-menu-items" *ngFor="let menu of menuOfertas$ | async; ; trackBy: trackBy"
+          (click)="onLink('departamento/' + menu.slug)">
+          <p class="item" mdbWavesEffect  routerLinkActive="active">
+            <i class="fas fa-shopping-basket mr-1"></i>  {{ menu.nome }}
+          </p>
+          <div class="icon">
+            <i class="fas fa-angle-right float-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="items" *ngFor="let campanha of items.campanha; trackBy: trackBy"
+        (click)="onLink(campanha.slug)">
+        <p class="item"> {{ campanha.nome }} </p>
+        <div class="icon">
+          <i class="fas fa-angle-right float-right"></i>
+        </div>
+      </div>
+      <div *ngFor="let center of items.center; trackBy: trackBy">
+        <a [href]="center.url" target="_blank" (click)="activeSidebar = 'out'">
+          <div class="items" *ngIf="center.external; else Internal">
+            <p class="item"> {{ center.name }} </p>
+            <div class="icon">
+              <i class="fas fa-angle-right float-right"></i>
+            </div>
+          </div>
+        </a>
+        <ng-template #Internal>
+          <a [routerLink]="[ center.url ]" (click)="activeSidebar = 'out'">
+            <div class="items">
+              <p class="item"> {{ center.name }} </p>
+              <div class="icon">
+                <i class="fas fa-angle-right float-right"></i>
+              </div>
+            </div>
+          </a>
+        </ng-template>
+      </div>
+      <div class="items" (click)="onLink('/blog')">
+        <p class="item"> Blog </p>
+        <div class="icon">
+          <i class="fas fa-angle-right float-right"></i>
+        </div>
+      </div>
+      <div class="space">
+        <div *ngFor="let header of items.header; trackBy: trackBy">
+          <a [href]="header.url" target="_blank" (click)="activeSidebar = 'out'">
+            <div class="items" *ngIf="header.external; else Internal">
+              <img [src]="header.iconmobile" [alt]="header.name">
+              <p class="item"> {{ header.name }} </p>
+              <div class="icon">
+                <i class="fas fa-angle-right float-right"></i>
+              </div>
+            </div>
+          </a>
+          <ng-template #Internal>
+            <a [routerLink]="[ header.url ]" (click)="activeSidebar = 'out'">
+              <div class="items">
+                <img [src]="header.iconmobile" [alt]="header.name">
+                <p class="item"> {{ header.name }} </p>
+                <div class="icon">
+                  <i class="fas fa-angle-right float-right"></i>
+                </div>
+              </div>
+            </a>
+          </ng-template>
+        </div>
+      </div>
+      <app-mobile-link titulo="Fale Conosco" [items]="faleConosco" (toogle)=(onToogle($event))></app-mobile-link>
+      <app-mobile-link [titulo]="condor.institucional.title" [items]="condor.institucional.menu" (toogle)=(onToogle($event))></app-mobile-link>
+      <app-mobile-link [titulo]="condor.acoes.title" [items]="condor.acoes.menu" (toogle)=(onToogle($event))></app-mobile-link>
+      <app-mobile-link [titulo]="condor.financeiro.title" [items]="condor.financeiro.menu" (toogle)=(onToogle($event))></app-mobile-link>
+      <app-mobile-link [titulo]="condor.empresa.title" [items]="condor.empresa.menu" (toogle)=(onToogle($event))></app-mobile-link>
+    </div>
+    <div class="vacio" (click)="toogleSidebar()">
+      <i class="fa white-text fa-times"></i>
+    </div>
+  </section>
+</main>

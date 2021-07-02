@@ -1,0 +1,39 @@
+
+
+.card-body {
+    height: 120px;
+    padding: 1.25rem .75rem;
+}
+
+
+@media(max-width: 768px) {
+    h5{ font-size: 1.25rem; }
+    .b-07 { font-weight: 600 !important; }
+    .card-body {
+        height: 180px;
+        padding: 1.25rem .75rem;
+    }
+}
+
+
+@media(max-width: 450px) {
+    .card-body {
+        height: auto;
+        padding: .5rem;
+    }
+}
+
+
+@media(max-width: 767px) and (orientation: landscape) {
+    #banner, .container { 
+        min-width: 100% !important;
+    }
+}
+
+
+@media(max-width: 450px) {
+    #banner, .col-md-8, .col-lg-8, .col-md-4, .col-lg-4, .col-sm-4 { 
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
