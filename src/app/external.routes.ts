@@ -91,6 +91,14 @@ const appRoute: Routes = [
       externalUrl: 'https://www.condor.com.br/camara-entreposto/index.html',
     },
   },
+    {
+    path: 'close-up',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/close-up/index.html',
+    },
+  },
   {
     path: 'cestas-de-natal',
     canActivate: [RedirectGuard],
