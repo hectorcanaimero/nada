@@ -120,6 +120,5 @@ export class AppComponent implements OnInit, AfterViewInit {
       image: 'https://www.condor.com.br/assets/images/card.jpg'
     }
     this.seo.updateTags(data);
-    this.seo.addCanonical();
   }
 }
