@@ -71,7 +71,7 @@ const appRoute: Routes = [
     canActivate: [RedirectGuard],
     component: RedirectGuard,
     data: {
-      externalUrl: 'https://www.condor.com.br/ecliente-especial/index.html',
+      externalUrl: 'https://www.condor.com.br/cliente-especial/index.html',
     },
   },
   {
