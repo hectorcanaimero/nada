@@ -66,6 +66,14 @@ const appRoute: Routes = [
       externalUrl: 'https://www.condor.com.br/especial-mulher/index.html',
     },
   },
+    {
+    path: 'cliente-especial',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/ecliente-especial/index.html',
+    },
+  },
   {
     path: 'aplicativo',
     canActivate: [RedirectGuard],
