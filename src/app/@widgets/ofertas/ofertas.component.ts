@@ -1,7 +1,7 @@
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 
 import { DataService } from '@core/services/data.service';
 import { Ofertas } from '@core/interfaces/ofertas';
@@ -54,11 +54,15 @@ export class OfertasComponent implements OnInit {
   }
 
   getOfertas = () => {
+    const source = interval(5000);
+    // source.subscribe((cal) => console.log(cal));
     this.storage.get('Loja').pipe().subscribe((res) => {
       this.loja = res;
-      if (this.type === 'slug') this.items$ = this.db.OfertasLojaSlug(this.loja.loja, this.code);
-      else if (this.type === 'campanha') this.items$ = this.db.OfertasLojaCampanha(this.loja.loja, this.code);
-      else if (this.type === 'departamento') this.items$ = this.db.OfertasLojaDepartamento(this.loja.loja, this.code);
+      source.subscribe((cal) => {
+        if (this.type === 'slug') this.items$ = this.db.OfertasLojaSlug(this.loja.loja, this.code);
+        else if (this.type === 'campanha') this.items$ = this.db.OfertasLojaCampanha(this.loja.loja, this.code);
+        else if (this.type === 'departamento') this.items$ = this.db.OfertasLojaDepartamento(this.loja.loja, this.code);
+      });
     });
   }
 
