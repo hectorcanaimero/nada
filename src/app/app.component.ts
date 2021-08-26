@@ -115,8 +115,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private getSeo = () => {
     const data = {
-      title: 'Rede Condor | Ofertas de Supermercado, Eletro, Bazar e Mais!',
-      description: 'Confira ofertas imperdíveis de Supermercado, Eletrodomésticos, Eletrônicos, Moda, Brinquedos, Casa e Jardim, Pet Shop, Pneus e vantagens Clube Condor!',
+      title: 'Rede Condor | Supermercado On-line | Condor.com.br',
+      description: 'Compre Online, Confira os Tabloides ou encontre o Supermercado Condor mais próximo! Toda loja em até 6x, Bazar em até 10x e Eletro em até 20x Sem Juros*',
       image: 'https://www.condor.com.br/assets/images/card.jpg'
     }
     this.seo.updateTags(data);

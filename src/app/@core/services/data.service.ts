@@ -52,8 +52,6 @@ export class DataService {
   OfertasLojaSlug(loja: number, slug: string, limit: number = 15): Observable<Ofertas[]> {
     return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosSlug?loja=${loja}&slug=${slug}&limit=${limit}`);
   }
-
-
   // Ofertas Loja Campanha
   OfertasLojaCampanha(loja: number, campanha: number, limit: number = 15): Observable<Ofertas[]> {
     return this.Query<Ofertas[]>(`/Ofertas/LojaProdutosCampanha?loja=${loja}&campanha=${campanha}&limit=${limit}`);

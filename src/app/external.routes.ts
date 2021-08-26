@@ -66,20 +66,12 @@ const appRoute: Routes = [
       externalUrl: 'https://www.condor.com.br/especial-mulher/index.html',
     },
   },
-  {
+    {
     path: 'cliente-especial',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
     data: {
       externalUrl: 'https://www.condor.com.br/cliente-especial/index.html',
-    },
-  },
-  {
-    path: 'concurso-pet',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://www.condor.com.br/concurso-pet/index.html',
     },
   },
   {
