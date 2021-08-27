@@ -38,7 +38,7 @@ export class SeoService {
   updateTags = (data: Seo) => {
     const description = data.description;
     const content = description.replace(/(<([^>]+)>)/gi, "");
-    let conteudo = content.substr(0, 155);
+    let conteudo = content.substr(0, 255);
     conteudo = `${conteudo}`;
     this.setTitle(data.title);
     this.updateTag('og:type', 'website');
