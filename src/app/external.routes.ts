@@ -75,6 +75,14 @@ const appRoute: Routes = [
     },
   },
   {
+    path: 'concurso-pet',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.condor.com.br/concurso-pet/index.html',
+    },
+  },
+  {
     path: 'aplicativo',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
